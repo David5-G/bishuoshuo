@@ -6,46 +6,89 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import codePush from 'react-native-code-push'
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+	android:
+		'Double tap R on your keyboard to reload,\n' +
+		'Shake or press menu button for dev menu',
 });
 
 type Props = {};
 export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>React Native!</Text>
-		
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-		
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+	constructor(props){
+		super(props)
+		this.state = {
+			updateText: '',
+			isDownload: false,
+			isUpdateFinished: false,
+		}
+	}
+	componentDidMount () {
+		this._hotUpdata()
+	}
+	_hotUpdata () {
+		codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE }, this.codePushStatusDidChange.bind(this));
+	}
+	codePushStatusDidChange(syncStatus) {
+        switch (syncStatus) {
+        case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+            this.setState({ updateText: '检查更新.' });
+            break;
+        case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+            this.setState({ isDownload: true, updateText: '下载更新包.' });
+            break;
+        case codePush.SyncStatus.AWAITING_USER_ACTION:
+            this.setState({ updateText: 'Awaiting user action.' });
+            break;
+        case codePush.SyncStatus.INSTALLING_UPDATE:
+            this.setState({ updateText: '正在安装更新.' });
+            break;
+        case codePush.SyncStatus.UP_TO_DATE:
+            this.setState({ updateText: '应用已是最新版本.' }, () => {
+                setTimeout(() => this.setState({ isUpdateFinished: true }), 100);
+            });
+            break;
+        case codePush.SyncStatus.UPDATE_IGNORED:
+            this.setState({ updateText: 'Update cancelled by user.' });
+            break;
+        case codePush.SyncStatus.UPDATE_INSTALLED:
+            this.setState({ updateText: '更新已安裝,将会在下次启动应用時启用.' },
+                () => this.setState({ isUpdateFinished: true }));
+            break;
+        case codePush.SyncStatus.UNKNOWN_ERROR:
+            this.setState({ updateText: '更新失败.' },
+                () => this.setState({ isUpdateFinished: true }));
+            break;
+        default:
+        }
+    }
+	render() {
+		const  {updateText } = this.state
+		return (
+			<View style={styles.container}>
+				<Text style={styles.welcome}>-->{updateText}</Text>
+				<Text style={styles.welcome}>React Native!</Text>
+				<Text style={styles.welcome}>React Native!</Text>
+				<Text style={styles.welcome}>React Native!</Text>
+				<Text style={styles.welcome}>hsdfasdf</Text>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#F5FCFF',
+	},
+	welcome: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+	},
 });
