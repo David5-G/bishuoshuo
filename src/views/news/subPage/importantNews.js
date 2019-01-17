@@ -4,7 +4,7 @@ import { View,Image,TouchableOpacity, Text,ActivityIndicator, Button, FlatList, 
 import { Container, List, ListItem, Body, Header, Content, Card, CardItem, Item, Input, Icon, Button as NeButton, Text as NeText } from 'native-base';
 
 import { observer, inject } from 'mobx-react/native'
-import Colors from '../../constants/Colors'
+import Colors from '../../../constants/Colors'
 // import {Dimensions} from 'react-native'
 // const deviceH = Dimensions.get('window').height
 // const deviceW = Dimensions.get('window').width

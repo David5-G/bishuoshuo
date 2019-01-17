@@ -7,16 +7,12 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import {Button} from 'native-base'
+import { Platform,SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import codePush from 'react-native-code-push'
 import Root from './src/root.js'
-const instructions = Platform.select({
-	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-	android:
-		'Double tap R on your keyboard to reload,\n' +
-		'Shake or press menu button for dev menu',
-});
+import { Provider } from 'mobx-react'
+import Store from './src/store/index.js'
+
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -71,11 +67,12 @@ export default class App extends Component<Props> {
 	render() {
 		const  {updateText } = this.state
 		return (
-			<View style={styles.container}>
+			<Provider {...Store} >
+				<View style={{flex: 1}}>
 				<Text style={styles.welcome}>-->{updateText}</Text>
-				<Text style={styles.welcome}>React Native!</Text>
-				<Root />
-			</View>
+					<Root />
+				</View>
+			</Provider>
 		);
 	}
 }
