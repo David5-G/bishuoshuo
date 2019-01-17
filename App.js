@@ -8,7 +8,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import {Button} from 'native-base'
 import codePush from 'react-native-code-push'
+import Root from './src/root.js'
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
 	android:
@@ -27,6 +29,7 @@ export default class App extends Component<Props> {
 		}
 	}
 	componentDidMount () {
+		console.log('app.js-->')
 		this._hotUpdata()
 	}
 	_hotUpdata () {
@@ -71,9 +74,7 @@ export default class App extends Component<Props> {
 			<View style={styles.container}>
 				<Text style={styles.welcome}>-->{updateText}</Text>
 				<Text style={styles.welcome}>React Native!</Text>
-				<Text style={styles.welcome}>React Native!</Text>
-				<Text style={styles.welcome}>React Native!</Text>
-				<Text style={styles.welcome}>hsdfasdf</Text>
+				<Root />
 			</View>
 		);
 	}

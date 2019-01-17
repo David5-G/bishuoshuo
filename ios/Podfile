@@ -10,6 +10,8 @@ target 'rn_j2' do
   target 'rn_j2-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   end
 
   target 'rn_j2Tests' do
