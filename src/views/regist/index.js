@@ -1,11 +1,11 @@
 import React from 'react';
 import { Alert, View, ActivityIndicator, TouchableOpacity, WebView, ScrollView, Button, StyleSheet, TextInput, Text } from 'react-native'
-import { Container, Header, Content, Item, Input, Icon, Button as NeButton, Text as NeText } from 'native-base';
+import { Container, Header, Content, Item,Icon as NeIcon, Input, Button as NeButton, Text as NeText } from 'native-base';
 
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from '../common/Loading'
 
-import { Icon as Eicon } from 'expo'
+import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
 import Colors from '../../constants/Colors'
 
@@ -40,7 +40,7 @@ export default class Login extends React.Component {
 				<NavigationBar
 					title={''}
 					style={{}}
-					leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 					rightButton={<Text onPress={()=> navigation.navigate('Login')} style={{color:Colors.headerText,fontSize:16,}}>登录</Text>}
 				/>
 				<Content style={{paddingLeft: 30, paddingRight: 30,paddingBottom:20,}}>
@@ -51,14 +51,14 @@ export default class Login extends React.Component {
 							onChangeText={(text) => this.setState({ text })}
 							maxLength={11}
 							placeholder='请输入手机号' />
-						<Icon name={text.length === 11 ? 'checkmark-circle' : 'information-circle'} />
+						<NeIcon name={text.length === 11 ? 'checkmark-circle' : 'information-circle'} />
 					</Item>
 					<Item success={text.length === 11}>
 						<Input
 							maxLength={6}
 							onChangeText={(verification_code) => this.setState({ verification_code })}
 							placeholder='请输入验证码' />
-						<Icon name={verification_code.length === 6 ? 'checkmark-circle' : 'information-circle'} />
+						<NeIcon name={verification_code.length === 6 ? 'checkmark-circle' : 'information-circle'} />
 						<NeText onPress={this._getCode.bind(this)}>点击获取</NeText>
 						{/* <NeButton
 							transparent
@@ -74,7 +74,7 @@ export default class Login extends React.Component {
 							secureTextEntry
 							onChangeText={(password) => this.setState({ password })}
 							placeholder='请输入密码' />
-						<Icon name={password.length >= 6 ? 'checkmark-circle' : 'information-circle'} />
+						<NeIcon name={password.length >= 6 ? 'checkmark-circle' : 'information-circle'} />
 					</Item>
 					<View style={{ marginTop: 50 }}>
 						<NeButton onPress={this._getRegist.bind(this)} block info={text && password && verification_code ? false : true}>

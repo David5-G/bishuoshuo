@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, WebView,Image, ScrollView, Dimensions, StyleSheet } from 'react-native'
-import {Icon as Eicon} from 'expo'
+import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
 import Colors from '../../constants/Colors'
 import HTML from 'react-native-render-html'
@@ -29,8 +29,8 @@ export default class NewsDetail extends React.Component {
                 <NavigationBar
 					title={params.post_title || params.title}
 					style={{}}
-					leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
-					leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 				/>
                 <ScrollView style={styles.container}>
                     {

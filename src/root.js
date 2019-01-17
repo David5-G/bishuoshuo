@@ -42,7 +42,6 @@ export default class News extends React.Component {
         const { loading, appState} = this.state
         return (
             <View style={styles.container}>
-                <Text>appState-->{appState}</Text>
                 <LoadingView show={loading} />
                 {Platform.OS === 'ios' && <StatusBar hidden={false} barStyle="light-content" />}
                 <Route />

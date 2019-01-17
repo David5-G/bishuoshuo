@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, WebView, ScrollView, StyleSheet,Image } from 'react-native';
 import { Container, Header, Content, List,Button as NeButton, ListItem, Text as NeText, Icon as NeIcon, Left, Body, Right, Switch } from 'native-base';
 import { observer, inject } from 'mobx-react/native'
-import { Icon as Eicon } from 'expo'
 @inject('UserStore')
 @observer
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Alert, View, AsyncStorage, ActivityIndicator, TouchableOpacity, WebView, ScrollView, Button, StyleSheet, TextInput, Text } from 'react-native'
-import { Container, Header,Left, Body, Right,Title, Content, Item, Input, Icon, Button as NeButton, Text as NeText } from 'native-base';
+import { Container, Header,Left, Body, Right,Title,Icon as NeIcon, Content, Item, Input, Button as NeButton, Text as NeText } from 'native-base';
 import { observer, inject } from 'mobx-react/native'
 import LoadingView from '../common/Loading'
-import { Icon as Eicon } from 'expo'
+import Icon from 'react-native-vector-icons/Ionicons'
+
 import NavigationBar from '../common/NavigationBar'
 import Colors from '../../constants/Colors'
 @inject('MainStore', 'UserStore')
@@ -45,7 +46,7 @@ export default class Login extends React.Component {
 				<NavigationBar
 					title={''}
 					style={{}}
-					leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 					rightButton={<Text onPress={()=> navigation.navigate('Regist')} style={{color:Colors.headerText,fontSize:16,}}>注册</Text>}
 				/>
 				<LoadingView show={loading} />
@@ -60,7 +61,7 @@ export default class Login extends React.Component {
 							maxLength={11}
 							value={text}
 							placeholder='请输入手机号' />
-						<Icon name={text.length === 11 ? 'checkmark-circle' : 'information-circle'} />
+						<NeIcon name={text.length === 11 ? 'checkmark-circle' : 'information-circle'} />
 					</Item>
 
 					<Item success={password.length >= 6}>
@@ -72,7 +73,7 @@ export default class Login extends React.Component {
 							}}
 							value={password}
 							placeholder='请输入密码' />
-						<Icon name={password.length >= 6 ? 'checkmark-circle' : 'information-circle'} />
+						<NeIcon name={password.length >= 6 ? 'checkmark-circle' : 'information-circle'} />
 					</Item>
 
 					<View style={styles.action}>

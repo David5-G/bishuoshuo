@@ -11,10 +11,11 @@ import {
     Image,
     StatusBar,
     Text,
+    Dimensions,
     View
 } from 'react-native'
 import Colors from '../../constants/Colors'
-import {Dimensions} from 'react-native'
+
 // const deviceH = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 

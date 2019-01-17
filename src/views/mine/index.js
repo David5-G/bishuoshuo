@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Button, Dimensions, SafeAreaView,TouchableOpacity, Text, WebView, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Button,Alert, Dimensions, SafeAreaView,TouchableOpacity, Text, WebView, ScrollView, Image, StyleSheet } from 'react-native';
+import { Container, Header,Left, Body, Right,Title, Content, Item, Input, Button as NeButton, Text as NeText } from 'native-base';
+
 import { observer, inject } from 'mobx-react/native';
-import { Icon as Eicon } from 'expo'
+
 import Colors from '../../constants/Colors'
 import NavigationBar from '../common/NavigationBar'
-import { LinearGradient } from 'expo';
 import MineList from './subPage/mineList.js'
+import Icon from 'react-native-vector-icons/Ionicons'
 const width = Dimensions.get('window').width
 
 @inject('MainStore', 'UserStore')
@@ -35,7 +37,6 @@ export default class Mine extends React.Component {
 		console.log('mine--> componentWillUnmount')
 	}
 	render() {
-		const { title } = this.props.MainStore
 		const { isLogin, userInfo } = this.props.UserStore
 		const {navigation} = this.props
 		return (
@@ -46,7 +47,7 @@ export default class Mine extends React.Component {
 					titleLayoutStyle={{ fontSize: 30 }}
 
 					rightButton={
-						<Eicon.Ionicons
+						<Icon
 							style={{ paddingLeft: 20, }}
 							onPress={() => {
 								if (isLogin) {
@@ -79,22 +80,18 @@ export default class Mine extends React.Component {
 					</View>
 				</View>
 				<View style={{flexDirection: 'row', justifyContent: 'space-between',paddingLeft: 20,paddingRight: 20,marginTop: -50}}>
-					<TouchableOpacity onPress={() => navigation.navigate('Login')}>
-						<LinearGradient
-							colors={['#ffba00','#ff9000']}
-							start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-							style={{ padding: 10, alignItems: 'center', width: 150,borderRadius: 4,}}>
-							<Text style={{backgroundColor: 'transparent', fontSize: 15, color: '#fff', }}>登录</Text>
-						</LinearGradient>
-					</TouchableOpacity>
-					<TouchableOpacity  onPress={() => navigation.navigate('Regist')}>
-						<LinearGradient
-							colors={['#ff6c47','#ff3c4b']}
-							start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-							style={{ padding: 10, alignItems: 'center', width: 150, borderRadius: 4,}}>
-							<Text style={{backgroundColor: 'transparent',fontSize: 15,color: '#fff',}}>注册</Text>
-						</LinearGradient>
-					</TouchableOpacity>
+					<NeButton
+						onPress={() => {
+							navigation.navigate('Login')
+						}}
+						style={{ padding: 10, alignItems: 'center', width: 150,borderRadius: 4,}}>
+						<Text style={{backgroundColor: 'transparent', fontSize: 15, color: '#fff', }}>登录</Text>
+					</NeButton>
+					<NeButton
+						onPress={() => navigation.navigate('Regist')}
+						style={{ padding: 10, alignItems: 'center', width: 150, borderRadius: 4,}}>
+						<Text style={{backgroundColor: 'transparent',fontSize: 15,color: '#fff',}}>注册</Text>
+					</NeButton>
 				</View>
 				<MineList />
 			</View>
@@ -119,5 +116,19 @@ const styles = StyleSheet.create({
 		shadowColor: '#000',
 		shadowOpacity: 0.2,
 		shadowOffset: { width: 0, height: 0 },
-	}
+	},
+	linearGradient: {
+		flex: 1,
+		paddingLeft: 15,
+		paddingRight: 15,
+		borderRadius: 5
+	  },
+	  buttonText: {
+		fontSize: 18,
+		fontFamily: 'Gill Sans',
+		textAlign: 'center',
+		margin: 10,
+		color: '#ffffff',
+		backgroundColor: 'transparent',
+	  },
 })

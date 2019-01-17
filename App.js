@@ -68,10 +68,7 @@ export default class App extends Component<Props> {
 		const  {updateText } = this.state
 		return (
 			<Provider {...Store} >
-				<View style={{flex: 1}}>
-				<Text style={styles.welcome}>-->{updateText}</Text>
-					<Root />
-				</View>
+				<Root />
 			</Provider>
 		);
 	}

@@ -1,11 +1,10 @@
 import React from 'react'
 import {Linking,SafeAreaView, ActivityIndicator, NetInfo, View, Text, WebView, ScrollView, StyleSheet, Button } from 'react-native'
-import { Container, Header, Content, Item, Input, Icon, Segment, Button as NeButton, Text as NeText } from 'native-base';
+import { Container, Header, Content, Item, Input, Segment, Button as NeButton, Text as NeText } from 'native-base';
 import { observer, inject } from 'mobx-react/native'
 import Colors from '../../constants/Colors';
 import NavigationBar from '../common/NavigationBar'
-import { Icon as Eicon} from 'expo'
-
+import Icon from 'react-native-vector-icons/Ionicons'
 @inject('QuotaStore')
 @observer
 export default class Home extends React.Component {
@@ -68,7 +67,7 @@ export default class Home extends React.Component {
 					titleLayoutStyle={{ fontSize: 30 }}
 
 					rightButton={
-						<Eicon.Ionicons
+						<Icon
 							style={{paddingLeft:20,}}
 							onPress={()=> {
 								

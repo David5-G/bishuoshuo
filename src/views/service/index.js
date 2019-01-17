@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, WebView } from 'react-native'
-// import { ExpoLinksView } from '@expo/samples';
-import { Icon as Eicon } from 'expo'
+import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
 import LoadingView from '../common/Loading'
 import Colors from '../../constants/Colors'
@@ -32,7 +31,7 @@ export default class Service extends React.Component {
                     title={'在线小秘书'}
                     style={{ color: Colors.headerText, fontSize: 20 }}
                     titleLayoutStyle={{ fontSize: 30 }}
-                    leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={'#fff'} />}
+                    leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={'#fff'} />}
                 />
                 <LoadingView show={this.state.loading} text={'客服正在准备'} />
                 <WebView

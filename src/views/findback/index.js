@@ -1,10 +1,10 @@
 import React from 'react';
 import { Alert, View, ActivityIndicator, TouchableOpacity, WebView, ScrollView, Button, StyleSheet, TextInput, Text } from 'react-native'
-import { Container, Header, Content, Item, Input, Icon, Button as NeButton, Text as NeText } from 'native-base';
+import { Container, Header, Content, Item, Input, Button as NeButton, Text as NeText } from 'native-base';
 
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from '../common/Loading'
-import { Icon as Eicon } from 'expo'
+import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
 import Colors from '../../constants/Colors'
 
@@ -38,7 +38,7 @@ export default class Findback extends React.Component {
                 <NavigationBar
 					title={''}
 					style={{}}
-					leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={26} color={'#fff'} />}
+					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={26} color={'#fff'} />}
 					// rightButton={<Text onPress={()=> navigation.navigate('Login')} style={{color:'#fff'}}>登录</Text>}
 				/>
 				<Content style={{paddingLeft: 30, paddingRight: 30,paddingBottom:20,}}>
