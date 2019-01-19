@@ -65,9 +65,17 @@ export default class App extends Component<Props> {
         }
     }
 	render() {
-		const  {updateText } = this.state
+		const  {updateText, isUpdateFinished } = this.state
+		if (!isUpdateFinished) {
+			return (
+				<View style={{flex: 1,justifyContent: 'center',alignItems: 'center'}}>
+					<Text style={{fontSize: 18}}>{updateText}</Text>
+				</View>
+			)
+		}
 		return (
 			<Provider {...Store} >
+				
 				<Root />
 			</Provider>
 		);

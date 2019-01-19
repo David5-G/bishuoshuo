@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View,Image,TouchableOpacity, Text,ActivityIndicator, Button, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
+import { View,Image,Dimensions,TouchableOpacity, Text,ActivityIndicator, Button, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
 import { Container, List, ListItem, Body, Header, Content, Card, CardItem, Item, Input, Icon, Button as NeButton, Text as NeText } from 'native-base';
 
 import { observer, inject } from 'mobx-react/native'
 import Colors from '../../constants/Colors'
-// import {Dimensions} from 'react-native'
+import NavigationBar from '../common/NavigationBar'
+
 // const deviceH = Dimensions.get('window').height
-// const deviceW = Dimensions.get('window').width
+const width = Dimensions.get('window').width
 @inject('MediaStore')
 @observer
 class ImportantNews extends React.Component {
@@ -37,8 +38,7 @@ class ImportantNews extends React.Component {
                 navigation.navigate('NewsDetail',item)
             }}>
                 <View style={styles.card} keyExtractor={'key' + index} keys={index}>
-                    {/* <Text style={{lineHeight:25,fontSize:16,}}>{item.C}</Text> */}
-                    {/* <Text>{item.post_content}</Text> */}
+                    
                     <View style={{flex:1}}>
                         <View style={{flex:1,justifyContent: 'space-between'}}>
                             
@@ -97,6 +97,24 @@ class ImportantNews extends React.Component {
         const { MediaStore } = this.props
         return (
             <Container style={styles.container}>
+                <NavigationBar
+                    title={'资讯'}
+                    style={{ color: Colors.headerText, fontSize: 20 }}
+                    titleLayoutStyle={{ fontSize: 30 }}
+                    titleView={<Image style={{width: 100,height: 24,marginTop: 13,}} source={{uri: 'https://s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png'}} />}
+                    rightButton={(<Text></Text>)}
+                />
+                <View style={styles.nav}>
+                    <Text style={styles.navItem}>行业</Text>
+                    <Text style={styles.navItem}>宏观</Text>
+                    <Text style={styles.navItem}>公司</Text>
+                    <Text style={styles.navItem}>数据</Text>
+                    <Text style={styles.navItem}>市场</Text>
+                    <Text style={styles.navItem}>观点</Text>
+                    <Text style={styles.navItem}>全球</Text>
+                    <Text style={styles.navItem}>A股</Text>
+                    <Text style={styles.navItem}>其它</Text>
+                </View>
                 <FlatList
                     data={MediaStore.importantNews}
                     refreshing={this.state.loading}
@@ -116,6 +134,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    nav: {
+        flexDirection: 'row',
+        width,
+        flexWrap: 'wrap',
+        backgroundColor: 'rgba(255,60,75,0.1)',
+        padding: 5,
+        
+    },
+    navItem: {
+        width: (width - 10)/6,
+        textAlign: 'center',
+        fontSize: 16,
+        lineHeight: 32,
+        color: '#333'
+    },
+
     card: {
         flex: 1,
         flexDirection: 'row',
@@ -125,6 +159,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.borderGray,
         borderBottomWidth: 1,
     },
+
     
 });
 
