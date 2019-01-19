@@ -25,10 +25,10 @@ export default class Home extends React.Component {
 	}
 	_initVariety () {
 		const { QuotaStore } = this.props
-		QuotaStore.getVarietyList({pidx:1,rout:'GBIDX'})
-		QuotaStore.getVarietyList({pidx:1,rout:'GBDC'})
-		QuotaStore.getVarietyList({pidx:1,rout:'CNFT'})
-		QuotaStore.getVarietyList({pidx:1,rout:'GBFT'})
+		// QuotaStore.getVarietyList({pidx:1,rout:'GBIDX'})
+		// QuotaStore.getVarietyList({pidx:1,rout:'GBDC'})
+		// QuotaStore.getVarietyList({pidx:1,rout:'CNFT'})
+		// QuotaStore.getVarietyList({pidx:1,rout:'GBFT'})
 	}
 	_renderItem (item,key) {
 		return (
@@ -93,7 +93,7 @@ export default class Home extends React.Component {
 				</Segment>
 
 				<ScrollView style={{flex: 1,paddingLeft: 10,paddingRight: 10,backgroundColor: '#fff',}}>
-					<View style={active !==1 ? {display: 'none'} : {}}>
+					{/* <View style={active !==1 ? {display: 'none'} : {}}>
 						{
 							QuotaStore.GBIDX_QUOTAS.map((item ,i) => {
 								return this._renderItem(item,i)
@@ -123,7 +123,7 @@ export default class Home extends React.Component {
 								return this._renderItem(item,i)
 							})
 						}
-					</View>
+					</View> */}
 				</ScrollView>
 				{/* <ActivityIndicator style={styles.loading} size="large" /> */}
 

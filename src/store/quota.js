@@ -79,6 +79,8 @@ class QuotaStore {
         return GET(Host + '/yapi/hq/hqbatchlist/', params).then(res => res)
     }
 
+    // 
+
     
 }
 
