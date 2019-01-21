@@ -9,7 +9,7 @@ import Banners from './subPage/banner.js'
 import { timeago } from '../../utils/times'
 const width = Dimensions.get('window').width
 
-@inject('MediaStore')
+@inject('MediaStore','UserStore')
 @observer
 class Home extends React.Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
@@ -57,11 +57,12 @@ class Home extends React.Component {
     }
     _renderItemView({ item }) {
         const key = item.key
+        const { navigation } = this.props
         if (!item.resource.title) {
             return null
         }
         return (
-            <View style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
+            <TouchableOpacity onPress={() => navigation.navigate('WallDetail',item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
                 <View style={{ flex: 2 }}>
                     <View style={{ flex: 1, justifyContent: 'space-between' }}>
                         <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18}}>{item.resource.title}</Text>
@@ -74,7 +75,7 @@ class Home extends React.Component {
                         source={{ uri: item.resource.image_uri || 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
                     />
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     _renderFooter() {
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
         padding: 5,
         minHeight: 130,
         borderColor: Colors.borderGray,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         backgroundColor: '#fff',
         
     },

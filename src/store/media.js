@@ -1,10 +1,9 @@
 
 import { observable, computed, useStrict,decorate, action } from 'mobx'
-import { Host } from '../config'
+import { Host, WallHost } from '../config'
 import { POST, GET } from '../utils/request.js'
 
 //华尔街见闻
-const wallHost = 'https://api-prod.wallstreetcn.com'
 
 useStrict
 class MediaStore {
@@ -28,7 +27,7 @@ class MediaStore {
     // }
 
     @action getBanners(params = {}) {
-        return GET(wallHost + '/apiv1/content/fabricate-articles', params).then(res => {
+        return GET(WallHost + '/apiv1/content/fabricate-articles', params).then(res => {
             if (res.code === 20000) {
                 this.banners = res.data.items
             } else {
@@ -42,8 +41,8 @@ class MediaStore {
     @action getWallmain (params={}) {
         if (params.channel !== this._cur) this.wallNews = [] //tab发生改变后清空当前的新闻
         this._cur = params.channel
-        
-        return GET(wallHost + '/apiv1/content/fabricate-articles', params).then(res => {
+
+        return GET(WallHost + '/apiv1/content/fabricate-articles', params).then(res => {
             if (res.code === 20000) {
                 this.wallNews = [...this.wallNews,...res.data.items]
                 this.wallNews.forEach((item,i) => item.key = i)

@@ -16,6 +16,7 @@ import Regist from '../views/regist'
 import Findback from '../views/findback'
 import Service from '../views/service'
 import NewsDetail from '../views/newsDetail'
+import WallDetail from '../views/wallDetail'
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -94,11 +95,13 @@ export default createStackNavigator(
 				},
 			}
 		},
+		
 		NewsDetail: NewsDetail, //查看资讯详情
 		Login: Login,
 		Regist: Regist,
 		Findback: Findback,
-        Service: Service,
+		Service: Service,
+		WallDetail: WallDetail,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,
