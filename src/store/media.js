@@ -3,24 +3,57 @@ import { observable, computed, useStrict,decorate, action } from 'mobx'
 import { Host } from '../config'
 import { POST, GET } from '../utils/request.js'
 
+//华尔街见闻
+const wallHost = 'https://api-prod.wallstreetcn.com'
+
 useStrict
 class MediaStore {
     id = Math.random()
     @observable banners = []
+    @observable wallNews = []
+
     @observable flashNews = []
     @observable importantNews = []
     @observable dubiwangNews = []
 
-    @action getBanners(params = {slide_id :1 }) {
-        return GET(Host + '/yapi/slide/index/', params).then(res => {
-            if (res.code === 1) {
-                this.banners = res.data
+    // @action getBanners(params = {slide_id :1 }) {
+    //     return GET(Host + '/yapi/slide/index/', params).then(res => {
+    //         if (res.code === 1) {
+    //             this.banners = res.data
+    //         } else {
+    //             this.banners = []
+    //         }
+    //         return res
+    //     })
+    // }
+
+    @action getBanners(params = {}) {
+        return GET(wallHost + '/apiv1/content/fabricate-articles', params).then(res => {
+            if (res.code === 20000) {
+                this.banners = res.data.items
             } else {
                 this.banners = []
             }
             return res
         })
     }
+
+    _cur = 'global' //记录home页面的选项卡
+    @action getWallmain (params={}) {
+        if (params.channel !== this._cur) this.wallNews = [] //tab发生改变后清空当前的新闻
+        this._cur = params.channel
+        
+        return GET(wallHost + '/apiv1/content/fabricate-articles', params).then(res => {
+            if (res.code === 20000) {
+                this.wallNews = [...this.wallNews,...res.data.items]
+                this.wallNews.forEach((item,i) => item.key = i)
+            } else {
+                this.wallNews = []
+            }
+            return res
+        })
+    }
+    
 
     @action getFlashNews(params={}) {
         // pidx 1 必选 页码，每页最多10，排序是从当前往历史方向排，第一页是当前

@@ -1,27 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View,Image,Dimensions,TouchableOpacity, Text,ActivityIndicator, Button, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
-import { Container, List, ListItem, Body, Header, Content, Card, CardItem, Item, Input, Icon, Button as NeButton, Text as NeText } from 'native-base';
-
+import { View, Image, Dimensions, TouchableOpacity, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
+import { Container, List, ListItem, Body, Header, Content, Card, CardItem, Item, Input, Icon, Button as NeButton, Text as NeText, } from 'native-base';
 import { observer, inject } from 'mobx-react/native'
 import Colors from '../../constants/Colors'
 import NavigationBar from '../common/NavigationBar'
-
-// const deviceH = Dimensions.get('window').height
+import Banners from './subPage/banner.js'
+import { timeago } from '../../utils/times'
 const width = Dimensions.get('window').width
+
 @inject('MediaStore')
 @observer
-class ImportantNews extends React.Component {
+class Home extends React.Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
-		title: '重新新闻',
-	})
+        title: '重新新闻',
+    })
     constructor(props) {
         super(props)
         this.state = {
-            // category: '1,2,3,4,5,6,7,8,9,10,0',
-            category: '2',
-            page: 1,
-            total: 0,
+            limit: 10,
+            cursor: '',
+            channel: 'global',
+            accept: 'article,newsroom,morning-report,newsrooms,live,calendar,audition,wits-home-users,hot-themes,vote-interactive,discuss-interactive,ad.internal_banner.inhouse,ad.internal_inline.inhouse,ad.inline.inhouse,ad.video.inhouse,ad.banner.inhouse,ad.inline.plista,ad.banner.plista,ad.topic.inhouse,ad.inline.tanx',
             loading: false,
             done: false,
         }
@@ -29,39 +29,60 @@ class ImportantNews extends React.Component {
     componentDidMount() {
         this._loadMore()
     }
-    componentWillUnmount() {
+    _toggleTab (topic) {
+
+        const { channel,loading } = this.state
+        if (loading) return
+        if (channel === topic) return
+        this.setState({channel: topic,done: false,cursor: '',loading: false}, () => this._loadMore())
     }
-    _renderItemView({item,index}) {
-        const { navigation } = this.props
+    _loadMore() {
+        const { MediaStore } = this.props
+        const { limit, cursor, channel, accept, loading, done, } = this.state
+        if (loading || done) return
+        this.setState({ loading: true })
+        MediaStore.getWallmain({
+            limit, cursor, channel, accept,
+        }).then(res => {
+            if (res.code === 20000) {
+                if (!res.data.items.length || MediaStore.wallNews.length >= 50) {
+                    this.setState({ done: true })
+                }
+                // wallnews 没有 page选项
+                const next_cursor = res.data.next_cursor
+                next_cursor && this.setState({ cursor: next_cursor })
+            }
+            this.setState({ loading: false })
+        })
+    }
+    _renderItemView({ item }) {
+        const key = item.key
+        if (!item.resource.title) {
+            return null
+        }
         return (
-            <TouchableOpacity onPress={() => {
-                navigation.navigate('NewsDetail',item)
-            }}>
-                <View style={styles.card} keyExtractor={'key' + index} keys={index}>
-                    
-                    <View style={{flex:1}}>
-                        <View style={{flex:1,justifyContent: 'space-between'}}>
-                            
-                            <Text numberOfLines={2} style={{lineHeight:25,fontSize:16,}}>{item.post_title.replace(/\s/,'')}</Text>
-                            <Text style={{lineHeight:50,fontSize:14,color:Colors.bodyTextGray}}>{item.post_source}</Text>
-                        </View>
-                    </View>
-                    <View style={{flex:1}}>
-                        <Image
-                            style={{marginLeft:10,height:80,borderRadius:3,}}
-                            source={{uri: item.more.thumbnail || 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-                        />
+            <View style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
+                <View style={{ flex: 2 }}>
+                    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                        <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18}}>{item.resource.title}</Text>
+                        <Text style={{ lineHeight: 50, fontSize: 14, color: Colors.bodyTextGray }}>{item.resource.author.display_name} {timeago(item.resource.display_time * 1000)}</Text>
                     </View>
                 </View>
-            </TouchableOpacity>
+                <View style={{ flex: 1 }}>
+                    <Image
+                        style={{ marginLeft: 10, height: 110 }}
+                        source={{ uri: item.resource.image_uri || 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+                    />
+                </View>
+            </View>
         )
     }
-    _renderFooter(){
-        const {done,loading,} = this.state
+    _renderFooter() {
+        const { done, loading, } = this.state
         if (done) {
             return (
-                <View style={{height:30,alignItems:'center',justifyContent:'flex-start',}}>
-                    <Text style={{color:Colors.bodyTextGray,fontSize:14,marginTop:5,marginBottom:5,}}>没有更多数据了</Text>
+                <View style={{ height: 30, alignItems: 'center', justifyContent: 'flex-start', }}>
+                    <Text style={{ color: '#999999', fontSize: 14, marginTop: 5, marginBottom: 5, }}>没有更多数据了</Text>
                 </View>
             )
         } else if (loading) {
@@ -70,100 +91,95 @@ class ImportantNews extends React.Component {
             return null
         }
     }
-    _loadMore() {
-        // category: 5,
-        // page: 1,
-        // loading: false,
-        // done: false,
-        const {category, page,loading ,done} = this.state
-        const { MediaStore } = this.props
-        if (loading || done) return
-        this.setState({loading: true})
-        MediaStore.getImportantNews({
-            category,page,
-        }).then(res => {
-            if (res.code === 1) {
-                this.setState({page: page + 1,})
-            } else {
-                this.setState({done: true})
-            }
-            this.setState({loading: false})
-        })
-    }
-    _keyExtractor (item, index) {
+    _keyExtractor(item, index) {
         return index.toString()
     }
     render() {
         const { MediaStore } = this.props
+        const { channel } = this.state
         return (
-            <Container style={styles.container}>
+            <View style={styles.container}>
                 <NavigationBar
                     title={'资讯'}
                     style={{ color: Colors.headerText, fontSize: 20 }}
                     titleLayoutStyle={{ fontSize: 30 }}
-                    titleView={<Image style={{width: 100,height: 24,marginTop: 13,}} source={{uri: 'https://s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png'}} />}
+                    titleView={<Image style={{ width: 100, height: 24, marginTop: 13, }} source={{ uri: 'https://s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png' }} />}
                     rightButton={(<Text></Text>)}
                 />
-                <View style={styles.nav}>
-                    <Text style={styles.navItem}>行业</Text>
-                    <Text style={styles.navItem}>宏观</Text>
-                    <Text style={styles.navItem}>公司</Text>
-                    <Text style={styles.navItem}>数据</Text>
-                    <Text style={styles.navItem}>市场</Text>
-                    <Text style={styles.navItem}>观点</Text>
-                    <Text style={styles.navItem}>全球</Text>
-                    <Text style={styles.navItem}>A股</Text>
-                    <Text style={styles.navItem}>其它</Text>
+
+                <View style={{height: 50,}}>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{marginBottom: 10,backgroundColor: '#fff',}} >
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'global')} style={styles.nav} ><Text style={styles.navItem}>要闻</Text><Text style={[styles.navItemBorder,channel==='global'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'forex')} style={styles.nav}><Text style={styles.navItem}>资产</Text><Text style={[styles.navItemBorder,channel==='forex'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'shares')} style={styles.nav}><Text style={styles.navItem}>股票</Text><Text style={[styles.navItemBorder,channel==='shares'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'economy')} style={styles.nav}><Text style={styles.navItem}>经济</Text><Text style={[styles.navItemBorder,channel==='economy'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'bonds')} style={styles.nav}><Text style={styles.navItem}>债券</Text><Text style={[styles.navItemBorder,channel==='bonds'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'commodities')} style={styles.nav}><Text style={styles.navItem}>商品</Text><Text style={[styles.navItemBorder,channel==='commodities'?styles.active:null]} /></TouchableOpacity>
+
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'enterprise')} style={styles.nav}><Text style={styles.navItem}>公司</Text><Text style={[styles.navItemBorder,channel==='enterprise'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'china')} style={styles.nav}><Text style={styles.navItem}>中国</Text><Text style={[styles.navItemBorder,channel==='china'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'us')} style={styles.nav}><Text style={styles.navItem}>美国</Text><Text style={[styles.navItemBorder,channel==='us'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'europe')} style={styles.nav}><Text style={styles.navItem}>欧洲</Text><Text style={[styles.navItemBorder,channel==='europe'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'japan')} style={styles.nav}><Text style={styles.navItem}>日本</Text><Text style={[styles.navItemBorder,channel==='japan'?styles.active:null]} /></TouchableOpacity>
+                        <TouchableOpacity onPress={this._toggleTab.bind(this,'wision')} style={styles.nav}><Text style={styles.navItem}>研究</Text><Text style={[styles.navItemBorder,channel==='wision'?styles.active:null]} /></TouchableOpacity>
+                    </ScrollView>
                 </View>
+
                 <FlatList
-                    data={MediaStore.importantNews}
-                    refreshing={this.state.loading}
+                    data={MediaStore.wallNews}
                     renderItem={this._renderItemView.bind(this)}
                     keyExtractor={this._keyExtractor} //唯一的key
+                    ListHeaderComponent={channel==='global'?<Banners />:null}
                     ListFooterComponent={this._renderFooter.bind(this)}
                     onEndReached={this._loadMore.bind(this)}
                     onEndReachedThreshold={0}
                 />
-            </Container>
+            </View>
         );
     }
 }
-export default ImportantNews
+export default Home
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: Colors.bodyBackground,
     },
-    nav: {
-        flexDirection: 'row',
-        width,
-        flexWrap: 'wrap',
-        backgroundColor: 'rgba(255,60,75,0.1)',
-        padding: 5,
-        
-    },
-    navItem: {
-        width: (width - 10)/6,
-        textAlign: 'center',
-        fontSize: 16,
-        lineHeight: 32,
-        color: '#333'
-    },
-
     card: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin: 10,
-        minHeight:100,
+        padding: 5,
+        minHeight: 130,
         borderColor: Colors.borderGray,
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
+        backgroundColor: '#fff',
+        
     },
-
-    
+    nav: {
+        flex: 1,
+        width: 35,
+        marginLeft: 10,
+        marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    navItem: {
+        lineHeight: 40,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#444',
+    },
+    navItemBorder: {
+        height: 4,
+        width: 25,
+    },
+    active: {
+        backgroundColor: Colors.bodyTextActive,
+    }
 });
 
-ImportantNews.proptypes = {
-    navigation : PropTypes.object.isRequired,
+Home.proptypes = {
+    navigation: PropTypes.object.isRequired,
 }
 

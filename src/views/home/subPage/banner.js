@@ -1,21 +1,37 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet } from 'react-native';
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper'
 import {Dimensions} from 'react-native'
+import { observer, inject } from 'mobx-react/native'
+
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
+
+
+@inject('MediaStore')
+@observer
 export default class Banner extends React.Component {
 	static navigationOptions = {
 		title: 'banner',
 	}
 	constructor(props){
 		super(props)
-		this.state = {}
+        this.state = {
+            channel: 'global-carousel',
+            limit: 5,
+        }
     }
-    componentDidMount() {}
+    componentDidMount() {
+        const { MediaStore } = this.props
+        const { channel, limit } = this.state
+        MediaStore.getBanners({
+            channel,limit
+        })
+    }
     componentWillUnmount() {}
 	render() {
-        const {banners} = this.props
+        const { MediaStore } = this.props
+        const banners = MediaStore.banners
 		return (
 			<View style={styles.container}>
                 {banners.length ? (
@@ -28,14 +44,14 @@ export default class Banner extends React.Component {
                     >
                         {banners.map((item,i) => {
                             return (
-                                <View key={i}>
-                                    <Image style={styles.image} source={{uri: item.image}} />
+                                <View style={styles.wrap} key={i}>
+                                    <Image style={styles.image} source={{uri: item.resource.image_uri}} />
+                                    <Text style={styles.title}>{item.resource.title}</Text>
                                 </View>
                             )
                         })}
                     </Swiper> 
                 ) : null}
-                
 			</View>
 		);
 	}
@@ -43,7 +59,19 @@ export default class Banner extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-        height: 100,
+        height: 150,
+    },
+    wrap: {
+        height: 150,
+    },
+    title: {
+        position: 'absolute',
+        left: 10,
+        bottom: 10,
+        width: width - 20,
+        fontSize: 18,
+        lineHeight: 25,
+        color: '#fff',
     },
     image: {
         width,

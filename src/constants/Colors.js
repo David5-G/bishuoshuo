@@ -1,4 +1,4 @@
-const tintColor = '#ff3c4b';
+const tintColor = '#1478f0';
 
 export default {
     tintColor,
@@ -15,7 +15,7 @@ export default {
     headerBackground: tintColor,
     headerText: '#fff',
 
-    bodyBackground: '#fff',
+    bodyBackground: '#f4f4f4',
     bodyTextDark: '#444',
     bodyTextGray: '#a9a9a9',
     bodyTextlight: '#aaa',

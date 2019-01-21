@@ -1,6 +1,11 @@
 import React from 'react'
 import { Linking,Alert, SafeAreaView, ActivityIndicator, NetInfo,Image, View, Text, WebView, ScrollView, StyleSheet, Button } from 'react-native';
-import { Container, Header, Content, Item, Input, Segment, Button as NeButton, Text as NeText } from 'native-base';
+import { Container, Header, Content, Item, Input, Segment, Button as NeButton,StyleProvider, Text as NeText } from 'native-base';
+import getTheme from '../../../native-base-theme/components';
+import platform from '../../../native-base-theme/variables/platform';
+import commonColor from '../../../native-base-theme/variables/commonColor'
+
+
 import { observer, inject } from 'mobx-react/native'
 import Colors from '../../constants/Colors'
 import CoinNews from './subPage/coin'
@@ -8,6 +13,7 @@ import FlashNews from './subPage/flashNews'
 import ImportantNews from './subPage/importantNews'
 import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
+
 @inject('UserStore')
 @observer
 export default class News extends React.Component {
@@ -54,17 +60,21 @@ export default class News extends React.Component {
 							color={Colors.headerText}
 						/>}
 				/>
-				<Segment >
-					<NeButton first active={active===1} onPress={() =>this.setState({active:1})}>
-						<NeText>币圈</NeText>
-					</NeButton>
-					<NeButton active={active===2} onPress={() =>this.setState({active:2})}>
-						<NeText>财经</NeText>
-					</NeButton>
-					<NeButton last active={active===3} onPress={() =>this.setState({active:3})}>
-						<NeText>快讯</NeText>
-					</NeButton>
-				</Segment>
+				<StyleProvider style={getTheme(commonColor)}> 
+					<Segment >
+						<NeButton first active={active===1} onPress={() =>this.setState({active:1})}>
+							<NeText>币圈</NeText>
+						</NeButton>
+						<NeButton active={active===2} onPress={() =>this.setState({active:2})}>
+							<NeText>财经</NeText>
+						</NeButton>
+						<NeButton last active={active===3} onPress={() =>this.setState({active:3})}>
+							<NeText>快讯</NeText>
+						</NeButton>
+					</Segment>
+				</StyleProvider>
+				
+				
 				
 				<View style={active===1?{flex:1}:{display:'none',flex:1,}}>
 					<CoinNews navigation={navigation} />
