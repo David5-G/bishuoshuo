@@ -62,7 +62,7 @@ class Home extends React.Component {
             return null
         }
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('WallDetail',item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
+            <View onPress={() => navigation.navigate('WallDetail',item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
                 <View style={{ flex: 2 }}>
                     <View style={{ flex: 1, justifyContent: 'space-between' }}>
                         <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18}}>{item.resource.title}</Text>
@@ -71,11 +71,11 @@ class Home extends React.Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <Image
-                        style={{ marginLeft: 10, height: 110 }}
+                        style={{ marginLeft: 10, height: 100 }}
                         source={{ uri: item.resource.image_uri || 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
                     />
                 </View>
-            </TouchableOpacity>
+            </View>
         )
     }
     _renderFooter() {
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         color: '#444',
     },
     navItemBorder: {
-        height: 4,
+        height: 6,
         width: 25,
     },
     active: {

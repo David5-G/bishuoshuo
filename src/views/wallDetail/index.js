@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Dimensions, Text,Button, WebView, ScrollView, StyleSheet } from 'react-native'
+import {View, Dimensions,Alert, Text,Button,Linking, WebView, ScrollView, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
 import Colors from '../../constants/Colors'
@@ -8,6 +8,7 @@ import { GET } from '../../utils/request.js'
 import { WallHost } from '../../config/index.js'
 import HTML from 'react-native-render-html'
 import { timeago } from '../../utils/times'
+import Loading from '../common/Loading.js'
 
 const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = Dimensions.get('window')
 
@@ -20,17 +21,22 @@ export default class WallDetail extends React.Component {
 	constructor(props){
 		super(props)
         this.state = {
+            id: this.props.navigation.state.params.resource.id,
             loading: false,
-            html: '',
             detail: {},
+            openLink: false
         }
     }
     componentDidMount() {
         this._getDetail()
     }
 	render() {
-        const { detail } = this.state
+        const { detail,loading,openLink,related_articles } = this.state
         const { navigation } = this.props
+        if (!detail.content) {
+            return (<Loading show={loading} text={'请稍候···'} />)
+        }
+        let content = detail.content.replace(/<!--image#0-->/,'<img src="'+detail.image_uri+'" />')
 		return (
 			<View style={styles.container}>
                 <NavigationBar
@@ -40,48 +46,66 @@ export default class WallDetail extends React.Component {
 					// rightButton={<Text onPress={()=> navigation.navigate('Login')} style={{color:Colors.headerText,fontSize:16,}}>登录</Text>}
 				/>
                 <ScrollView style={{paddingTop: 30,paddingBottom: 100}}>
+                    {/* title */}
                     <View style={{marginLeft: 10,marginRight: 10}}>
-                        <Text style={{fontSize: 20,fontWeight: '600',lineHeight: 30}}>{detail.title}</Text>
+                        <Text style={{fontSize: 25,fontWeight: '600',lineHeight: 35}}>{detail.title}</Text>
                     </View>
-
+                    {/* description */}
                     <View style={{marginLeft: 10,marginRight: 10,flexDirection: 'row',justifyContent: 'space-between',}}>
-                        <Text style={{flex: 3,}}>{detail.author && detail.author.display_name}</Text>
-                        <View style={{flex: 7,flexDirection: 'row',justifyContent: 'space-between'}}>
-                            <View styles={{flex: 5,flexDirection: 'row',justifyContent: 'space-around'}}>
-                                <Text style={{flex: 1}}>字数</Text>
-                                <Text style={{flex: 1}}>{detail.words_count}</Text>
-                            </View>
-                            <View styles={{flex: 5,flexDirection: 'row',justifyContent: 'space-around'}}>
-                                <Text style={{flex: 1}}>阅读</Text>
-                                <Text style={{flex: 1}}>{parseInt(detail.words_count/600)}字</Text>
-                            </View>
+                        <View style={{flex:4,flexDirection:'row',justifyContent:"flex-start"}}>
+                            <Text style={{lineHeight:50,}}>来源: {detail.author && detail.author.display_name}</Text>
+                            <Text style={{lineHeight:50,color:Colors.bodyTextGray,marginLeft: 10,}}>{timeago(detail.display_time*1000)}</Text>
+                        </View>
+                        <View style={{flex: 6,flexDirection: 'row',justifyContent:"flex-end"}}>
+                            <Text style={{lineHeight:50,color:Colors.bodyTextGray}}>字数</Text>
+                            <Text style={{lineHeight:50,marginLeft:10}}>{detail.words_count}</Text>
+                            <Text style={{lineHeight:50,color:Colors.bodyTextGray,marginLeft:20}}>阅读</Text>
+                            <Text style={{lineHeight:50,marginLeft:10}}>{parseInt(detail.words_count/500)}分钟</Text>
                         </View>
                     </View>
-                    {
-                        detail.content ? 
-                        <HTML
-                            html={detail.content}
-                            ignoredStyles={['font-family','fontFamily','display']}
-                            containerStyle={{width:DEVICE_WIDTH,paddingLeft:10,paddingRight:10}}
-                            tagsStyles={{
-                                p: {fontSize: 16,lineHeight: 25,color: '#333',textAlign: 'justify'}
-                        }} /> : null
-                    }
+                    {/* 简短介绍 */}
+                    <View style={{marginTop: 25,marginLeft: 20,marginRight: 20,marginBottom: 30}}>
+                        <Text style={{lineHeight: 28,color: Colors.bodyTextGray,fontSize: 16,textAlign: 'justify'}}>摘要: {detail.content_short}</Text>
+                    </View>
+                    <Loading show={openLink} text={'打开链接中···'} />
+                    
+                    {/* 主体内容 */}
+                    <HTML
+                        
+                        html={content}
+                        onLinkPress={(target,link) => {
+                            if (openLink) return
+                            this.setState({openLink: true})
+                            Linking.openURL(link).then(res => this.setState({openLink: false})).catch(err => {
+                                Alert('打开链接失败')
+                                this.setState({openLink: false})
+                            });
+                        }}
+                        ignoredStyles={['font-family','fontFamily','display']}
+                        containerStyle={{width:DEVICE_WIDTH,paddingLeft:10,paddingRight:10}}
+                        tagsStyles={{
+                            p: {fontSize: 18,lineHeight: 25,color: '#333',textAlign: 'justify',marginBottom: 25,},
+                            img: {
+                                width: DEVICE_WIDTH - 20,
+                                height: 200,
+                            },
+                    }} />
+                    {/* 相关文章 */}
+                    <View style={{marginTop: 20}}>
+                        {
+
+                        }
+                    </View>
                 </ScrollView>
 			</View>
 		);
     }
     async _getDetail () {
-        console.log('_getDetail')
-        const { loading } = this.state
-        const { params } = this.props.navigation.state
-        const id = params.resource.id
+        const { loading,id } = this.state
         if (!id) return
         if (loading) return 
-        // https://api-prod.wallstreetcn.com/apiv1/content/articles/3473254?extract=1
         this.setState({loading: true})
         const res =  await GET(WallHost + '/apiv1/content/articles/' + id,{extract: 1})
-        console.log('await res --> ', res)
         if (res.code === 20000) {
             this && this.setState({ detail: res.data})
         }

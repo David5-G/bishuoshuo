@@ -23,9 +23,10 @@ export default class MineList extends React.Component {
 	}
 	render() {
 		const {userInfo, isLogin} = this.props.UserStore
+		const { navigation } = this.props
 		return (
 			<View style={styles.container}>
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => navigation.navigate('Userinfo')}>
 					<View style={styles.item}>
 						<View style={{flexDirection: 'row'}}>
 							<Icon style={styles.iconL} name={'logo-octocat'} size={24} color={Colors.bodyTextActive}  />
@@ -34,7 +35,7 @@ export default class MineList extends React.Component {
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
 					</View>
 				</TouchableOpacity>
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
 					<View style={[styles.item,{borderBottomWidth: 0,borderColor: 'red'}]}>
 						<View style={{flexDirection: 'row'}}>
 							<Icon style={styles.iconL} name={'ios-filing'} size={24} color={Colors.bodyTextActive}  />
@@ -54,7 +55,7 @@ export default class MineList extends React.Component {
 					</View>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => navigation.navigate('Service')}>
 					<View style={[styles.item]}>
 						<View style={{flexDirection: 'row'}}>
 							<Icon style={styles.iconL} name={'md-chatboxes'} size={24} color={Colors.bodyTextGray}  />

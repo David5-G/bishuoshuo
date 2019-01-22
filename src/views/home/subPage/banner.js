@@ -59,10 +59,10 @@ export default class Banner extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-        height: 150,
+        height: 160,
     },
     wrap: {
-        height: 150,
+        height: 160,
     },
     title: {
         position: 'absolute',
@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
     },
     image: {
         width,
-        height: 200,
+        height: 160,
     }
 });

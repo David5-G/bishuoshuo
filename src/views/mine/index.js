@@ -28,13 +28,8 @@ export default class Mine extends React.Component {
 		}
 	}
 	componentDidMount() {
-		console.log('mine--> componentDidMount')
-
-
-		console.log('userInfo-->')
 	}
 	componentWillUnmount() {
-		console.log('mine--> componentWillUnmount')
 	}
 	render() {
 		const { isLogin, userInfo } = this.props.UserStore
@@ -64,7 +59,7 @@ export default class Mine extends React.Component {
 				</View>
 				<View style={styles.card}>
 					<Image
-						style={{ width: 50, height: 50, borderRadius: 27, position: 'relative', top: -25, left: (width - 40) / 2 - 27, backgroundColor: '#fff', borderWidth: 2, borderColor: Colors.bodyTextActive, }}
+						style={{ width: 50, height: 50, borderRadius: 25, position: 'relative', top: -25, left: (width - 40) / 2 - 27, backgroundColor: '#fff', borderWidth: 2, borderColor: Colors.bodyTextActive, }}
 						source={{ uri: userInfo.avatar ? userInfo.avatar : 'https://img.alicdn.com/tps/TB1ld1GNFXXXXXLapXXXXXXXXXX-200-200.png' }}
 					/>
 					<Text style={{ fontSize: 16, marginTop: -10, textAlign: 'center' }}>您好，{isLogin ? userInfo.user_nickname : '游客'}</Text>
@@ -93,7 +88,7 @@ export default class Mine extends React.Component {
 						<Text style={{backgroundColor: 'transparent',fontSize: 15,color: '#fff',}}>注册</Text>
 					</NeButton>
 				</View>
-				<MineList />
+				<MineList navigation={navigation} />
 			</View>
 		);
 	}

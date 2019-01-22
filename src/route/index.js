@@ -17,6 +17,8 @@ import Findback from '../views/findback'
 import Service from '../views/service'
 import NewsDetail from '../views/newsDetail'
 import WallDetail from '../views/wallDetail'
+import Feedback from '../views/feedback'
+import Userinfo from '../views/userinfo'
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -27,7 +29,7 @@ const Tab = createBottomTabNavigator(
 		Home: {
 			screen: Home,
 			navigationOptions: {
-				tabBarLabel: '学堂',
+				tabBarLabel: '首页',
 				// tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={Platform.OS === 'ios'? `ios-information-circle${focused ? '' : '-outline'}`: 'md-information-circle'} />),
 				tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={'md-aperture'} />),
 			}
@@ -56,8 +58,8 @@ const Tab = createBottomTabNavigator(
 		},
 	},
 	{
-		initialRouteName: 'News', //第一次加载时初始选项卡路由的routeName
-		order: ['News','Home','Quota','Mine'], //定义选项卡顺序的routeNames数组
+		initialRouteName: 'Home', //第一次加载时初始选项卡路由的routeName
+		order: ['Home','Quota','News','Mine'], //定义选项卡顺序的routeNames数组
 		backBehavior: 'initialRoute', //后退按钮是否会导致标签切换到初始路由？如果是，则设置为initialRoute，否则none。默认为initialRoute。
 		//tabBarComponent: null, //Options，覆盖用作标签栏的组件。
 		tabBarOptions: {
@@ -95,13 +97,15 @@ export default createStackNavigator(
 				},
 			}
 		},
-		
-		NewsDetail: NewsDetail, //查看资讯详情
-		Login: Login,
-		Regist: Regist,
-		Findback: Findback,
-		Service: Service,
-		WallDetail: WallDetail,
+
+		NewsDetail, //查看资讯详情
+		Login,
+		Regist,
+		Findback,
+		Service,
+		WallDetail,
+		Feedback,
+		Userinfo,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,
