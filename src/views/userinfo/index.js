@@ -13,12 +13,11 @@ export default class Userinfo extends React.Component {
 		this.state = {}
     }
     componentDidMount() {
-        console.log('Userinfo--> componentDidMount')
     }
     componentWillUnmount() {
-        console.log('Userinfo--> componentWillUnmount')
     }
 	render() {
+		const { navigation } = this.props
 		return (
 			<View style={styles.container}>
 				<NavigationBar

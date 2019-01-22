@@ -89,7 +89,7 @@ export default class MineList extends React.Component {
 					<View style={[styles.item,{borderBottomWidth: 0}]}>
 						<View style={{flexDirection: 'row'}}>
 							<Icon style={styles.iconL} name={'ios-man'} size={24} color={Colors.bodyTextGray}  />
-							<Text style={styles.text}>关于我们</Text>
+							<Text style={styles.text}>关于</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
 					</View>
