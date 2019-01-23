@@ -60,6 +60,21 @@ class UserStore {
             return res
         })
     }
+    // 更新用户信息
+    @action setUserInfo(params = {}, header = {}) { //查找用户信息
+        // user_nicknamemm 用户昵称 【参数名参与更改时,不论参数值是否为空都会更改】
+        // avatar20181015\cbae14e740a24cb826f6972150babe8e.jpg 用户头像【参数名参与更改时,不论参数值是否为空都会更改】
+        // signature开开心心又一天 个性签名【参数名参与更改时,不论参数值是否为空都会更改】
+        // user_urlhttps://www.eolinker.com 用户个人网址【参数名参与更改时,不论参数值是否为空都会更改】
+        // sex1 性别;0:保密,1:男,2:女 【参数名参与更改时,不论参数值是否为空都会更改】
+        // birthday19990909 生日 【参数名参与更改时,不论参数值是否为空都会更改】
+        return POST(Host + '/api/user/profile/userInfo', params, header).then(res => {
+            Alert.alert(res.msg ? res.msg : '错误')
+            this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
+            return res
+        })
+    }
+
     @action userFindback(params = {}, header = {}) {
         return POST(Host + '/api/user/public/passwordReset', params, header).then(res => {
             if (res.code === 1) {
