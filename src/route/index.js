@@ -19,6 +19,7 @@ import NewsDetail from '../views/newsDetail'
 import WallDetail from '../views/wallDetail'
 import Feedback from '../views/feedback'
 import Userinfo from '../views/userinfo'
+import About from '../views/about'
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -106,6 +107,7 @@ export default createStackNavigator(
 		WallDetail,
 		Feedback,
 		Userinfo,
+		About,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,

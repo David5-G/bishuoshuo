@@ -61,13 +61,13 @@ const FETCH = (url, options, noHeaders = false) => {
 		.then(checkStatus);
 };
 
-const POST = (url, data = {}, options = {}) => {
+const POST = (url, data = {}, header = {}) => {
 	const dataCopy = { ...data, _: new Date().getTime(), };
 	return FETCH(url, {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json', },
+		headers: { 'Content-Type': 'application/json', ...header},
 		body: JSON.stringify(dataCopy),
-		...options,
+		// ...options,
 	})
 		.then(resp => resp)
 		.catch((error) => { console.log(error); });
@@ -75,8 +75,6 @@ const POST = (url, data = {}, options = {}) => {
 
 const GET = (url, data = {}, header = {}) => {
 	const requestUrl = encodeQuery(url, data);
-
-	console.log('requestUrl-->', requestUrl)
 	return FETCH(requestUrl, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json', ...header},

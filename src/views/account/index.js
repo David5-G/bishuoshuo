@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text,Button, WebView, ScrollView, StyleSheet } from 'react-native';
 import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
-
-export default class Account extends React.Component {
+import Colors from '../../constants/Colors'
+export default class About extends React.Component {
 	static navigationOptions = {
-		title: 'account',
+		title: 'About',
 		header: null,
 	};
 	constructor(props){
@@ -13,19 +13,17 @@ export default class Account extends React.Component {
 		this.state = {}
     }
     componentDidMount() {
-        console.log('account--> componentDidMount')
     }
     componentWillUnmount() {
-        console.log('account--> componentWillUnmount')
     }
 	render() {
+        const { navigation } = this.props
 		return (
 			<View style={styles.container}>
 				<NavigationBar
-					title={''}
+					title={'关于'}
 					style={{}}
 					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
-					rightButton={<Text onPress={()=> navigation.navigate('Login')} style={{color:Colors.headerText,fontSize:16,}}>登录</Text>}
 				/>
                 <Button 
                     onPress={()=>this.props.navigation.navigate('Home')}

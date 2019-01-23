@@ -32,21 +32,21 @@ export default class Mine extends React.Component {
 	componentWillUnmount() {
 	}
 	render() {
-		const { isLogin, userInfo } = this.props.UserStore
+		const { isLogin, userInfo,userLogout,token } = this.props.UserStore
 		const {navigation} = this.props
 		return (
-			<View style={styles.container}>
+			<ScrollView style={styles.container}>
 				<NavigationBar
 					title={''}
 					style={{ color: Colors.headerText, fontSize: 20 }}
 					titleLayoutStyle={{ fontSize: 30 }}
-
 					rightButton={
 						<Icon
 							style={{ paddingLeft: 20, }}
 							onPress={() => {
 								if (isLogin) {
-									Alert.alert('退出')
+									console.log('token-->', token)
+									userLogout({},{'XX-Token': token,'XX-Device-Type': 'iphone',})
 								} else {
 									navigation.navigate('Login')
 								}
@@ -89,7 +89,7 @@ export default class Mine extends React.Component {
 					</NeButton>
 				</View>
 				<MineList navigation={navigation} />
-			</View>
+			</ScrollView>
 		);
 	}
 }

@@ -3,15 +3,13 @@ import { observable, computed, useStrict, decorate, action } from 'mobx'
 import { AsyncStorage, Alert } from 'react-native';
 import { POST, GET } from '../utils/request.js'
 import { Host } from '../config'
+
 useStrict
 class UserStore {
     id = Math.random()
-    @observable token = 'tes'
-    @observable apiLoading = ''
+    @observable token = ''
     @observable userInfo = {}
-
-    @computed get isLogin () {return this.userInfo.create_time}
-
+    @computed get isLogin() { return this.token }
     @action userRegister(params = {}) { //注册
         // username13922120454
         // 手机或邮箱 必填
@@ -25,21 +23,20 @@ class UserStore {
         // password qwe123
         // device_type iphone
 
-        console.log('用户登录')
         return POST(Host + '/api/user/public/login', params).then(res => {
             if (res.code === 1) {
                 this.userInfo = res.data.user
                 this.token = res.data.token
-                AsyncStorage.setItem('token',this.token)
-                AsyncStorage.setItem('username',params.username)
-                AsyncStorage.setItem('password',params.password)
-                this.userUserInfo({},{'XX-Token': this.token,'XX-Device-Type': 'iphone',})
+                AsyncStorage.setItem('token', this.token)
+                AsyncStorage.setItem('username', params.username)
+                AsyncStorage.setItem('password', params.password)
+                this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
             } else {
                 this.userInfo = {}
                 this.token = ''
-                AsyncStorage.setItem('token','')
-                AsyncStorage.setItem('username','')
-                AsyncStorage.setItem('password','')
+                AsyncStorage.setItem('token', '')
+                AsyncStorage.removeItem('username')
+                AsyncStorage.removeItem('password')
             }
             return res
         })
@@ -48,23 +45,26 @@ class UserStore {
         // XX-Tokene 6a879a3ba87340c8c7e767c2e296702819471e2292855f9d52c71950c1a1dd6
         // XX-Device-Type iphone
         console.log('查找用户信息')
-        return GET(Host + '/api/user/profile/userInfo',params, header).then(res => {
+        return GET(Host + '/api/user/profile/userInfo', params, header).then(res => {
+            console.log('userUserInfo')
             if (res.code === 1) {
                 this.userInfo = res.data
             } else {
                 this.userInfo = {}
                 this.token = ''
-                AsyncStorage.setItem('token','')
-                AsyncStorage.setItem('password','')
+                AsyncStorage.removeItem('token')
+                AsyncStorage.removeItem('password')
             }
+            console.log('userUserInfo-->', this.userInfo)
+
             return res
         })
     }
-    @action userFindback(params = {}, header = {}){
+    @action userFindback(params = {}, header = {}) {
         return POST(Host + '/api/user/public/passwordReset', params, header).then(res => {
             if (res.code === 1) {
-                AsyncStorage.setItem('username',params.username)
-                AsyncStorage.setItem('password',params.password)
+                AsyncStorage.setItem('username', params.username)
+                AsyncStorage.setItem('password', params.password)
             }
             return res
         })
@@ -73,7 +73,8 @@ class UserStore {
         // XX-Token 9ccf9beac642504ea2086886c2fb14ac6822dec8609e6e3bcc3d021ebd2a5f45
         // XX-Device-Type iphone
         return POST(Host + '/api/user/public/logout', params, header).then(res => {
-            console.log('res-->', res)
+            Alert.alert(res.msg)
+            this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
             return res
         })
     }

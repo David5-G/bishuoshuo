@@ -68,7 +68,7 @@ export default class MineList extends React.Component {
 				<TouchableOpacity onPress={() => {}}>
 					<View style={[styles.item]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'ios-mail-unread'} size={24} color={Colors.bodyTextGray}  />
+							<Icon style={styles.iconL} name={'ios-mail'} size={24} color={Colors.bodyTextGray}  />
 							<Text style={styles.text}>消息中心</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
@@ -85,7 +85,7 @@ export default class MineList extends React.Component {
 					</View>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => navigation.navigate('About')}>
 					<View style={[styles.item,{borderBottomWidth: 0}]}>
 						<View style={{flexDirection: 'row'}}>
 							<Icon style={styles.iconL} name={'ios-man'} size={24} color={Colors.bodyTextGray}  />

@@ -62,9 +62,11 @@ export default class News extends React.Component {
         // console.log('_initStore MediaStore-->', MediaStore)
         // console.log('_initStore MediaStore.getBanners-->', MediaStore.getBanners)
         this.setState({ loading: true })
-        const text = await AsyncStorage.getItem('username') || '17688739001'
-        const password = await AsyncStorage.getItem('password') || '123qwe'
-        const loginInfo = await UserStore.userLogin({ username: text, password, device_type: 'iphone' })
+        const text = await AsyncStorage.getItem('username') || ''
+        const password = await AsyncStorage.getItem('password') || ''
+        if (text && password) {
+            await UserStore.userLogin({ username: text, password, device_type: 'iphone' })
+        }
         const banners = await MediaStore.getBanners()
         this.setState({ loading: false })
     }

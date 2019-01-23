@@ -105,7 +105,10 @@ export default class Login extends React.Component {
 			this.setState({ loading: true })
 			const res = await UserStore.userLogin({ username: text, password, device_type: 'iphone' })
 			this.setState({ loading: false })
-			Alert.alert('登录', res.msg ? res.msg : '错误', [{ text: '确定', onPress: () => res.code === 1 && navigation.navigate('Home') }], { cancelable: false })
+			Alert.alert(res.msg ? res.msg : '错误')
+			navigation.goBack()
+
+			// Alert.alert('登录', res.msg ? res.msg : '错误', [{ text: '确定', onPress: () => res.code === 1 && navigation.navigate('Home') }], { cancelable: false })
 		}
 	}
 	async _getDefaultAccount() {
