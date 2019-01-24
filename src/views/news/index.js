@@ -29,12 +29,6 @@ export default class News extends React.Component {
 			active : 1,
 		}
 	}
-	componentDidMount() {
-		console.log('news--> componentDidMount')
-	}
-	componentWillUnmount() {
-		console.log('news--> componentWillUnmount')
-	}
 	render() {
 		const {active} = this.state
 		const { navigation }  = this.props
@@ -76,18 +70,9 @@ export default class News extends React.Component {
 				
 				
 				
-				<View style={active===1?{flex:1}:{display:'none',flex:1,}}>
-					<CoinNews navigation={navigation} />
-				</View>
-
-				<View style={active===2?{flex:1}:{display:'none',flex:1,}}>
-					<ImportantNews navigation={navigation} />
-				</View>
-
-				<View style={active===3?{flex:1}:{display:'none',flex:1,}}>
-					<FlashNews navigation={navigation} />
-				</View>
-				
+				{active===1?<CoinNews navigation={navigation} />:null}
+				{active===2?<ImportantNews navigation={navigation} />:null}
+				{active===3?<FlashNews navigation={navigation} />:null}
 			</View>
 		);
 	}

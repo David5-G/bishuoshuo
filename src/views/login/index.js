@@ -13,10 +13,6 @@ export default class Login extends React.Component {
 	static navigationOptions = ({ navigation, screenProps }) => ({
 		title: '',
 		header: null,
-		// headerRight: (
-		// 	<TouchableOpacity onPress={() => navigation.navigate('Regist')}>
-		// 		<Text style={{ marginRight: 20, fontSize: 16, color: '#007bff' }}>注册</Text>
-		// 	</TouchableOpacity>)
 	})
 	constructor(props) {
 		super(props)
@@ -28,11 +24,9 @@ export default class Login extends React.Component {
 		this._getDefaultAccount = this._getDefaultAccount.bind(this)
 	}
 	componentDidMount() {
-		console.log('login--> componentDidMount')
 		this._getDefaultAccount()
 	}
 	componentWillUnmount() {
-		console.log('login--> componentWillUnmount')
 	}
 	render() {
 		const { MainStore, UserStore, navigation } = this.props
@@ -46,7 +40,7 @@ export default class Login extends React.Component {
 				<NavigationBar
 					title={''}
 					style={{}}
-					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> UserStore.isLogin?navigation.goBack():navigation.navigate('Mine')} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 					rightButton={<Text onPress={()=> navigation.navigate('Regist')} style={{color:Colors.headerText,fontSize:16,}}>注册</Text>}
 				/>
 				<LoadingView show={loading} />

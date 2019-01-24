@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Button,Alert, Dimensions, SafeAreaView,TouchableOpacity, Text, WebView, ScrollView, Image, StyleSheet } from 'react-native';
-import { Container, Header,Left, Body, Right,Title, Content, Item, Input, Button as NeButton, Text as NeText } from 'native-base';
+import { View, Button, Alert, Dimensions, SafeAreaView, TouchableOpacity, Text, WebView, ScrollView, Image, StyleSheet } from 'react-native';
+import { Container, Header, Left, Body, Right, Title, Content, Item, Input, Button as NeButton, Text as NeText } from 'native-base';
 
 import { observer, inject } from 'mobx-react/native';
 
@@ -27,33 +27,38 @@ export default class Mine extends React.Component {
 			symbol: 'BSESN'
 		}
 	}
-	componentDidMount() {
-	}
-	componentWillUnmount() {
+	_logout() {
+		const { UserStore, navigation } = this.props
+
+		if (UserStore.isLogin) {
+			Alert.alert(
+				'是否要退出？',
+				'',
+				[
+					{ text: '取消' },
+					{ text: '退出', onPress: () => UserStore.userLogout({}, { 'XX-Token': UserStore.token, 'XX-Device-Type': 'iphone', }) },
+				],
+				{ cancelable: false }
+			)
+		} else {
+			navigation.navigate('Login')
+		}
 	}
 	render() {
-		const { isLogin, userInfo,userLogout,token } = this.props.UserStore
-		const {navigation} = this.props
+		const { isLogin, userInfo, token } = this.props.UserStore
+		const { navigation } = this.props
 		return (
 			<ScrollView style={styles.container}>
 				<NavigationBar
 					title={''}
 					style={{ color: Colors.headerText, fontSize: 20 }}
 					titleLayoutStyle={{ fontSize: 30 }}
-					rightButton={
-						<Icon
-							style={{ paddingLeft: 20, }}
-							onPress={() => {
-								if (isLogin) {
-									console.log('token-->', token)
-									userLogout({},{'XX-Token': token,'XX-Device-Type': 'iphone',})
-								} else {
-									navigation.navigate('Login')
-								}
-							}}
-							name={isLogin ? 'ios-log-out' : 'ios-log-in'} size={28}
-							color={Colors.headerText}
-						/>}
+					rightButton={isLogin ? <Icon
+						style={{ paddingLeft: 20, }}
+						onPress={this._logout.bind(this)}
+						name={isLogin ? 'ios-log-out' : 'ios-log-in'} size={28}
+						color={Colors.headerText}
+					/> : null}
 				/>
 				<View style={{ backgroundColor: Colors.bodyTextActive, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: 100, }}>
 				</View>
@@ -74,18 +79,18 @@ export default class Mine extends React.Component {
 						</View>
 					</View>
 				</View>
-				<View style={{flexDirection: 'row', justifyContent: 'space-between',paddingLeft: 20,paddingRight: 20,marginTop: -50}}>
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20, marginTop: -50 }}>
 					<NeButton
 						onPress={() => {
 							navigation.navigate('Login')
 						}}
-						style={{ padding: 10, alignItems: 'center', width: 150,borderRadius: 4,}}>
-						<Text style={{backgroundColor: 'transparent', fontSize: 15, color: '#fff', }}>登录</Text>
+						style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginRight: 10, }}>
+						<NeText>登录</NeText>
 					</NeButton>
 					<NeButton
 						onPress={() => navigation.navigate('Regist')}
-						style={{ padding: 10, alignItems: 'center', width: 150, borderRadius: 4,}}>
-						<Text style={{backgroundColor: 'transparent',fontSize: 15,color: '#fff',}}>注册</Text>
+						style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10, }}>
+						<NeText>注册</NeText>
 					</NeButton>
 				</View>
 				<MineList navigation={navigation} />
@@ -117,13 +122,13 @@ const styles = StyleSheet.create({
 		paddingLeft: 15,
 		paddingRight: 15,
 		borderRadius: 5
-	  },
-	  buttonText: {
+	},
+	buttonText: {
 		fontSize: 18,
 		fontFamily: 'Gill Sans',
 		textAlign: 'center',
 		margin: 10,
 		color: '#ffffff',
 		backgroundColor: 'transparent',
-	  },
+	},
 })

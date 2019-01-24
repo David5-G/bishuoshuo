@@ -44,9 +44,7 @@ class UserStore {
     @action userUserInfo(params = {}, header = {}) { //查找用户信息
         // XX-Tokene 6a879a3ba87340c8c7e767c2e296702819471e2292855f9d52c71950c1a1dd6
         // XX-Device-Type iphone
-        console.log('查找用户信息')
         return GET(Host + '/api/user/profile/userInfo', params, header).then(res => {
-            console.log('userUserInfo')
             if (res.code === 1) {
                 this.userInfo = res.data
             } else {
@@ -55,8 +53,6 @@ class UserStore {
                 AsyncStorage.removeItem('token')
                 AsyncStorage.removeItem('password')
             }
-            console.log('userUserInfo-->', this.userInfo)
-
             return res
         })
     }
@@ -69,8 +65,9 @@ class UserStore {
         // sex1 性别;0:保密,1:男,2:女 【参数名参与更改时,不论参数值是否为空都会更改】
         // birthday19990909 生日 【参数名参与更改时,不论参数值是否为空都会更改】
         return POST(Host + '/api/user/profile/userInfo', params, header).then(res => {
-            Alert.alert(res.msg ? res.msg : '错误')
-            this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
+            if (res.code === 1) {
+                this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
+            }
             return res
         })
     }
@@ -84,7 +81,9 @@ class UserStore {
             return res
         })
     }
+
     @action userLogout(params = {}, header = {}) { //退出登录
+
         // XX-Token 9ccf9beac642504ea2086886c2fb14ac6822dec8609e6e3bcc3d021ebd2a5f45
         // XX-Device-Type iphone
         return POST(Host + '/api/user/public/logout', params, header).then(res => {

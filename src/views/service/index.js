@@ -6,7 +6,6 @@ import LoadingView from '../common/Loading'
 import Colors from '../../constants/Colors'
 import { Service as ServiceUrl } from '../../config'
 
-console.log('Service-->', Service)
 export default class Service extends React.Component {
     static navigationOptions = {
         header: null,

@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     },
     navBarButton: {
         alignItems: 'center',
-        marginTop: Notch? 20 : 0,
+        marginTop: Notch ? 20 : 0,
     },
     statusBar: {
         height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT:0,
