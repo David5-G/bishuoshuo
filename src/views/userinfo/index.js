@@ -209,6 +209,7 @@ const deviceWidth = Dimensions.get("window").width;
 						{
 							modalTitle === 'user_url' ? <Item><Input autoFocus onChangeText={(user_url) => this.setState({ user_url })} value={user_url} placeholder="请输入新的个人网址" /></Item> : null
 						}
+						
 						{
 							modalTitle === 'sex' ? 
 							<Picker

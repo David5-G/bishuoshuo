@@ -5,7 +5,8 @@ import Colors from '../../constants/Colors';
 import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import Fund from './subPage/fund'
+// import Fund from './subPage/fund'
+import Commodity from './subPage/commodity.js'
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -17,6 +18,7 @@ export default class Home extends React.Component {
 	
 	render() {
 		const {active} = this.state
+		const { navigation } = this.props
 		return (
 			<View style={styles.container}>
 				<NavigationBar
@@ -35,7 +37,7 @@ export default class Home extends React.Component {
 				/>
 				<Segment style={{backgroundColor:'#fff'}}>
 					<NeButton first active={active===1} onPress={() =>this.setState({active:1})}>
-						<NeText>基金</NeText>
+						<NeText>商品</NeText>
 					</NeButton>
 					<NeButton active={active===2} onPress={() =>this.setState({active:2})}>
 						<NeText>GBDC</NeText>
@@ -48,7 +50,8 @@ export default class Home extends React.Component {
 					</NeButton>
 				</Segment>
 				<View style={{flex: 1}}>
-					<Fund />
+					{/* <Fund /> */}
+					<Commodity navigation={navigation} />
 				</View>
 			</View>
 

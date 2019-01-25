@@ -4,11 +4,12 @@ import TabBarIcon from '../component/TabBarIcon'
 import Colors from '../constants/Colors'
 import Home from '../views/home'
 import News from '../views/news'
+import Quota from '../views/quota'
+import Mine from '../views/mine'
+import Chart from '../views/chart'
 // import Play from '../views/play'
 // import PlayVideo from '../views/play/play.js'
 
-import Quota from '../views/quota'
-import Mine from '../views/mine'
 
 
 import Login from '../views/login'
@@ -20,6 +21,7 @@ import WallDetail from '../views/wallDetail'
 import Feedback from '../views/feedback'
 import Userinfo from '../views/userinfo'
 import About from '../views/about'
+
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -108,6 +110,7 @@ export default createStackNavigator(
 		Feedback,
 		Userinfo,
 		About,
+		Chart,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,

@@ -75,6 +75,8 @@ const POST = (url, data = {}, header = {}) => {
 
 const GET = (url, data = {}, header = {}) => {
 	const requestUrl = encodeQuery(url, data);
+
+	console.log( 'get requestUrl-->', requestUrl)
 	return FETCH(requestUrl, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json', ...header},

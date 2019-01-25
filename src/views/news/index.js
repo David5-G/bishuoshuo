@@ -68,11 +68,10 @@ export default class News extends React.Component {
 					</Segment>
 				</StyleProvider>
 				
-				
-				
 				{active===1?<CoinNews navigation={navigation} />:null}
 				{active===2?<ImportantNews navigation={navigation} />:null}
 				{active===3?<FlashNews navigation={navigation} />:null}
+
 			</View>
 		);
 	}

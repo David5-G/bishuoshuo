@@ -1,7 +1,7 @@
 
 import { observable, computed, useStrict,decorate, action } from 'mobx'
 import { POST, GET } from '../utils/request.js'
-import { Host } from '../config'
+import { Host,WallQuotaHost } from '../config'
 useStrict
 
 class QuotaStore {
@@ -91,6 +91,23 @@ class QuotaStore {
         return GET(Host + '/yapi/Bond/fund_list/', params).then(res => {
             if (res.code === 1) {
                 this.fundList = [...this.fundList,...res.data]
+            }
+            return res
+        })
+    }
+
+    // wallstreet 行情列表
+    @observable commodityList = []
+    @action getQuotaList (params={}) { // 取所有行情
+
+        console.log('params-->',params)
+        // type: commodity
+        // fields: prod_name,last_px,px_change,px_change_rate,price_precision,update_time
+        // sort_type: pcp_incr
+
+        return GET(WallQuotaHost + '/real_list/', params).then(res => {
+            if (res.code === 200) {
+                this.commodityList = res.data.snapshot.data_arrs
             }
             return res
         })

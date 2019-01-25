@@ -40,6 +40,27 @@ function timeago(dateTimeStamp) {   //dateTimeStamp是一个时间毫秒，注�
 }
 
 
+function hourMins (time) {
+    if (!time) return "···"
+    time = time * 1000
+	time = new Date(time);
+	const month = (time.getMonth() + 1).toString().padStart(2, "0");
+	const date = time
+		.getDate()
+		.toString()
+		.padStart(2, "0");
+	const hour = time
+		.getHours()
+		.toString()
+		.padStart(2, "0");
+	const minute = time
+		.getMinutes()
+		.toString()
+		.padStart(2, "0");
+	return hour + ":" + minute + ":00";
+}
+
 export {
-    timeago
+    timeago,
+    hourMins,
 }
