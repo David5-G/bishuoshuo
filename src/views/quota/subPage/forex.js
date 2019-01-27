@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, WebView, RefreshControl,TouchableOpacity, ScrollView, SectionList, StyleSheet } from 'react-native';
+import { View, Text, Button, WebView, RefreshControl,TouchableOpacity,TouchableHighlight, ScrollView, SectionList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
 import Colors from '../../../constants/Colors'
 import { GET } from '../../../utils/request'
@@ -14,6 +14,7 @@ export default class Forex extends React.Component {
         super(props)
         this.state = {
             loading: false,
+            defaultShow: 0,
             list: [],
         }
     }
@@ -27,7 +28,8 @@ export default class Forex extends React.Component {
     async _getList() {
         // WallQuotaHost: 'https://api-ddc.wallstreetcn.com',
         // 外汇
-        if (this.state.loading) return
+        const { loading,defaultShow } = this.state
+        if (loading) return
         this.setState({ loading: true })
         let list = await GET(WallQuotaListHost + '/apiv1/kvconfig/items/marketdataforexii').then(res => res)
         if (list.code !== 20000) return
@@ -44,22 +46,27 @@ export default class Forex extends React.Component {
         if (quotaList.code !== 20000) return
         quotaList = quotaList.data.snapshot
 
-        list.forEach(arr => {
-            arr['items'].forEach(obj => {
+        list.forEach((sections,index) => {
+            sections['items'].forEach(obj => {
                 obj.data = quotaList[obj.symbol]
             })
-            arr.data = arr.items
-            delete arr['items']
+            sections.data = sections.items
+            delete sections['items']
+            sections.index= index
         })
         this && this.setState({ loading: false, list })
     }
     _renderItemView = (info) => {
+        const { defaultShow } = this.state
         const { navigation } = this.props
         const item = info.item.data
-        const key = info.item.index
-        return (<TouchableOpacity onPress={() => navigation.navigate('Chart', item[0])} key={key} style={styles.item}>
+        const sectionIdx = info.section.index
+        if (defaultShow !== sectionIdx) {
+            return null
+        }
+        return (<TouchableOpacity onPress={() => navigation.navigate('Chart', item[0])} style={styles.item}>
             <View style={{ flex: 3 }}>
-                <Text style={{ lineHeight: 25, fontSize: 15 }}>{item[1]}</Text>
+                <Text style={{ lineHeight: 25, fontSize: 15,color: '#333' }}>{item[1]}</Text>
                 <Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{item[2]}</Text>
             </View>
 
@@ -77,12 +84,15 @@ export default class Forex extends React.Component {
         </TouchableOpacity>)
     }
 
-    renderSectionHeader = (info) => {
-        const name = info.section.name
-        return (<View style={{backgroundColor: 'aaa',flexDirection: 'row',height: 35,alignItems:'center'}}>
-            <Icon size={20} color={'#999'} name={'downsquare'}  style={{marginTop:3,marginLeft: 10}}/>
-            <Text style={{lineHeight: 35,height: 35,fontSize: 16,marginLeft: 5}}>{name}</Text>
-        </View>)
+    _renderSectionHeader = (info) => {
+        const { name, index } = info.section
+        const { defaultShow } = this.state
+        return (<TouchableHighlight onPress={() => this.setState({defaultShow: defaultShow===index?'':index})}>
+                <View style={styles.sectionHeader}>
+                    <Icon size={16} color={'#777'} name={defaultShow===index?'downcircle':'upcircle'} style={{marginTop: 2,marginLeft: 10}}/>
+                    <Text style={{lineHeight: 35,height: 35,fontSize: 16,marginLeft: 5}}>{name}</Text>
+                </View>
+            </TouchableHighlight>)
     }
     _keyExtractor(info) {
         return Math.random()
@@ -92,22 +102,12 @@ export default class Forex extends React.Component {
         return (
             <View style={styles.container}>
                 <SectionList
-                    renderSectionHeader={this.renderSectionHeader}
+                    renderSectionHeader={this._renderSectionHeader.bind(this)}
                     renderItem={this._renderItemView.bind(this)}
-                    keyExtractor={this.keyExtractor}
+                    keyExtractor={this._keyExtractor}
                     sections={list}
                     refreshing={loading}
-                    onRefresh={loading} //下拉
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={loading}
-                            onRefresh={this._getList.bind(this)}
-                            title="刷新中···"
-                            titleColor="#999999"
-                            colors={['#ff0000', '#00ff00', '#0000ff']}
-                            progressBackgroundColor="red"
-                        />
-                    }
+                    onRefresh={this._getList.bind(this)} //下拉
                     ItemSeparatorComponent={() => null}
                     ListHeaderComponent={() => null}
                     ListFooterComponent={() => null}
@@ -132,4 +132,12 @@ const styles = StyleSheet.create({
         borderColor: Colors.borderGray,
         backgroundColor: '#fff',
     },
+    sectionHeader: {
+        backgroundColor: '#f2f2f2',
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 35,
+        borderColor: '#eee',
+        borderBottomWidth: 1,
+    }
 });
