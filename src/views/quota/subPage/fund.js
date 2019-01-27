@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { observer, inject } from 'mobx-react/native'
 import Colors from '../../../constants/Colors'
 
@@ -7,16 +7,16 @@ import Colors from '../../../constants/Colors'
 @inject('QuotaStore')
 @observer
 export default class Fund extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             loading: false,
             done: false,
             num: 10,
-			page: 1,
-			asc: 1, //排序 0降序 1 升序,
-			sort: 'trade', //排序 类型 （trade 最新价、pricechange 涨跌额、changepercent 涨跌幅、volume 成交量、amount 成交额、symbol 代码） 默认代码
-			type: 'etf_hq_fund', //etf_hq_fund ETF基金行情、lof_hq_fund LOF基金行情） 默认etf_hq_fund ETF基金行情
+            page: 1,
+            asc: 1, //排序 0降序 1 升序,
+            sort: 'trade', //排序 类型 （trade 最新价、pricechange 涨跌额、changepercent 涨跌幅、volume 成交量、amount 成交额、symbol 代码） 默认代码
+            type: 'etf_hq_fund', //etf_hq_fund ETF基金行情、lof_hq_fund LOF基金行情） 默认etf_hq_fund ETF基金行情
         }
     }
     componentDidMount() {
@@ -26,29 +26,29 @@ export default class Fund extends Component {
     }
     componentWillUnmount() {
     }
-    _renderItemView ({ item, key }) {
-		return (
-			<View key={key} style={{flex: 1,borderBottomWidth: 1,borderColor: Colors.borderGray,paddingTop:5,paddingBottom:10}}>
-				<View style={{flex: 1,flexDirection: 'row',alignItems: 'center',height: 25}}>
-					<Text numberOfLines={1}  style={{fontSize: 16}}>{item.name}</Text>
-					<Text style={{fontSize: 14,marginTop: 5,marginLeft: 5,color: Colors.bodyTextGray}}>{item.symbol}</Text>
-				</View>
-				<View style={{flex: 1,justifyContent: 'space-between',flexDirection: 'row',alignItems: 'center',height: 30}}>
-					<View style={{flex: 1,flexDirection: 'row',justifyContent:'space-between',}}>
-						<Text style={{fontSize: 20,color: Colors.bodyTextGray}}>{item.open}</Text>
-					</View>
-					<View style={{flex: 1,marginLeft: 20,flexDirection: 'row',justifyContent:'space-between',}}>
-						<Text style={{marginTop:4,color: Colors.bodyTextGray}}>买量:</Text>
-						<Text style={{marginTop:4,color: Colors.bodyTextGray}}>{item.volume}</Text>
-					</View>
-					<View style={{flex: 1,marginLeft: 20,flexDirection: 'row',justifyContent:'space-between',}}>
-						{/* <Text style={{marginTop:4,color: Colors.bodyTextGray}}>幅度:</Text> */}
-						<Text style={{fontSize: 16,height:30,lineHeight: 30,marginLeft: 10,color: '#fff',backgroundColor: item.pricechange > 0 ? '#EB2D3B' : item.pricechange == 0 ? '#ddd' : '#00B267',flex: 1,textAlign:'center'}}>{item.pricechange>0 ? '+': null}{Number(item.changepercent).toFixed(2)}%</Text>
-					</View>
-				</View>
-			</View>
-		)
-	}
+    _renderItemView({ item, key }) {
+        return (
+            <View key={key} style={{ flex: 1, borderBottomWidth: 1, borderColor: Colors.borderGray, paddingTop: 5, paddingBottom: 10 }}>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', height: 25 }}>
+                    <Text numberOfLines={1} style={{ fontSize: 16 }}>{item.name}</Text>
+                    <Text style={{ fontSize: 14, marginTop: 5, marginLeft: 5, color: Colors.bodyTextGray }}>{item.symbol}</Text>
+                </View>
+                <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', height: 30 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                        <Text style={{ fontSize: 20, color: Colors.bodyTextGray }}>{item.open}</Text>
+                    </View>
+                    <View style={{ flex: 1, marginLeft: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
+                        <Text style={{ marginTop: 4, color: Colors.bodyTextGray }}>买量:</Text>
+                        <Text style={{ marginTop: 4, color: Colors.bodyTextGray }}>{item.volume}</Text>
+                    </View>
+                    <View style={{ flex: 1, marginLeft: 20, flexDirection: 'row', justifyContent: 'space-between', }}>
+                        {/* <Text style={{marginTop:4,color: Colors.bodyTextGray}}>幅度:</Text> */}
+                        <Text style={{ fontSize: 16, height: 30, lineHeight: 30, marginLeft: 10, color: '#fff', backgroundColor: item.pricechange > 0 ? '#EB2D3B' : item.pricechange == 0 ? '#ddd' : '#00B267', flex: 1, textAlign: 'center' }}>{item.pricechange > 0 ? '+' : null}{Number(item.changepercent).toFixed(2)}%</Text>
+                    </View>
+                </View>
+            </View>
+        )
+    }
     _renderFooter() {
         const { done, loading, } = this.state
         if (done) {
@@ -64,7 +64,7 @@ export default class Fund extends Component {
         }
     }
     _loadMore() {
-        const { num, page, asc, sort, type,loading,done } = this.state
+        const { num, page, asc, sort, type, loading, done } = this.state
         const { QuotaStore } = this.props
         console.log('_loadMore-->')
         if (loading || done) return
@@ -88,12 +88,13 @@ export default class Fund extends Component {
     _keyExtractor(item, index) {
         return index.toString()
     }
-    render () {
+    render() {
         const { QuotaStore } = this.props
         return (
             <View style={styles.container}>
+            
                 <FlatList
-                    style={{backgroundColor:'#fff'}}
+                    style={{ backgroundColor: '#fff' }}
                     data={QuotaStore.fundList}
                     renderItem={this._renderItemView.bind(this)}
                     keyExtractor={this._keyExtractor} //唯一的key
@@ -101,6 +102,7 @@ export default class Fund extends Component {
                     onEndReached={this._loadMore.bind(this)}
                     onEndReachedThreshold={0}
                 />
+
             </View>
         )
     }

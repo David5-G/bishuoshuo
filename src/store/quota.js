@@ -105,9 +105,9 @@ class QuotaStore {
         // fields: prod_name,last_px,px_change,px_change_rate,price_precision,update_time
         // sort_type: pcp_incr
 
-        return GET(WallQuotaHost + '/real_list/', params).then(res => {
-            if (res.code === 200) {
-                this.commodityList = res.data.snapshot.data_arrs
+        return GET(WallQuotaHost + '/market/rank', params).then(res => {
+            if (res.code === 20000) {
+                this.commodityList = res.data.candle
             }
             return res
         })

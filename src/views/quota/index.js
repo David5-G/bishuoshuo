@@ -6,7 +6,8 @@ import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 // import Fund from './subPage/fund'
-import Commodity from './subPage/commodity.js'
+// import Commodity from './subPage/commodity.js'
+import Forex from './subPage/forex'
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -15,7 +16,21 @@ export default class Home extends React.Component {
 			active: 1,
 		}
 	}
-	
+	componentDidMount () {
+		// 查列表
+		// https://api-prod.wallstreetcn.com/apiv1/kvconfig/items/marketdataforexii
+
+		//外汇 marketdataforexii
+		//商品 marketdatacommodityii
+		//股指 marketdataindexii
+		//债券 marketdatabondii
+		//数字货币 marketdatacryptocurrencyii
+		
+		// 查行情
+		// https://api-ddc.wallstreetcn.com/market/real?&prod_code=BTCUSD.Bitfinex&fields=prod_code,prod_name,prod_en_name,market_type,symbol,trade_status,price_precision,update_time,securities_type,px_change,px_change_rate,last_px,preclose_px,amplitude,turnover_volume,ex_type,ex_update_time,ex_last_px,ex_px_change,ex_px_change_rate
+
+
+	}
 	render() {
 		const {active} = this.state
 		const { navigation } = this.props
@@ -51,10 +66,11 @@ export default class Home extends React.Component {
 				</Segment>
 				<View style={{flex: 1}}>
 					{/* <Fund /> */}
-					<Commodity navigation={navigation} />
+					{/* <Commodity navigation={navigation} /> */}
+					<Forex navigation={navigation} />
+
 				</View>
 			</View>
-
 		);
 	}
 }

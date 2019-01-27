@@ -13,52 +13,43 @@ export default class Fund extends Component {
         super(props)
         this.state = {
             loading: false,
-
-            type: 'commodity',
-            fields: 'prod_name,last_px,px_change,px_change_rate,price_precision,update_time',
-            sort_type: '', //pcp_incr
+            market_type: 'forexdata',
+            stk_type: 'commodity',
+            order_by: 'none',
+            sort_field: 'px_change_rate',
+            limit: 15,
+            fields: 'prod_name,prod_en_name,prod_code,symbol,last_px,px_change,px_change_rate,high_px,low_px,week_52_high,week_52_low,price_precision,update_time',
+            cursor: 0,
         }
     }
     componentDidMount() {
-        this._getList()
+        this._loadMore()
     }
     _renderItemView({ item, key }) {
-        const symbol = Object.keys(item)[0]
-        const arr = item[symbol]
-        const {navigation} = this.props
+        const { navigation } = this.props
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('Chart',symbol)}  key={key} style={styles.item}>
-                <View style={{flex: 2}}>
-                    <Text style={{lineHeight: 20,fontWeight: '600',fontSize: 15}}>{arr[0]}</Text>
-                    <Text style={{lineHeight: 25,fontSize: 12,color: Colors.bodyTextGray}}>{symbol}</Text>
-                </View>
+            <TouchableOpacity onPress={() => navigation.navigate('Chart', item[2])} key={key} style={styles.item}>
+				<View style={{ flex: 3 }}>
+					<Text style={{ lineHeight: 25, fontSize: 15 }}>{item[0]}</Text>
+					<Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{item[1]}</Text>
+				</View>
 
-                <View style={{flex: 1}}>
-                    <Text style={{lineHeight: 20,fontWeight: '600',}}>{arr[1]}</Text>
-                    <Text style={{lineHeight: 25,fontSize: 12,color: Colors.bodyTextGray}}>{hourMins(arr[5])}</Text>
-                </View>
+				<View style={{ flex: 1 }}>
+					<Text style={{ lineHeight: 25, fontWeight: '600', fontSize: 15 }}>{item[4]}</Text>
+					<Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{hourMins(item[11])}</Text>
+				</View>
 
-                <View style={{flex: 1,justifyContent: 'center'}}>
-                    <Text style={{fontWeight: '600',color: arr[3]>=0?Colors.raise:Colors.fall}}>{arr[3]>=0?'+':null}{arr[3].toFixed(2)}%</Text>
-                </View>
-
-                <View style={{flex: 1,justifyContent: 'center'}}>
-                    <Text style={{fontWeight: '600',color: arr[3]>=0?Colors.raise:Colors.fall}}>{arr[2]>=0?'+':null}{arr[2]}</Text>
-                </View>
-            </TouchableOpacity>
+				<View style={{ flex: 1 }}>
+					<View style={{ borderRadius: 3, backgroundColor: item[6] >= 0 ? Colors.raise : Colors.fall, alignItems: 'center' }}>
+						<Text style={{ lineHeight: 25, fontWeight: '600', color: '#fff', fontSize: 15 }}>{item[6] >= 0 ? '+' : null}{item[6].toFixed(2)}%</Text>
+					</View>
+					<Text style={{ lineHeight: 20, fontSize: 12, color: item[5] >= 0 ? Colors.raise : Colors.fall }}>{item[5] >= 0 ? '+' : null}{item[5].toFixed(item[11])}</Text>
+				</View>
+			</TouchableOpacity>
         )
     }
     _renderHeader() {
-        return (<View style={{flexDirection: 'row',paddingLeft: 10,paddingRight: 10,height: 40,alignItems: 'center',backgroundColor:'#f2f2f2'}}>
-            <View style={{flex: 2}}><Text style={{fontSize: 12}}>资产</Text></View>
-            <View style={{flex: 1}}><Text style={{fontSize: 12}}>现价</Text></View>
-            <View style={{flex: 1,flexDirection: 'row',alignItems:'center'}}>
-                <Text style={{fontSize: 12}}>涨跌额</Text><Icon style={{marginLeft: 3}} size={18} name={'md-arrow-dropdown'} color={Colors.bodyTextGray} />
-            </View>
-            <View style={{flex: 1,flexDirection: 'row',alignItems:'center'}}>
-                <Text style={{fontSize: 12}}>涨跌幅</Text><Icon style={{marginLeft: 3}} size={18} name={'md-arrow-dropdown'} color={Colors.bodyTextGray} />
-            </View>
-        </View>)
+        return null
     }
     _renderFooter() {
         const {loading } = this.state
@@ -73,15 +64,19 @@ export default class Fund extends Component {
         }
         
     }
-    _getList() {
-        const {  loading, type, fields, sort_type } = this.state
+    _loadMore() {
+        const {  loading, market_type, stk_type, order_by, sort_field, limit, fields, cursor, } = this.state
         const { QuotaStore } = this.props
         if (loading) return
         this.setState({ loading: true })
         QuotaStore.getQuotaList({
-            type,
+            market_type,
+            stk_type,
+            order_by,
+            sort_field,
+            limit,
             fields,
-            sort_type,
+            cursor,
         }).then(res => {
             console.log('res-->', res)
             this.setState({ loading: false })
@@ -110,8 +105,8 @@ export default class Fund extends Component {
                     refreshControl={
                         <RefreshControl
                           refreshing={loading}
-                          onRefresh={this._getList.bind(this)}
-                          title="加载中..."
+                          onRefresh={this._loadMore.bind(this)}
+                          title="刷新中···"
                           titleColor="#999999"
                           colors={['#ff0000', '#00ff00', '#0000ff']}
                           progressBackgroundColor="red"
@@ -131,10 +126,11 @@ const styles = StyleSheet.create({
     item: {
         paddingLeft: 10,
         paddingRight: 10,
-        paddingTop: 20,
-        paddingBottom: 20,
+        paddingTop: 15,
+        paddingBottom: 10,
         flexDirection: 'row',
-        marginBottom: 1,
+        borderBottomWidth: 1,
+        borderColor: Colors.borderGray,
         backgroundColor: '#fff',
     },
 });
