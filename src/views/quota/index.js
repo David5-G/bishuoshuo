@@ -52,23 +52,32 @@ export default class Home extends React.Component {
 				/>
 				<Segment style={{backgroundColor:'#fff'}}>
 					<NeButton first active={active===1} onPress={() =>this.setState({active:1})}>
-						<NeText>商品</NeText>
+						<NeText>外汇</NeText>
 					</NeButton>
 					<NeButton active={active===2} onPress={() =>this.setState({active:2})}>
-						<NeText>GBDC</NeText>
+						<NeText>商品</NeText>
 					</NeButton>
 					<NeButton active={active===3} onPress={() =>this.setState({active:3})}>
-						<NeText>CNFT</NeText>
+						<NeText>股指</NeText>
 					</NeButton>
-					<NeButton last active={active===4} onPress={() =>this.setState({active:4})}>
-						<NeText>GBIDX</NeText>
+					<NeButton active={active===4} onPress={() =>this.setState({active:4})}>
+						<NeText>债券</NeText>
+					</NeButton>
+
+					<NeButton last active={active===5} onPress={() =>this.setState({active:5})}>
+						<NeText>债券</NeText>
 					</NeButton>
 				</Segment>
 				<View style={{flex: 1}}>
 					{/* <Fund /> */}
 					{/* <Commodity navigation={navigation} /> */}
-					<Forex navigation={navigation} />
 
+					{active===1?<Forex navigation={navigation} classify={'marketdataforexii'} />:null}
+					{active===2?<Forex navigation={navigation} classify={'marketdatacommodityii'} />:null}
+					{active===3?<Forex navigation={navigation} classify={'marketdataindexii'} />:null}
+					{active===4?<Forex navigation={navigation} classify={'marketdatabondii'} />:null}
+					{active===5?<Forex navigation={navigation} classify={'marketdatacryptocurrencyii'} />:null}
+					
 				</View>
 			</View>
 		);
