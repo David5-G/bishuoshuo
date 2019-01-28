@@ -22,7 +22,7 @@ export default {
     bodyTextActive: tintColor,
 
     borderGray: '#f4f4f4',
-    raise: '#ff433e',
-    fall: '#22c760',
+    raise: '#e62e4d',
+    fall: '#1f995c',
 
 };

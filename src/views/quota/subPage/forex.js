@@ -63,7 +63,6 @@ export default class List extends React.Component {
             delete sections['items']
             sections.index= index
         })
-        console.log('list-->', list )
         this && this.setState({ loading: false, list })
     }
     _renderItemView = (info) => {
@@ -71,8 +70,9 @@ export default class List extends React.Component {
         const { navigation } = this.props
         const item = info.item.data
         const sectionIdx = info.section.index
-        if (!item) return null
-        if (!item || defaultShow !== sectionIdx) return null
+        if (!item) return null //错误处理
+        if (info.index >= 5) return null //最多只显示6个
+        if (!item || defaultShow !== sectionIdx) return null //只显示展开的
         return (<TouchableOpacity onPress={() => navigation.navigate('Chart', item[0])} style={styles.item}>
             <View style={{ flex: 3 }}>
                 <Text style={{ lineHeight: 25, fontSize: 15,color: '#333' }}>{item[1]}</Text>
@@ -96,12 +96,15 @@ export default class List extends React.Component {
     _renderSectionHeader = (info) => {
         const { name, index } = info.section
         const { defaultShow } = this.state
-        return (<TouchableHighlight onPress={() => this.setState({defaultShow: defaultShow===index?'':index})}>
-                <View style={styles.sectionHeader}>
-                    <Icon size={16} color={'#777'} name={defaultShow===index?'downcircle':'upcircle'} style={{marginTop: 2,marginLeft: 10}}/>
-                    <Text style={{lineHeight: 35,height: 35,fontSize: 16,marginLeft: 5}}>{name}</Text>
-                </View>
-            </TouchableHighlight>)
+        return (<View style={styles.sectionHeader}>
+                    <TouchableHighlight onPress={() => this.setState({defaultShow: defaultShow===index?'':index})}>
+                        <View style={{flexDirection: 'row',alignItems: 'center'}}>
+                            <Icon size={16} color={'#777'} name={defaultShow===index?'downcircle':'upcircle'} style={{marginTop: 2,}}/>
+                            <Text style={{lineHeight: 35,height: 35,fontSize: 16,marginLeft: 5,}}>{name}</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <Text style={{lineHeight: 35,height: 35,fontSize: 14,color: '#666'}}>查看更多</Text>
+                </View>)
     }
     _keyExtractor(info) {
         return Math.random()
@@ -148,5 +151,8 @@ const styles = StyleSheet.create({
         height: 35,
         borderColor: '#eee',
         borderBottomWidth: 1,
+        justifyContent: 'space-between',
+        paddingLeft: 10,
+        paddingRight: 10,
     }
 });

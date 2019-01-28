@@ -65,7 +65,7 @@ export default class Home extends React.Component {
 					</NeButton>
 
 					<NeButton last active={active===5} onPress={() =>this.setState({active:5})}>
-						<NeText>债券</NeText>
+						<NeText>数字货币</NeText>
 					</NeButton>
 				</Segment>
 				<View style={{flex: 1}}>
