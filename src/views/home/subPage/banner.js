@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {View, Text, Image, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper'
 import {Dimensions} from 'react-native'
@@ -13,7 +14,11 @@ const width = Dimensions.get('window').width
 export default class Banner extends React.Component {
 	static navigationOptions = {
 		title: 'banner',
-	}
+    }
+    static proptypes = {
+        navigation: PropTypes.object.isRequired,
+    }
+    
 	constructor(props){
 		super(props)
         this.state = {

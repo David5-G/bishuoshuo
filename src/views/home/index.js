@@ -96,7 +96,7 @@ class Home extends React.Component {
         return index.toString()
     }
     render() {
-        const { MediaStore } = this.props
+        const { MediaStore,navigation } = this.props
         const { channel } = this.state
         return (
             <View style={styles.container}>
@@ -130,7 +130,7 @@ class Home extends React.Component {
                     data={MediaStore.wallNews}
                     renderItem={this._renderItemView.bind(this)}
                     keyExtractor={this._keyExtractor} //唯一的key
-                    ListHeaderComponent={channel==='global'?<Banners />:null}
+                    ListHeaderComponent={channel==='global'?<Banners navigation={navigation} />:null}
                     ListFooterComponent={this._renderFooter.bind(this)}
                     onEndReached={this._loadMore.bind(this)}
                     onEndReachedThreshold={0}

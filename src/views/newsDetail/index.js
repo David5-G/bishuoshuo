@@ -30,7 +30,6 @@ export default class NewsDetail extends React.Component {
 					title={params.post_title || params.title}
 					style={{}}
 					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
-					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 				/>
                 <ScrollView style={styles.container}>
                     {

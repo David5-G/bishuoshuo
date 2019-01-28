@@ -4,7 +4,7 @@ import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
 import Bar from './subPage/bar'
-
+import Articles from './subPage/article'
 
 import { GET } from '../../utils/request'
 import { WallQuotaListHost, WallQuotaHost } from '../../config'
@@ -45,19 +45,25 @@ export default class Chart extends React.Component {
         return (
             <View style={styles.container}>
                 <NavigationBar
-                    title={'实时行情'}
+                    title={quota[1] || ''}
                     style={{}}
                     leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20 }} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
                 />
-                <Bar navigation={navigation} quota={quota} />
-                {symbol ? <WebView
-                    ref={(ww) => this._chart = ww}
-                    source={{ uri: 'http://localhost:2002?symbol=' + symbol + '&interval=1' }}
-                    onLoadStart={() => this.setState({ loading: true })}
-                    onLoad={() => {}}
-                    onLoadEnd={() => this.setState({ loading: false })}
-                    injectedJavaScript={``}
-                /> : null}
+                <ScrollView>
+                    <Bar navigation={navigation} quota={quota} />
+                    <View style={{height: 350,}}>
+                        {symbol ? <WebView
+                            style={{flex: 1}}
+                            ref={(ww) => this._chart = ww}
+                            source={{ uri: 'http://localhost:2002?symbol=' + symbol + '&interval=1' }}
+                            onLoadStart={() => this.setState({ loading: true })}
+                            onLoad={() => {}}
+                            onLoadEnd={() => this.setState({ loading: false })}
+                            injectedJavaScript={``}
+                        /> : null}
+                    </View>
+                    <Articles navigation={navigation} symbol={symbol} />
+                </ScrollView>
             </View>
         );
     }
