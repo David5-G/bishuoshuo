@@ -93,7 +93,7 @@ const deviceWidth = Dimensions.get("window").width;
 		console.log('res --> ', res)
 		this.setState({
 			modalVisible: false,
-			// loading: false,
+			loading: false,
 			// user_nickname: '',
 			// signature: '',
 			// birthday: '',

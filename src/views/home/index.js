@@ -63,7 +63,7 @@ class Home extends React.Component {
         }
         return (
             <TouchableOpacity onPress={() => navigation.navigate('WallDetail',item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
-                <View style={{ flex: 2 }}>
+                <View style={{ flex: 1.8 }}>
                     <View style={{ flex: 1, justifyContent: 'space-between' }}>
                         <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18}}>{item.resource.title}</Text>
                         <Text style={{ lineHeight: 50, fontSize: 14, color: Colors.bodyTextGray }}>{item.resource.author.display_name} {timeago(item.resource.display_time * 1000)}</Text>
@@ -104,8 +104,8 @@ class Home extends React.Component {
                     title={'资讯'}
                     style={{ color: Colors.headerText, fontSize: 20 }}
                     titleLayoutStyle={{ fontSize: 30 }}
-                    titleView={<Image style={{ width: 100, height: 24, marginTop: 13, }} source={{ uri: 'https://s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png' }} />}
-                    rightButton={(<Text></Text>)}
+                    titleView={<Image style={{ width: 100, height: 24,}} source={{ uri: 'https://s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png' }} />}
+                    rightButton={(<Text>34</Text>)}
                 />
 
                 <View style={{height: 50,}}>

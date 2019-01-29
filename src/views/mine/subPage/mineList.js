@@ -45,7 +45,7 @@ export default class MineList extends React.Component {
 					</View>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => navigation.navigate('Teach')}>
 					<View style={[styles.item,{marginTop: 10}]}>
 						<View style={{flexDirection: 'row'}}>
 							<Icon style={styles.iconL} name={'ios-school'} size={24} color={Colors.bodyTextGray}  />

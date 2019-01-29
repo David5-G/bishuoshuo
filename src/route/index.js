@@ -3,7 +3,8 @@ import {Text, Platform } from 'react-native'
 import TabBarIcon from '../component/TabBarIcon'
 import Colors from '../constants/Colors'
 import Home from '../views/home'
-import News from '../views/news'
+// import News from '../views/news'
+import Cycle from '../views/cycle'
 import Quota from '../views/quota'
 import Mine from '../views/mine'
 import Chart from '../views/chart'
@@ -21,7 +22,7 @@ import WallDetail from '../views/wallDetail'
 import Feedback from '../views/feedback'
 import Userinfo from '../views/userinfo'
 import About from '../views/about'
-
+import Teach from '../views/teach'
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -38,10 +39,10 @@ const Tab = createBottomTabNavigator(
 			}
 		},
 
-		News: {
-			screen: News,
+		Cycle: {
+			screen: Cycle,
 			navigationOptions: {
-				tabBarLabel: '资讯',
+				tabBarLabel: '圈子',
 				tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={'ios-today'} />),
 			}
 		},
@@ -62,7 +63,7 @@ const Tab = createBottomTabNavigator(
 	},
 	{
 		initialRouteName: 'Home', //第一次加载时初始选项卡路由的routeName
-		order: ['Home','Quota','News','Mine'], //定义选项卡顺序的routeNames数组
+		order: ['Home','Quota','Cycle','Mine'], //定义选项卡顺序的routeNames数组
 		backBehavior: 'initialRoute', //后退按钮是否会导致标签切换到初始路由？如果是，则设置为initialRoute，否则none。默认为initialRoute。
 		//tabBarComponent: null, //Options，覆盖用作标签栏的组件。
 		tabBarOptions: {
@@ -111,6 +112,7 @@ export default createStackNavigator(
 		Userinfo,
 		About,
 		Chart,
+		Teach,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,

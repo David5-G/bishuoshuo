@@ -48,6 +48,7 @@ export default class Chart extends React.Component {
                     title={quota[1] || ''}
                     style={{}}
                     leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20 }} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+					rightButton={<Icon style={{}} onPress={() => navigation.navigate('Teach')} name={'md-compass'} size={20} color={Colors.headerText} />}
                 />
                 <ScrollView>
                     <Bar navigation={navigation} quota={quota} />

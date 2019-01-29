@@ -65,9 +65,7 @@ class UserStore {
         // sex1 性别;0:保密,1:男,2:女 【参数名参与更改时,不论参数值是否为空都会更改】
         // birthday19990909 生日 【参数名参与更改时,不论参数值是否为空都会更改】
         return POST(Host + '/api/user/profile/userInfo', params, header).then(res => {
-            if (res.code === 1) {
-                this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
-            }
+            this.userUserInfo({}, { 'XX-Token': this.token, 'XX-Device-Type': 'iphone', })
             return res
         })
     }
