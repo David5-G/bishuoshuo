@@ -32,6 +32,7 @@ export default class App extends Component<Props> {
 	componentDidMount() {
 		SplashScreen.hide();
 		console.log('app.js-->')
+		console.log('SplashScreen--> hide')
 
 		JPushModule.getRegistrationID((registrationId) => {
 			console.log('registrationId-->', registrationId)

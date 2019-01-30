@@ -75,10 +75,7 @@
   //  umeng end
   
   
-  //  splashscreen start
-  [RNSplashScreen show];  // here
-  return YES;
-  //  splashscreen end
+  
   
   [JPUSHService setupWithOption:launchOptions appKey:@"475f91be84ab0dd75ec136f7"
                         channel:nil apsForProduction:nil];
@@ -102,6 +99,10 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  //  splashscreen start
+  [RNSplashScreen show];
+  //  splashscreen end
   return YES;
 }
 
