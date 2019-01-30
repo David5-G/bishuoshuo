@@ -57,7 +57,6 @@ export default class Cycle extends React.Component {
                             theme.map((item, i) => {
                                 return (<View key={i} style={{width: '50%',}}>
                                     <View style={i%2===0?styles.l:styles.r}>
-                                        
                                         <Image resizeMode={'cover'} style={{ height: 120 }} source={{ uri: item.image_uri }} />
                                         <Text>{item.title}</Text>
                                     </View>
