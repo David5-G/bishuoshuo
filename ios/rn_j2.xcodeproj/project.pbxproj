@@ -21,6 +21,7 @@
 		0BB1483F220194A50009721C /* UMAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1480F220194A50009721C /* UMAnalyticsModule.m */; };
 		0BB14841220197210009721C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB14840220197210009721C /* libsqlite3.0.tbd */; };
 		0BB148432201972B0009721C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB148422201972B0009721C /* CoreGraphics.framework */; };
+		0BB1484A2201A2C80009721C /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB148492201A20E0009721C /* libSplashScreen.a */; };
 		0BB50A482201434D0025D6DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		0BB50AC3220158050025D6DF /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB50A9D220157C20025D6DF /* libRCTJPushModule.a */; };
 		0BB50AC42201581C0025D6DF /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB50AC2220157F20025D6DF /* libRCTJCoreModule.a */; };
@@ -151,6 +152,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = E72EC1401F7ABB5A0001BC90;
 			remoteInfo = "RNDeviceInfo-tvOS";
+		};
+		0BB148482201A20E0009721C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BB148442201A20E0009721C /* SplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7682761D8E76B80014119E;
+			remoteInfo = SplashScreen;
 		};
 		0BB50A9C220157C20025D6DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -419,6 +427,7 @@
 		0BB14810220194A50009721C /* RNUMConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNUMConfigure.h; sourceTree = "<group>"; };
 		0BB14840220197210009721C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		0BB148422201972B0009721C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0BB148442201A20E0009721C /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		0BB50A8E220157C20025D6DF /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
 		0BB50ABD220157F10025D6DF /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTJCoreModule.xcodeproj; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; };
 		0BB50AC52201583B0025D6DF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -498,6 +507,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BB1484A2201A2C80009721C /* libSplashScreen.a in Frameworks */,
 				0BB148432201972B0009721C /* CoreGraphics.framework in Frameworks */,
 				0BB14841220197210009721C /* libsqlite3.0.tbd in Frameworks */,
 				0BB50AD6220158A70025D6DF /* libresolv.tbd in Frameworks */,
@@ -675,6 +685,14 @@
 			path = UMReactBridge;
 			sourceTree = "<group>";
 		};
+		0BB148452201A20E0009721C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BB148492201A20E0009721C /* libSplashScreen.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0BB50A8F220157C20025D6DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +827,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0BB148442201A20E0009721C /* SplashScreen.xcodeproj */,
 				0BB50ABD220157F10025D6DF /* RCTJCoreModule.xcodeproj */,
 				0BB50A8E220157C20025D6DF /* RCTJPushModule.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -1087,6 +1106,10 @@
 					ProductGroup = 0B8E9E5721F80CD600522633 /* Products */;
 					ProjectRef = FB15B17ED98C456494F09CCE /* RNDeviceInfo.xcodeproj */;
 				},
+				{
+					ProductGroup = 0BB148452201A20E0009721C /* Products */;
+					ProjectRef = 0BB148442201A20E0009721C /* SplashScreen.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1160,6 +1183,13 @@
 			fileType = archive.ar;
 			path = "libRNDeviceInfo-tvOS.a";
 			remoteRef = 0B8E9E5D21F80CD600522633 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0BB148492201A20E0009721C /* libSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSplashScreen.a;
+			remoteRef = 0BB148482201A20E0009721C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0BB50A9D220157C20025D6DF /* libRCTJPushModule.a */ = {
@@ -1848,7 +1878,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMcomponent/UMComponents",
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n",
+				);
 				INFOPLIST_FILE = rn_j2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

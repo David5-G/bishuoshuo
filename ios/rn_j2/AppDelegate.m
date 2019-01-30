@@ -16,6 +16,8 @@
 #import <UMAnalytics/MobClick.h> //umeng
 #import "RNUMConfigure.h" //umeng
 
+#import "RNSplashScreen.h"  //splashScreen
+
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -71,6 +73,12 @@
   [RNUMConfigure initWithAppkey:@"5c514be9b465f518720008cb" channel:@"App Store"];
   [MobClick setScenarioType:E_UM_NORMAL];
   //  umeng end
+  
+  
+  //  splashscreen start
+  [RNSplashScreen show];  // here
+  return YES;
+  //  splashscreen end
   
   [JPUSHService setupWithOption:launchOptions appKey:@"475f91be84ab0dd75ec136f7"
                         channel:nil apsForProduction:nil];

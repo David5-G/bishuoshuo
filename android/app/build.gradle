@@ -143,6 +143,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-splash-screen')
     compile project(':jpush-react-native')
     implementation project(':jcore-react-native')
     implementation project(':jpush-react-native')

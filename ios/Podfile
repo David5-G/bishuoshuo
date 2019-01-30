@@ -17,6 +17,8 @@ target 'rn_j2' do
 
     pod 'JCoreRN', :path => '../node_modules/jcore-react-native'
 
+    pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   end
 
   target 'rn_j2Tests' do

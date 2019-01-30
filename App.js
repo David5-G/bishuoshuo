@@ -15,6 +15,7 @@ import Store from './src/store/index.js'
 
 
 import JPushModule from 'jpush-react-native'
+import SplashScreen from 'react-native-splash-screen'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -29,6 +30,7 @@ export default class App extends Component<Props> {
 		}
 	}
 	componentDidMount() {
+		SplashScreen.hide();
 		console.log('app.js-->')
 
 		JPushModule.getRegistrationID((registrationId) => {
