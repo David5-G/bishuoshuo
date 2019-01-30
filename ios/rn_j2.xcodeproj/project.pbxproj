@@ -15,6 +15,12 @@
 		00E356F31AD99517003FC87E /* rn_j2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rn_j2Tests.m */; };
 		03476AB1DBE4487FB07463E3 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E43A34076441494590BFBEE2 /* Octicons.ttf */; };
 		057E6799A46448FDA19C76D8 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7AFB45C984463B94EF1F52 /* Roboto.ttf */; };
+		0BB1483C220194A50009721C /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB1480A220194A50009721C /* UMCommon.framework */; };
+		0BB1483D220194A50009721C /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB1480B220194A50009721C /* UMAnalytics.framework */; };
+		0BB1483E220194A50009721C /* RNUMConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1480E220194A50009721C /* RNUMConfigure.m */; };
+		0BB1483F220194A50009721C /* UMAnalyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1480F220194A50009721C /* UMAnalyticsModule.m */; };
+		0BB14841220197210009721C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB14840220197210009721C /* libsqlite3.0.tbd */; };
+		0BB148432201972B0009721C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB148422201972B0009721C /* CoreGraphics.framework */; };
 		0BB50A482201434D0025D6DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		0BB50AC3220158050025D6DF /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB50A9D220157C20025D6DF /* libRCTJPushModule.a */; };
 		0BB50AC42201581C0025D6DF /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB50AC2220157F20025D6DF /* libRCTJCoreModule.a */; };
@@ -405,6 +411,14 @@
 		00E356F21AD99517003FC87E /* rn_j2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rn_j2Tests.m; sourceTree = "<group>"; };
 		02CF95316F254D4FA88AF255 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		0B448BCC21F03E5200815141 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		0BB1480A220194A50009721C /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		0BB1480B220194A50009721C /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
+		0BB1480D220194A50009721C /* UMAnalyticsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMAnalyticsModule.h; sourceTree = "<group>"; };
+		0BB1480E220194A50009721C /* RNUMConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNUMConfigure.m; sourceTree = "<group>"; };
+		0BB1480F220194A50009721C /* UMAnalyticsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMAnalyticsModule.m; sourceTree = "<group>"; };
+		0BB14810220194A50009721C /* RNUMConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNUMConfigure.h; sourceTree = "<group>"; };
+		0BB14840220197210009721C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		0BB148422201972B0009721C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0BB50A8E220157C20025D6DF /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
 		0BB50ABD220157F10025D6DF /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTJCoreModule.xcodeproj; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; };
 		0BB50AC52201583B0025D6DF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -484,6 +498,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BB148432201972B0009721C /* CoreGraphics.framework in Frameworks */,
+				0BB14841220197210009721C /* libsqlite3.0.tbd in Frameworks */,
 				0BB50AD6220158A70025D6DF /* libresolv.tbd in Frameworks */,
 				0BB50AD4220158990025D6DF /* UserNotifications.framework in Frameworks */,
 				0BB50AD2220158890025D6DF /* UIKit.framework in Frameworks */,
@@ -501,9 +517,11 @@
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
+				0BB1483C220194A50009721C /* UMCommon.framework in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				0BB1483D220194A50009721C /* UMAnalytics.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
@@ -628,6 +646,35 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0BB14808220194A50009721C /* UMcomponent */ = {
+			isa = PBXGroup;
+			children = (
+				0BB14809220194A50009721C /* UMComponents */,
+				0BB1480C220194A50009721C /* UMReactBridge */,
+			);
+			path = UMcomponent;
+			sourceTree = "<group>";
+		};
+		0BB14809220194A50009721C /* UMComponents */ = {
+			isa = PBXGroup;
+			children = (
+				0BB1480A220194A50009721C /* UMCommon.framework */,
+				0BB1480B220194A50009721C /* UMAnalytics.framework */,
+			);
+			path = UMComponents;
+			sourceTree = "<group>";
+		};
+		0BB1480C220194A50009721C /* UMReactBridge */ = {
+			isa = PBXGroup;
+			children = (
+				0BB1480D220194A50009721C /* UMAnalyticsModule.h */,
+				0BB1480E220194A50009721C /* RNUMConfigure.m */,
+				0BB1480F220194A50009721C /* UMAnalyticsModule.m */,
+				0BB14810220194A50009721C /* RNUMConfigure.h */,
+			);
+			path = UMReactBridge;
+			sourceTree = "<group>";
+		};
 		0BB50A8F220157C20025D6DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +751,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BB148422201972B0009721C /* CoreGraphics.framework */,
+				0BB14840220197210009721C /* libsqlite3.0.tbd */,
+				0BB14808220194A50009721C /* UMcomponent */,
 				0BB50AD5220158A70025D6DF /* libresolv.tbd */,
 				0BB50AD3220158990025D6DF /* UserNotifications.framework */,
 				0BB50AD1220158880025D6DF /* UIKit.framework */,
@@ -1516,6 +1566,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				0BB1483F220194A50009721C /* UMAnalyticsModule.m in Sources */,
+				0BB1483E220194A50009721C /* RNUMConfigure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1676,6 +1728,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 58RK54F55J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UMcomponent/UMComponents",
+				);
 				INFOPLIST_FILE = rn_j2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1788,6 +1844,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 58RK54F55J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UMcomponent/UMComponents",
+				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule";
 				INFOPLIST_FILE = rn_j2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1810,6 +1870,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 58RK54F55J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UMcomponent/UMComponents",
+				);
 				INFOPLIST_FILE = rn_j2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

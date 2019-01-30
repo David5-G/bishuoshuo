@@ -5,13 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import "AppDelegate.h"
-#import <RCTJPushModule.h>
-#ifdef NSFoundationVersionNumber_iOS_9_x_Max
-#import <UserNotifications/UserNotifications.h>
+#import "AppDelegate.h" //jpush
+#import <RCTJPushModule.h> //jpush
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max //jpush
+#import <UserNotifications/UserNotifications.h> //jpush
 #endif
 
-#import <CodePush/CodePush.h>
+#import <CodePush/CodePush.h> //codepush
+
+#import <UMAnalytics/MobClick.h> //umeng
+#import "RNUMConfigure.h" //umeng
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -63,6 +66,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  //  umeng start
+  [UMConfigure setLogEnabled:YES];
+  [RNUMConfigure initWithAppkey:@"5c514be9b465f518720008cb" channel:@"App Store"];
+  [MobClick setScenarioType:E_UM_NORMAL];
+  //  umeng end
+  
   [JPUSHService setupWithOption:launchOptions appKey:@"475f91be84ab0dd75ec136f7"
                         channel:nil apsForProduction:nil];
 
