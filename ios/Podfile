@@ -13,6 +13,10 @@ target 'rn_j2' do
     inherit! :search_paths
     # Pods for testing
     # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+    pod 'JPushRN', :path => '../node_modules/jpush-react-native'
+
+    pod 'JCoreRN', :path => '../node_modules/jcore-react-native'
+
   end
 
   target 'rn_j2Tests' do

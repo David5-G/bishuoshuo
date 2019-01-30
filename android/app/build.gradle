@@ -104,6 +104,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "475f91be84ab0dd75ec136f7",
+                APP_CHANNEL : "default"
+        ]
+
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -138,6 +143,9 @@ android {
 }
 
 dependencies {
+    compile project(':jpush-react-native')
+    implementation project(':jcore-react-native')
+    implementation project(':jpush-react-native')
     compile project(':react-native-device-info')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')
