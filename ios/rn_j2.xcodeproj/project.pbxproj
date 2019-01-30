@@ -1862,7 +1862,8 @@
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
-					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = rn_j2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1888,6 +1889,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMcomponent/UMComponents",
+				);
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = rn_j2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
