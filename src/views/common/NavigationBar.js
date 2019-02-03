@@ -6,24 +6,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {
     StyleSheet,
-    Platform,
-    TouchableOpacity,
-    Image,
     StatusBar,
     Text,
     Dimensions,
     View
 } from 'react-native'
 import Colors from '../../constants/Colors'
-import DeviceInfo from 'react-native-device-info'
+import { width,barHeight,notch, statusBarHeight } from '../../constants/Scale'
 
-const Notch = DeviceInfo.hasNotch()
-// const deviceH = Dimensions.get('window').height
-const width = Dimensions.get('window').width
-
-const NAV_BAR_HEIGHT_IOS = Notch ? 60 : 40;
-const NAV_BAR_HEIGHT_ANDROID = 50;
-const STATUS_BAR_HEIGHT = 20;
 const StatusBarShape = {
     // barStyle: PropTypes.oneOf(['light-content', 'default',]),
     // hidden: PropTypes.bool,
@@ -98,7 +88,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: Platform.OS === 'ios' ? NAV_BAR_HEIGHT_IOS : NAV_BAR_HEIGHT_ANDROID,
+        height: barHeight,
     },
     navBarTitleContainer: {
         alignItems: 'center',
@@ -113,14 +103,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         color: Colors.headerText,
-        marginTop: Notch ? 20 : 0,
+        marginTop: notch ? 20 : 0,
     },
     navBarButton: {
         alignItems: 'center',
-        marginTop: Notch ? 20 : 0,
+        marginTop: notch ? 20 : 0,
     },
     statusBar: {
-        height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT:0,
-
+        height: statusBarHeight,
     },
 })

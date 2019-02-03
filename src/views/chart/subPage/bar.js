@@ -26,7 +26,7 @@ export default class Bar extends React.Component {
         const { navigation, quota } = this.props
 		return (
 			<View style={styles.container}>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row',paddingTop: 10,}}>
                     <View style={{flex: 1.5}}>
                         <Text style={[styles.lastPrice,quota[3]<0?styles.fall:styles.raise]}>{quota[2].toFixed(quota[19])}</Text>
                         <View style={{flexDirection: 'row'}}>
@@ -92,20 +92,21 @@ const styles = StyleSheet.create({
         marginBottom: 3,
     },
     lastPrice: {
-        lineHeight: 25,
-        fontSize: 21,
+        fontSize: 30,
+        fontWeight: '600',
+        marginTop: -10,
     },
     point: {
-        fontSize: 13,
+        fontSize: 14,
         lineHeight: 25,
     },
     text: {
-        fontSize: 12,
+        fontSize: 14,
         color: '#666',
         lineHeight: 25,
     },
     num: {
-        fontSize: 12,
+        fontSize: 14,
         marginLeft: 5,
         lineHeight: 25,
     },
