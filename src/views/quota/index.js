@@ -1,5 +1,5 @@
 import React from 'react'
-import {Linking,SafeAreaView, ActivityIndicator, NetInfo, View, Text, WebView, ScrollView, StyleSheet, Button } from 'react-native'
+import {StatusBar, NetInfo, View, Text, WebView, ScrollView, StyleSheet } from 'react-native'
 import { Container, Header, Content, Item, Input, Segment, Button as NeButton, Text as NeText } from 'native-base';
 import Colors from '../../constants/Colors';
 import NavigationBar from '../common/NavigationBar'
@@ -36,44 +36,45 @@ export default class Home extends React.Component {
 		const { navigation } = this.props
 		return (
 			<View style={styles.container}>
+                <StatusBar barStyle={'dark-content'}/>
 				<NavigationBar
-					title={'波动'}
-					style={{ color: Colors.headerText, fontSize: 20 }}
+					title={''}
+					style={{backgroundColor: '#fff'}}
 					titleLayoutStyle={{ fontSize: 30 }}
+					titleView={(
+						<View style={{flex: 1,flexDirection:'row',alignItems:'flex-end'}}>
+							<Segment style={{}}>
+								<NeButton first active={active===1} onPress={() =>this.setState({active:1})}>
+									<NeText>商品</NeText>
+								</NeButton>
+								{/* <NeButton active={active===2} onPress={() =>this.setState({active:2})}>
+									<NeText>外汇</NeText>
+								</NeButton>
+								<NeButton active={active===3} onPress={() =>this.setState({active:3})}>
+									<NeText>股指</NeText>
+								</NeButton> */}
+								<NeButton active={active===4} onPress={() =>this.setState({active:4})}>
+									<NeText>债券</NeText>
+								</NeButton>
+								<NeButton last active={active===5} onPress={() =>this.setState({active:5})}>
+									<NeText>数字</NeText>
+								</NeButton>
+							</Segment>
+						</View>
+					)}
 					rightButton={
 						<Icon
-							style={{paddingLeft:20,}}
-							onPress={()=> {
-								
-							}}
+							style={{}}
 							name={'ios-help-circle-outline'} size={24}
-							color={Colors.headerText}
+							color={'#999'}
 						/>}
 				/>
-				<Segment style={{backgroundColor:'#fff'}}>
-					<NeButton first active={active===1} onPress={() =>this.setState({active:1})}>
-						<NeText>外汇</NeText>
-					</NeButton>
-					<NeButton active={active===2} onPress={() =>this.setState({active:2})}>
-						<NeText>商品</NeText>
-					</NeButton>
-					<NeButton active={active===3} onPress={() =>this.setState({active:3})}>
-						<NeText>股指</NeText>
-					</NeButton>
-					<NeButton active={active===4} onPress={() =>this.setState({active:4})}>
-						<NeText>债券</NeText>
-					</NeButton>
-
-					<NeButton last active={active===5} onPress={() =>this.setState({active:5})}>
-						<NeText>数字货币</NeText>
-					</NeButton>
-				</Segment>
+				
 				<View style={{flex: 1}}>
 					{/* <Fund /> */}
 					{/* <Commodity navigation={navigation} /> */}
-
-					{active===1?<Forex navigation={navigation} classify={'marketdataforexii'} />:null}
-					{active===2?<Forex navigation={navigation} classify={'marketdatacommodityii'} />:null}
+					{active===1?<Forex navigation={navigation} classify={'marketdatacommodityii'} />:null}
+					{active===2?<Forex navigation={navigation} classify={'marketdataforexii'} />:null}
 					{active===3?<Forex navigation={navigation} classify={'marketdataindexii'} />:null}
 					{active===4?<Forex navigation={navigation} classify={'marketdatabondii'} />:null}
 					{active===5?<Forex navigation={navigation} classify={'marketdatacryptocurrencyii'} />:null}

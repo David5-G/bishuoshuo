@@ -33,10 +33,7 @@ export default class WallDetail extends React.Component {
 	render() {
         const { detail,loading,openLink,related_articles } = this.state
         const { navigation } = this.props
-        if (!detail.content) {
-            return (<Loading show={loading} text={'请稍候···'} />)
-        }
-        let content = detail.content.replace(/<!--image#0-->/,'<img src="'+detail.image_uri+'" />')
+        let content = detail.content ? detail.content.replace(/<!--image#0-->/,'<img src="'+detail.image_uri+'" />') : ''
 		return (
 			<View style={styles.container}>
                 <NavigationBar
@@ -45,7 +42,9 @@ export default class WallDetail extends React.Component {
 					leftButton={<Icon style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 					// rightButton={<Text onPress={()=> navigation.navigate('Login')} style={{color:Colors.headerText,fontSize:16,}}>登录</Text>}
 				/>
-                <ScrollView style={{paddingTop: 30,paddingBottom: 100}}>
+                {
+                    detail.content ?
+                    <ScrollView style={{paddingTop: 30,paddingBottom: 100}}>
                     {/* title */}
                     <View style={{marginLeft: 10,marginRight: 10}}>
                         <Text style={{fontSize: 25,fontWeight: '600',lineHeight: 35}}>{detail.title}</Text>
@@ -96,7 +95,9 @@ export default class WallDetail extends React.Component {
 
                         }
                     </View>
-                </ScrollView>
+                </ScrollView> : <Loading show={loading} text={'请稍候···'} />
+                }
+                
 			</View>
 		);
     }

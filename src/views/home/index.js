@@ -33,10 +33,8 @@ class Home extends React.Component {
         this._loadMore()
     }
     _toggleTab(topic) {
-
         const { channel, loading } = this.state
-        if (loading) return
-        if (channel === topic) return
+        if (channel === topic || loading) return
         this.setState({ channel: topic, done: false, cursor: '', loading: false }, () => this._loadMore())
     }
     _loadMore() {
@@ -120,6 +118,7 @@ class Home extends React.Component {
                         <TouchableOpacity onPress={this._toggleTab.bind(this,'wision')} style={styles.nav}><Text style={[channel==='wision'?styles.active:styles.navItem]}>研究</Text></TouchableOpacity>
                     </ScrollView>
                 </View> */}
+                
                 <StatusBar barStyle={'dark-content'}/>
                 <View style={{paddingTop: statusBarHeight + 10,backgroundColor: '#fff'}}>
 

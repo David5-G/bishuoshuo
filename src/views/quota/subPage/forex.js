@@ -75,12 +75,12 @@ export default class List extends React.Component {
         if (!item || defaultShow !== sectionIdx) return null //只显示展开的
         return (<TouchableOpacity onPress={() => navigation.navigate('Chart', item[0])} style={styles.item}>
             <View style={{ flex: 3 }}>
-                <Text style={{ lineHeight: 25, fontSize: 15,color: '#333' }}>{item[1]}</Text>
+                <Text style={{ lineHeight: 25, fontSize: 16,color: '#333' }}>{item[1]}</Text>
                 <Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{item[2]}</Text>
             </View>
 
             <View style={{ flex: 1 }}>
-                <Text style={{ lineHeight: 25, fontWeight: '600', fontSize: 15 }}>{item[11]}</Text>
+                <Text style={{ lineHeight: 25, fontWeight: '600', fontSize: 17 }}>{item[11]}</Text>
                 <Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{hourMins(item[7])}</Text>
             </View>
 
@@ -99,11 +99,11 @@ export default class List extends React.Component {
         return (<View style={styles.sectionHeader}>
                     <TouchableHighlight onPress={() => this.setState({defaultShow: defaultShow===index?'':index})}>
                         <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                            <Icon size={16} color={'#777'} name={defaultShow===index?'downcircle':'upcircle'} style={{marginTop: 2,}}/>
-                            <Text style={{lineHeight: 35,height: 35,fontSize: 16,marginLeft: 5,}}>{name}</Text>
+                            <Icon size={18} color={'#777'} name={defaultShow===index?'downcircle':'upcircle'} style={{marginTop: 2,}}/>
+                            <Text style={{lineHeight: 45,height: 45,fontSize: 18,marginLeft: 5,}}>{name}</Text>
                         </View>
                     </TouchableHighlight>
-                    <Text style={{lineHeight: 35,height: 35,fontSize: 14,color: '#666'}}>查看更多</Text>
+                    <Text style={{lineHeight: 45,height: 45,fontSize: 16,color: '#666'}}>查看更多</Text>
                 </View>)
     }
     _keyExtractor(info) {
@@ -144,12 +144,12 @@ const styles = StyleSheet.create({
         borderColor: Colors.borderGray,
         backgroundColor: '#fff',
     },
+
     sectionHeader: {
-        backgroundColor: '#f2f2f2',
         flexDirection: 'row',
         alignItems: 'center',
-        height: 35,
-        borderColor: '#eee',
+        height: 45,
+        borderColor: '#ddd',
         borderBottomWidth: 1,
         justifyContent: 'space-between',
         paddingLeft: 10,

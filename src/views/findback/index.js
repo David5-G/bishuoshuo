@@ -24,10 +24,8 @@ export default class Findback extends React.Component {
 		}
 	}
 	componentDidMount() {
-		console.log('login--> componentDidMount')
 	}
 	componentWillUnmount() {
-		console.log('login--> componentWillUnmount')
 	}
 	render() {
 		const { MainStore, UserStore, navigation } = this.props

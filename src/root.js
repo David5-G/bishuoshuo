@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Text, Platform,StatusBar,AsyncStorage, NetInfo, StyleSheet, AppState, } from 'react-native';
+import { View,Text, Platform,StatusBar,AsyncStorage, StyleSheet, AppState, } from 'react-native';
 import Route from './route/index.js'
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from './views/common/Loading'
@@ -9,7 +9,8 @@ import LoadingView from './views/common/Loading'
 export default class News extends React.Component {
     static navigationOptions = {
         title: 'news',
-        token: 'default token'
+        token: 'default token',
+        
     }
     constructor(props) {
         super(props)
@@ -27,19 +28,14 @@ export default class News extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Root--> componentDidMount')
         AppState.addEventListener('change', this._handleAppStateChange);
-
-        NetInfo.addEventListener('connectionChange', (connectionInfo) => {
-            console.log('connectionInfo-->', connectionInfo)
-        })
         this._initStore()
     }
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
     render() {
-        const { loading, appState} = this.state
+        const { loading , appState} = this.state
         return (
             <View style={styles.container}>
                 <LoadingView show={loading} />
@@ -58,9 +54,8 @@ export default class News extends React.Component {
         this.setState({ appState: nextAppState })
     }
     async _initStore() {
-        // console.log('_initStore UserStore-->', UserStore)
-        // console.log('_initStore MediaStore-->', MediaStore)
-        // console.log('_initStore MediaStore.getBanners-->', MediaStore.getBanners)
+        const {loading } = this.state
+        if (loading) return
         this.setState({ loading: true })
         const text = await AsyncStorage.getItem('username') || ''
         const password = await AsyncStorage.getItem('password') || ''
