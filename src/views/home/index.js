@@ -73,14 +73,13 @@ class Home extends React.Component {
         const idx = MediaStore.collection.findIndex(el => el.id === author.id)
         const active = idx === -1 ? 0 : 1
         return (
-            <View style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
+            <TouchableOpacity onPress={() => navigation.navigate('WallDetail', item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
                 <View style={{ flex: 1.8 }}>
                     <View style={{ flex: 1, justifyContent: 'space-between'}}>
-                        <TouchableOpacity onPress={() => navigation.navigate('WallDetail', item)}><Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18 }}>{item.resource.title}</Text></TouchableOpacity>
+                        <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18 }}>{item.resource.title}</Text>
                         <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
                             <Text style={{flex: 3,lineHeight: 50,fontSize: 14,color: Colors.bodyTextGray }}>{item.resource.author.display_name} {timeago(item.resource.display_time * 1000)}</Text>
-                            <Icon onPress={() => MediaStore.toggleCollection(item)} style={{flex: 1,textAlign:'right',lineHeight: 50,fontSize: 18,color: active?Colors.raise:Colors.bodyTextGray }} name={active?'ios-star':'ios-star-outline'} />
-                            <Icon onPress={() => navigation.navigate('WallDetail', item)} style={{flex: 1,textAlign:'right',lineHeight: 50,fontSize: 18,color: Colors.bodyTextGray }} name={'ios-arrow-dropright'} />
+                            <Text style={{flex: 1,textAlign:'right',lineHeight: 50,fontSize: 12,color: active?Colors.collect:Colors.bodyTextGray }}>{active ? '已关注' : ''}</Text>
                         </View>
                     </View>
                 </View>
@@ -90,7 +89,7 @@ class Home extends React.Component {
                         source={{ uri: item.resource.image_uri || 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
                     />
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     _renderFooter() {

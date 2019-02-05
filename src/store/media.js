@@ -59,14 +59,14 @@ class MediaStore {
             if (idx === -1) {
                 Toast.show({
                     text: '关注成功',
-                    position: 'top',
+                    position: 'bottom',
                     duration: 1000
                 })
                 collection.push(item)
             } else {
                 Toast.show({
                     text: '取消关注成功',
-                    position: 'top',
+                    position: 'bottom',
                     duration: 1000
                 })
                 collection.splice(idx, 1)

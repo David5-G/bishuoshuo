@@ -24,5 +24,6 @@ export default {
     borderGray: '#f4f4f4',
     raise: '#e62e4d',
     fall: '#1f995c',
+    collect: '#ff8647'
 
 };
