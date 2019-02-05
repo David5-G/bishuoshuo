@@ -1,5 +1,6 @@
 import React from 'react';
 import { View,Text, Platform,StatusBar,AsyncStorage, StyleSheet, AppState, } from 'react-native';
+import { Root } from "native-base";
 import Route from './route/index.js'
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from './views/common/Loading'
@@ -37,11 +38,11 @@ export default class News extends React.Component {
     render() {
         const { loading , appState} = this.state
         return (
-            <View style={styles.container}>
+            <Root style={styles.container}>
                 <LoadingView show={loading} />
                 {Platform.OS === 'ios' && <StatusBar hidden={false} barStyle="light-content" />}
                 <Route />
-            </View>
+            </Root>
         )
     }
     _handleAppStateChange = (nextAppState) => {

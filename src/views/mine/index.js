@@ -10,7 +10,7 @@ import MineList from './subPage/mineList.js'
 import Icon from 'react-native-vector-icons/Ionicons'
 const width = Dimensions.get('window').width
 
-@inject('MainStore', 'UserStore')
+@inject('MainStore','MediaStore', 'UserStore')
 @observer
 export default class Mine extends React.Component {
 	static navigationOptions = ({ navigation, screenProps }) => ({
@@ -46,6 +46,7 @@ export default class Mine extends React.Component {
 	}
 	render() {
 		const { isLogin, userInfo, token } = this.props.UserStore
+		const { collection } = this.props.MediaStore
 		const { navigation } = this.props
 		return (
 			<ScrollView style={styles.container}>
@@ -60,38 +61,34 @@ export default class Mine extends React.Component {
 						color={Colors.headerText}
 					/> : null}
 				/>
-				<View style={{ backgroundColor: Colors.bodyTextActive, borderBottomEndRadius: 20, borderBottomStartRadius: 20, height: 100, }}>
-				</View>
-				<View style={styles.card}>
-					<Image
-						style={{ width: 50, height: 50, borderRadius: 25, position: 'relative', top: -25, left: (width - 40) / 2 - 27, backgroundColor: '#fff', borderWidth: 2, borderColor: Colors.bodyTextActive, }}
-						source={{ uri: userInfo.avatar ? userInfo.avatar : 'https://img.alicdn.com/tps/TB1ld1GNFXXXXXLapXXXXXXXXXX-200-200.png' }}
-					/>
-					<Text style={{ fontSize: 16, marginTop: -10, textAlign: 'center' }}>您好，{isLogin ? userInfo.user_nickname : '游客'}</Text>
-					<View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20, paddingBottom: 10, }}>
-						<View style={{ width: 100 }}>
-							<Text style={{ lineHeight: 25, fontSize: 16, color: '#ff3c4b' }}>{isLogin ? userInfo.score : '0.00'}</Text>
-							<Text style={{ lineHeight: 25, fontSize: 16 }}>我的积分</Text>
-						</View>
-						<View style={{ width: 100 }}>
-							<Text style={{ lineHeight: 25, fontSize: 16, color: '#febb02' }}>{isLogin ? userInfo.coin : '0.00'}</Text>
-							<Text style={{ lineHeight: 25, fontSize: 16 }}>我的金币</Text>
-						</View>
+				<TouchableOpacity onPress={() => !isLogin && navigation.navigate('Login')} style={styles.avatar}>
+					<View style={{}}>
+						<Image
+							style={{ width: 50, height: 50, borderRadius: 25, }}
+							source={{ uri: userInfo.avatar ? userInfo.avatar : 'https://img.alicdn.com/tps/TB1ld1GNFXXXXXLapXXXXXXXXXX-200-200.png' }}
+						/>
 					</View>
-				</View>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20, marginTop: -50 }}>
-					<NeButton
-						onPress={() => {
-							navigation.navigate('Login')
-						}}
-						style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginRight: 10, }}>
-						<NeText>登录</NeText>
-					</NeButton>
-					<NeButton
-						onPress={() => navigation.navigate('Regist')}
-						style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10, }}>
-						<NeText>注册</NeText>
-					</NeButton>
+					<View style={{}}>
+						<Text style={{lineHeight: 40,fontSize:16,marginLeft: 20}}>{isLogin?userInfo.user_nickname:'您好，请登录'}</Text>
+					</View>
+				</TouchableOpacity>
+				<View style={{flexDirection: 'row'}}>
+					<View style={styles.itemWrap}>
+						<Text style={styles.tip}>关注</Text>
+						<Text style={styles.tipVal}>{collection.length}</Text>
+					</View>
+					<View style={styles.itemWrap}>
+						<Text style={styles.tip}>收藏</Text>
+						<Text style={styles.tipVal}>0</Text>
+					</View>
+					<View style={styles.itemWrap}>
+						<Text style={styles.tip}>订阅</Text>
+						<Text style={styles.tipVal}>0</Text>
+					</View>
+					<View style={styles.itemWrap}>
+						<Text style={styles.tip}>积分</Text>
+						<Text style={styles.tipVal}>{isLogin?userInfo.score:0}</Text>
+					</View>
 				</View>
 				<MineList navigation={navigation} />
 			</ScrollView>
@@ -103,32 +100,14 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
-
-	card: {
-		width: width - 40,
-		top: -70,
-		left: 20,
-		right: 20,
-		position: 'relative',
-		backgroundColor: '#fff',
-		borderRadius: 6,
-		zIndex: 100,
-		shadowColor: '#000',
-		shadowOpacity: 0.2,
-		shadowOffset: { width: 0, height: 0 },
-	},
-	linearGradient: {
+	avatar: {flexDirection:'row',backgroundColor:'#fff',paddingTop: 10,paddingBottom: 10,paddingLeft: 20,paddingRight: 20,borderColor: Colors.borderGray,borderBottomWidth: 1,},
+	itemWrap: {
 		flex: 1,
-		paddingLeft: 15,
-		paddingRight: 15,
-		borderRadius: 5
+		alignItems: 'center',
+		paddingTop: 10,
+		paddingBottom: 10,
+		backgroundColor:'#fff',
 	},
-	buttonText: {
-		fontSize: 18,
-		fontFamily: 'Gill Sans',
-		textAlign: 'center',
-		margin: 10,
-		color: '#ffffff',
-		backgroundColor: 'transparent',
-	},
+	tip: {lineHeight: 20,fontSize: 14,color: '#666'},
+	tipVal: {lineHeight: 25,fontSize: 18},
 })

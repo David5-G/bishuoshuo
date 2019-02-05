@@ -39,7 +39,6 @@ export default class NewsDetail extends React.Component {
                                 source={{uri: params.detal_img}}
                             /> : null
                     }
-                    {/* <Text style={{textAlign:'center',fontSize: 20,lineHeight:50,}}>{params.post_title}</Text> */}
                     <HTML
                         html={params.post_content_filtered || params.post_content ||  '<p style="font-size:18;line-height:30;color:#666">'+params.post_content+'</p>'}
                         ignoredStyles={['font-family','fontFamily','display']}

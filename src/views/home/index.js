@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View, Image, Dimensions, TouchableOpacity,StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
-// import { Container, List, ListItem, Body, Header, Content, Card, CardItem, Item, Input, Icon, Button as NeButton, Text as NeText, } from 'native-base';
-import { observer, inject } from 'mobx-react/native'
+import { View,Alert, Image, Dimensions,AsyncStorage, TouchableOpacity,StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
+import { Toast, Button} from 'native-base'
+import { observer, inject, } from 'mobx-react/native'
+import { toJS } from 'mobx'
+
 import Colors from '../../constants/Colors'
 import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
@@ -30,8 +32,13 @@ class Home extends React.Component {
         }
     }
     componentDidMount() {
+        const { MediaStore } = this.props
+        MediaStore.getStorageCollection()
         this._loadMore()
     }
+    
+    
+
     _toggleTab(topic) {
         const { channel, loading } = this.state
         if (channel === topic || loading) return
@@ -57,26 +64,33 @@ class Home extends React.Component {
         })
     }
     _renderItemView({ item }) {
-        const key = item.key
-        const { navigation } = this.props
-        if (!item.resource.title) {
+        if (!item.resource.title || !item.resource.author) {
             return null
         }
+        const key = item.key
+        const { navigation, MediaStore } = this.props
+        const author = item.resource.author
+        const idx = MediaStore.collection.findIndex(el => el.id === author.id)
+        const active = idx === -1 ? 0 : 1
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('WallDetail', item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
+            <View style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
                 <View style={{ flex: 1.8 }}>
-                    <View style={{ flex: 1, justifyContent: 'space-between', }}>
-                        <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18 }}>{item.resource.title}</Text>
-                        <Text style={{ lineHeight: 50, fontSize: 14, color: Colors.bodyTextGray }}>{item.resource.author.display_name} {timeago(item.resource.display_time * 1000)}</Text>
+                    <View style={{ flex: 1, justifyContent: 'space-between'}}>
+                        <TouchableOpacity onPress={() => navigation.navigate('WallDetail', item)}><Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18 }}>{item.resource.title}</Text></TouchableOpacity>
+                        <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
+                            <Text style={{flex: 3,lineHeight: 50,fontSize: 14,color: Colors.bodyTextGray }}>{item.resource.author.display_name} {timeago(item.resource.display_time * 1000)}</Text>
+                            <Icon onPress={() => MediaStore.toggleCollection(item)} style={{flex: 1,textAlign:'right',lineHeight: 50,fontSize: 18,color: active?Colors.raise:Colors.bodyTextGray }} name={active?'ios-star':'ios-star-outline'} />
+                            <Icon onPress={() => navigation.navigate('WallDetail', item)} style={{flex: 1,textAlign:'right',lineHeight: 50,fontSize: 18,color: Colors.bodyTextGray }} name={'ios-arrow-dropright'} />
+                        </View>
                     </View>
                 </View>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1,justifyContent: 'space-between' }}>
                     <Image
                         style={{ marginLeft: 10, height: 100 }}
                         source={{ uri: item.resource.image_uri || 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
                     />
                 </View>
-            </TouchableOpacity>
+            </View>
         )
     }
     _renderFooter() {
@@ -137,7 +151,7 @@ class Home extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-
+                
                 <FlatList
                     data={MediaStore.wallNews}
                     renderItem={this._renderItemView.bind(this)}

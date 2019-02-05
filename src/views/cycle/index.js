@@ -78,7 +78,73 @@ export default class Cycle extends React.Component {
                             <Text style={[styles.des,]}>服务范围</Text>
                         </View>
                     </View>
+                    
+                    <View style={[styles.section,{paddingLeft: 7}]}>
+                        <View style={{flexDirection: 'row',paddingLeft: 10,}}>
+                            <Icon style={{marginTop: 12,marginRight: 10,}} name={'md-list'} size={15} />
+                            <Text style={{lineHeight: 40}}>商讯</Text>
+                        </View>
+                        <View style={styles.bussiness}>
+                            <View style={{flex: 2,paddingRight: 15,}}>
+                                <View style={{flex: 1,justifyContent: 'space-between'}}>
+                                    <Text>推广丨纵享生活N次方，传祺GM6引领家用MPV新进化</Text>
+                                    <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
+                                        <Text style={[styles.bTip,]}>01-14: 13:34</Text>
+                                        <Text style={[styles.bTip,]}>查看</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Image style={{width: '100%'}} source={require('../../pics/bussiness1.png')} />
+                            </View>
+                        </View>
 
+                        <View style={styles.bussiness}>
+                            <View style={{flex: 2,paddingRight: 15,}}>
+                                <View style={{flex: 1,justifyContent: 'space-between'}}>
+                                    <Text>推广丨见证你的时代 全新奥迪A6L重磅上市</Text>
+                                    <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
+                                        <Text style={[styles.bTip,]}>01-14: 13:34</Text>
+                                        <Text style={[styles.bTip,]}>查看</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Image style={{width: '100%'}} source={require('../../pics/bussiness2.png')} />
+                            </View>
+                        </View>
+
+                        <View style={styles.bussiness}>
+                            <View style={{flex: 2,paddingRight: 15,}}>
+                                <View style={{flex: 1,justifyContent: 'space-between'}}>
+                                    <Text>推广丨亚洲金融论坛揭幕：逾百位财金官员、商界翘楚共话可持续与共融未来</Text>
+                                    <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
+                                        <Text style={[styles.bTip,]}>01-14: 13:34</Text>
+                                        <Text style={[styles.bTip,]}>查看</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Image style={{width: '100%'}} source={require('../../pics/bussiness3.png')} />
+                            </View>
+                        </View>
+
+                        <View style={styles.bussiness}>
+                            <View style={{flex: 2,paddingRight: 15,}}>
+                                <View style={{flex: 1,justifyContent: 'space-between'}}>
+                                    <Text>推广丨用心成就千万信赖 上汽大众第2000万辆汽车下线</Text>
+                                    <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
+                                        <Text style={[styles.bTip,]}>01-14: 13:34</Text>
+                                        <Text style={[styles.bTip,]}>查看</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Image style={{width: '100%'}} source={require('../../pics/bussiness4.png')} />
+                            </View>
+                        </View>
+                    </View>
+                    
                     <View style={styles.section}>
                         <View style={{flexDirection: 'row',paddingLeft: 10,}}>
                             <Icon style={{marginTop: 12,marginRight: 10,}} name={'md-list'} size={15} />
@@ -122,6 +188,34 @@ export default class Cycle extends React.Component {
                             </View>
                         </View>
                     </View>
+
+                    <View style={[styles.section]}>
+                        <View style={{flexDirection: 'row',paddingLeft: 10,}}>
+                            <Icon style={{marginTop: 12,marginRight: 10,}} name={'md-list'} size={15} />
+                            <Text style={{lineHeight: 40}}>案例分析</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                            <View style={[styles.listItem]}>
+                                <Image style={[styles.thumb,]} source={require('../../pics/case1.png')} />
+                                <Text style={[styles.tip,]}>「案例」微牛证券借势巴菲特大会件打造短视频内容营销</Text>
+                                <Image style={[styles.thumbSub,]} source={require('../../pics/case-sub1.png')} />
+                            </View>
+
+                            <View style={[styles.listItem]}>
+                                <Image style={[styles.thumb,]} source={require('../../pics/case2.png')} />
+                                <Text style={[styles.tip,]}>「案例」整合营销新玩法，一汽·大众迈腾与领创者见面</Text>
+                                <Image style={[styles.thumbSub,]} source={require('../../pics/case-sub2.png')} />
+                            </View>
+
+                            <View style={[styles.listItem]}>
+                                <Image style={[styles.thumb,]} source={require('../../pics/case3.png')} />
+                                <Text style={[styles.tip,]}>「案例」外资银行如何深入中国市场？贝莱德为中国投资者“解码未来” </Text>
+                                <Image style={[styles.thumbSub,]} source={require('../../pics/case-sub3.png')} />
+                            </View>
+                        </View>
+                    </View>
+
+                    
                 </ScrollView>
 
 
@@ -202,6 +296,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         borderRadius: 3,
     },
+    thumbSub: {
+        height: 25,
+        marginTop: 5,
+    },
     tip: {
         lineHeight: 20,
         fontSize: 14,
@@ -209,5 +307,16 @@ const styles = StyleSheet.create({
     flag: { backgroundColor: '#714cd0', borderRadius: 2, marginRight: 10, paddingLeft: 3, paddingRight: 3 },
     flag1: { lineHeight: 15, fontSize: 12, color: '#fff' },
     flag2: { fontSize: 12, color: '#666', lineHeight: 15, },
+    bussiness: {
+        flexDirection: 'row',
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderColor: Colors.borderGray,
+        borderBottomWidth: 1,
+    },
+    bTip: {
+        fontSize: 12,
+        color: Colors.bodyTextGray,
+    }
 
 });

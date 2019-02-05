@@ -27,18 +27,17 @@ export default class MineList extends React.Component {
 		return (
 			<View style={styles.container}>
 				<TouchableOpacity onPress={() => navigation.navigate('Userinfo')}>
-					<View style={styles.item}>
+					<View style={[styles.item,styles.border]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'logo-octocat'} size={24} color={Colors.bodyTextActive}  />
 							<Text style={styles.text}>个人信息</Text>
+							<Text style={styles.tip}>修改个人信息</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
 					</View>
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
-					<View style={[styles.item,{borderBottomWidth: 0,borderColor: 'red'}]}>
+					<View style={[styles.item]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'ios-filing'} size={24} color={Colors.bodyTextActive}  />
 							<Text style={styles.text}>用户反馈</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
@@ -46,19 +45,18 @@ export default class MineList extends React.Component {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => navigation.navigate('Teach')}>
-					<View style={[styles.item,{marginTop: 10}]}>
+					<View style={[styles.item,styles.border,styles.space]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'ios-school'} size={24} color={Colors.bodyTextGray}  />
 							<Text style={styles.text}>小课堂</Text>
+							<Text style={styles.tip}>了解小知识</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
 					</View>
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => navigation.navigate('Service')}>
-					<View style={[styles.item]}>
+					<View style={[styles.item,styles.border]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'md-chatboxes'} size={24} color={Colors.bodyTextGray}  />
 							<Text style={styles.text}>联系我们</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
@@ -66,9 +64,8 @@ export default class MineList extends React.Component {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => {}}>
-					<View style={[styles.item]}>
+					<View style={[styles.item,styles.border]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'ios-mail'} size={24} color={Colors.bodyTextGray}  />
 							<Text style={styles.text}>消息中心</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
@@ -78,17 +75,15 @@ export default class MineList extends React.Component {
 				<TouchableOpacity onPress={() => {}}>
 					<View style={[styles.item]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'md-git-network'} size={24} color={Colors.bodyTextGray}  />
 							<Text style={styles.text}>分享好友</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
 					</View>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => navigation.navigate('About')}>
+				<TouchableOpacity style={styles.space} onPress={() => navigation.navigate('About')}>
 					<View style={[styles.item,{borderBottomWidth: 0}]}>
 						<View style={{flexDirection: 'row'}}>
-							<Icon style={styles.iconL} name={'ios-man'} size={24} color={Colors.bodyTextGray}  />
 							<Text style={styles.text}>关于</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
@@ -103,7 +98,7 @@ export default class MineList extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginTop: 20,
+		marginTop: 10,
 		
 	},
 	item: {
@@ -112,16 +107,24 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		backgroundColor: '#ffff',
-		borderColor: Colors.borderGray,
-		borderBottomWidth: 1,
+		
 		backgroundColor: '#fff',
 	},
-	text: {lineHeight: 50,fontSize: 16,marginLeft: 10,color: Colors.bodyTextDark},
-	iconL: {
-		marginTop: 13,
-		width: 25,
+	text: {lineHeight: 50,fontSize: 17,marginLeft: 10,color: '#111'},
+	tip: {
+		color: Colors.raise,
+		fontSize: 12,
+		lineHeight: 50,
+		marginLeft: 10,
 	},
 	iconR: {
 		marginTop: 13,
 	},
+	border: {
+		borderColor: Colors.borderGray,
+		borderBottomWidth: 1,
+	},
+	space: {
+		marginTop: 10,
+	}
 });

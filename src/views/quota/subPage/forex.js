@@ -73,13 +73,14 @@ export default class List extends React.Component {
         if (!item) return null //错误处理
         if (info.index >= 5) return null //最多只显示6个
         if (!item || defaultShow !== sectionIdx) return null //只显示展开的
+
         return (<TouchableOpacity onPress={() => navigation.navigate('Chart', item[0])} style={styles.item}>
-            <View style={{ flex: 3 }}>
+            <View style={{ flex: 2 }}>
                 <Text style={{ lineHeight: 25, fontSize: 16,color: '#333' }}>{item[1]}</Text>
                 <Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{item[2]}</Text>
             </View>
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 2 }}>
                 <Text style={{ lineHeight: 25, fontWeight: '600', fontSize: 17 }}>{item[11]}</Text>
                 <Text style={{ lineHeight: 20, fontSize: 12, color: Colors.bodyTextGray }}>{hourMins(item[7])}</Text>
             </View>
@@ -103,7 +104,7 @@ export default class List extends React.Component {
                             <Text style={{lineHeight: 45,height: 45,fontSize: 18,marginLeft: 5,}}>{name}</Text>
                         </View>
                     </TouchableHighlight>
-                    <Text style={{lineHeight: 45,height: 45,fontSize: 16,color: '#666'}}>查看更多</Text>
+                    <Text style={{lineHeight: 45,height: 45,fontSize: 16,color: '#666'}}>></Text>
                 </View>)
     }
     _keyExtractor(info) {
@@ -154,5 +155,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 10,
         paddingRight: 10,
+        backgroundColor: '#f2f2f2'
     }
 });
