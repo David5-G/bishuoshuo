@@ -34,6 +34,7 @@ class Home extends React.Component {
     componentDidMount() {
         const { MediaStore } = this.props
         MediaStore.getStorageCollection()
+        MediaStore.getStorageArticleCollection()
         this._loadMore()
     }
     

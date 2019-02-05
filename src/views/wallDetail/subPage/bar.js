@@ -44,21 +44,21 @@ export default class Bar extends React.Component {
                 <View style={{flex: 1,marginLeft: 10}}>
                     <Text style={{lineHeight: 25,fontSize: 16}}>{user_info.display_name}</Text>
                     <Text style={{lineHeight: 25,fontSize: 12,color: Colors.bodyTextGray}}>{timeago(item.created_at * 1000)}</Text>
-                    <Text style={{lineHeight: 25,fontSize: 15,marginTop: 5,color: '#666',}}>{item.content}</Text>
+                    <Text style={{lineHeight: 25,fontSize: 15,marginTop: 5,color: '#666',textAlign:'justify',marginRight: 10,}}>{item.content}</Text>
                 </View>
         </View>)
     }
     _renderHeader() {
+        return (<Text>
+            
+            </Text>)
+    }
+    _renderFooter() {
         const { comments } = this.props
         return (<View style={{marginLeft: 10,marginRight: 10,marginTop: 10}}>
             <Image source={{with: width-20,height:200,uri: comments.resource_image_uri}} />
-            <Text style={{fontSize: 20,fontWeight:'bold',lineHeight: 30,textAlign:'justify',marginTop: 20,}}>{comments.resource_title}</Text>
+            <Text style={{fontSize: 18,fontWeight:'bold',lineHeight: 28,textAlign:'justify',marginTop: 20,}}>{comments.resource_title}</Text>
         </View>)
-    }
-    _renderFooter() {
-        return (<Text>
-            
-        </Text>)
     }
     _keyExtractor(item, index) {
         return index.toString()
@@ -68,8 +68,11 @@ export default class Bar extends React.Component {
             const { navigation, comments, MediaStore } = this.props
             const { params } = navigation.state;
             const authorId = params.resource.author.id
-            const idx = MediaStore.collection.findIndex(o => o.id === authorId)
-            const keepAuthor = idx === -1 ? 0 : 1
+            const ariticleId = params.resource.id
+            const authorIdx = MediaStore.collection.findIndex(o => o.id === authorId)
+            const articleIdx = MediaStore.articleCollection.findIndex(o => o.id === ariticleId)
+            const keepAuthor = authorIdx === -1 ? 0 : 1
+            const keepArticle = articleIdx === -1 ? 0 : 1
             const commentList = comments.items || []
             const { modalVisible } = this.state
             return (
@@ -89,18 +92,26 @@ export default class Bar extends React.Component {
                             </View>
                         </TouchableOpacity>
 
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <TouchableOpacity
+                            onPress={() => MediaStore.toggleArticleCollection({
+                                id: params.resource.id,
+                                title: params.resource.title,
+                                image_uri: params.resource.image_uri,
+                                display_time: params.resource.display_time,
+                                author: params.resource.author
+                            })}
+                            style={{ flex: 1, flexDirection: 'row' }}>
                             {/* ios-person-add */}
-                            <Icon name={'ios-star-outline'} size={22} style={{ marginLeft: 10, lineHeight: 30 }} />
-                            <Text style={{ marginLeft: 5, lineHeight: 30, fontSize: 14, }}>已收藏</Text>
-                        </View>
+                            <Icon name={keepArticle?'ios-star':'ios-star-outline'} size={22} color={keepArticle ? Colors.collect : null} style={{ marginLeft: 10, lineHeight: 30 }} />
+                            <Text style={{ marginLeft: 5, lineHeight: 30, fontSize: 14, color: keepArticle ? Colors.bodyTextGray : null  }}>{keepArticle?'已收藏':'收藏'}</Text>
+                        </TouchableOpacity>
 
                         <TouchableOpacity
                             onPress={() => MediaStore.toggleCollection(params)}
                             style={{ flex: 1, flexDirection: 'row', marginLeft: 10 }}>
                             {/* ios-person-add */}
                             <Icon name={'ios-person-add'} size={24} color={keepAuthor ? Colors.raise : null} style={{ marginLeft: 10, lineHeight: 30 }} />
-                            <Text style={{ marginLeft: 5, lineHeight: 30, fontSize: 14, color: keepAuthor ? Colors.collect : null }}>{keepAuthor ? '已关注' : '关注'}</Text>
+                            <Text style={{ marginLeft: 5, lineHeight: 30, fontSize: 14, color: keepAuthor ? Colors.bodyTextGray : null }}>{keepAuthor ? '已关注' : '关注'}</Text>
                         </TouchableOpacity>
 
                     </View>

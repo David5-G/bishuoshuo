@@ -58,7 +58,7 @@ class MediaStore {
             const idx = collection.findIndex(o => o.id === item.id)
             if (idx === -1) {
                 Toast.show({
-                    text: '关注成功',
+                    text: '关注作者成功',
                     position: 'bottom',
                     duration: 1000
                 })
@@ -78,6 +78,45 @@ class MediaStore {
             Alert.alert('添加失败')
         }
     }
+
+    @observable articleCollection = []
+    @action async getStorageArticleCollection() {
+        try {
+            const res = await AsyncStorage.getItem('articleCollection')
+            this.articleCollection = res ? JSON.parse(res) : []
+        } catch (error) {
+            Alert.alert('读取储存失败')
+        }
+    }
+
+    @action toggleArticleCollection(item) {
+        try {
+            
+            const collection = this.articleCollection
+            const idx = collection.findIndex(o => o.id === item.id)
+            if (idx === -1) {
+                Toast.show({
+                    text: '收藏文章成功',
+                    position: 'bottom',
+                    duration: 1000
+                })
+                collection.push(item)
+            } else {
+                Toast.show({
+                    text: '取消收藏成功',
+                    position: 'bottom',
+                    duration: 1000
+                })
+                collection.splice(idx, 1)
+            }
+            AsyncStorage.setItem('articleCollection', JSON.stringify(collection)).then(() => {
+                this.getStorageArticleCollection()
+            })
+        } catch (error) {
+            Alert.alert('添加失败')
+        }
+    }
+
 
     _cur = 'global' //记录home页面的选项卡
     @action getWallmain(params = {}) {

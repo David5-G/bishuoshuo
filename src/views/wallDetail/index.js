@@ -48,8 +48,8 @@ export default class WallDetail extends React.Component {
                     detail.content ?
                         <ScrollView style={{}}>
                             {/* title */}
-                            <View style={{ marginLeft: 10, marginRight: 10, marginTop: 30 }}>
-                                <Text style={{ fontSize: 25, fontWeight: '600', lineHeight: 35 }}>{detail.title}</Text>
+                            <View style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}>
+                                <Text style={{ fontSize: 23, fontWeight: '600', lineHeight: 35,textAlign:'justify'}}>{detail.title}</Text>
                             </View>
                             {/* description */}
                             <View style={{ marginLeft: 10, marginRight: 10, flexDirection: 'row', justifyContent: 'space-between', }}>

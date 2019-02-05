@@ -46,7 +46,7 @@ export default class Mine extends React.Component {
 	}
 	render() {
 		const { isLogin, userInfo, token } = this.props.UserStore
-		const { collection } = this.props.MediaStore
+		const { collection,articleCollection } = this.props.MediaStore
 		const { navigation } = this.props
 		return (
 			<ScrollView style={styles.container}>
@@ -75,11 +75,11 @@ export default class Mine extends React.Component {
 				<View style={{flexDirection: 'row'}}>
 					<View style={styles.itemWrap}>
 						<Text style={styles.tip}>关注</Text>
-						<Text style={styles.tipVal}>{collection.length}</Text>
+						<Text style={styles.tipVal}>{isLogin?collection.length:0}</Text>
 					</View>
 					<View style={styles.itemWrap}>
 						<Text style={styles.tip}>收藏</Text>
-						<Text style={styles.tipVal}>0</Text>
+						<Text style={styles.tipVal}>{isLogin?articleCollection.length:0}</Text>
 					</View>
 					<View style={styles.itemWrap}>
 						<Text style={styles.tip}>订阅</Text>
