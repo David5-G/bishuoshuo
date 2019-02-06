@@ -66,23 +66,25 @@ export default class Bar extends React.Component {
     render() {
         try {
             const { navigation, comments, MediaStore } = this.props
-            const { params } = navigation.state;
-            const authorId = params.resource.author.id
-            const ariticleId = params.resource.id
+            let { params } = navigation.state;
+
+            const { isLogin } = this.props.UserStore
+
+            const authorId = params.author.id
+
+            const ariticleId = params.id
+
+            console.log(authorId,ariticleId)
             const authorIdx = MediaStore.collection.findIndex(o => o.id === authorId)
             const articleIdx = MediaStore.articleCollection.findIndex(o => o.id === ariticleId)
             const keepAuthor = authorIdx === -1 ? 0 : 1
             const keepArticle = articleIdx === -1 ? 0 : 1
             const commentList = comments.items || []
             const { modalVisible } = this.state
+            
             return (
                 <View style={styles.bar}>
                     <View style={{ flexDirection: 'row', paddingTop: 10, paddingLeft: 20, paddingRight: 20, }}>
-                        {/* <View style={{flexDirection: 'row',}}>
-                        <Icon name={'ios-code-working'} size={30} color={Colors.raise}  style={{lineHeight: 30}}/>
-                        <Text style={{fontSize: 16,lineHeight: 30,marginLeft: 5}}>34</Text>
-                    </View> */}
-
                         <TouchableOpacity
                             onPress={() => this.setState({ modalVisible: true })}
                             style={{ flex: 2, flexDirection: 'row', }}>
@@ -93,31 +95,35 @@ export default class Bar extends React.Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={() => MediaStore.toggleArticleCollection({
-                                id: params.resource.id,
-                                title: params.resource.title,
-                                image_uri: params.resource.image_uri,
-                                display_time: params.resource.display_time,
-                                author: params.resource.author
-                            })}
+                            onPress={() => {
+                                if (isLogin) {
+                                    MediaStore.toggleArticleCollection(params)
+                                } else {
+                                    navigation.navigate('Login')
+                                }
+                            }}
                             style={{ flex: 1, flexDirection: 'row' }}>
                             {/* ios-person-add */}
                             <Icon name={keepArticle?'ios-star':'ios-star-outline'} size={22} color={keepArticle ? Colors.collect : null} style={{ marginLeft: 10, lineHeight: 30 }} />
                             <Text style={{ marginLeft: 5, lineHeight: 30, fontSize: 14, color: keepArticle ? Colors.bodyTextGray : null  }}>{keepArticle?'已收藏':'收藏'}</Text>
                         </TouchableOpacity>
-
                         <TouchableOpacity
-                            onPress={() => MediaStore.toggleCollection(params)}
+                            onPress={() => {
+                                if (isLogin) {
+                                    MediaStore.toggleCollection(params)
+                                } else {
+                                    navigation.navigate('Login')
+                                }
+                            }}
                             style={{ flex: 1, flexDirection: 'row', marginLeft: 10 }}>
                             {/* ios-person-add */}
                             <Icon name={'ios-person-add'} size={24} color={keepAuthor ? Colors.raise : null} style={{ marginLeft: 10, lineHeight: 30 }} />
                             <Text style={{ marginLeft: 5, lineHeight: 30, fontSize: 14, color: keepAuthor ? Colors.bodyTextGray : null }}>{keepAuthor ? '已关注' : '关注'}</Text>
                         </TouchableOpacity>
-
                     </View>
 
                     <Modal animationType="slide" visible={modalVisible} >
-                        <View>
+                        <View style={{paddingBottom: 50}}>
                             <NavigationBar
                                 title={'热门评论'}
                                 rightButton={<Icon name={'ios-arrow-down'} size={25} style={{ color: Colors.headerText }} onPress={() => this.setState({ modalVisible: false })} />}

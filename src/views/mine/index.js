@@ -73,19 +73,19 @@ export default class Mine extends React.Component {
 					</View>
 				</TouchableOpacity>
 				<View style={{flexDirection: 'row'}}>
-					<View style={styles.itemWrap}>
+					<TouchableOpacity onPress={() => navigation.navigate(isLogin ? 'Watch' : 'Login')} style={styles.itemWrap}>
 						<Text style={styles.tip}>关注</Text>
 						<Text style={styles.tipVal}>{isLogin?collection.length:0}</Text>
-					</View>
-					<View style={styles.itemWrap}>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={() => navigation.navigate(isLogin ? 'Collect' : 'Login')} style={styles.itemWrap}>
 						<Text style={styles.tip}>收藏</Text>
 						<Text style={styles.tipVal}>{isLogin?articleCollection.length:0}</Text>
-					</View>
-					<View style={styles.itemWrap}>
+					</TouchableOpacity>
+					{/* <View style={styles.itemWrap}>
 						<Text style={styles.tip}>订阅</Text>
 						<Text style={styles.tipVal}>0</Text>
-					</View>
-					<View style={styles.itemWrap}>
+					</View> */}
+					<View style={[styles.itemWrap]}>
 						<Text style={styles.tip}>积分</Text>
 						<Text style={styles.tipVal}>{isLogin?userInfo.score:0}</Text>
 					</View>

@@ -17,6 +17,8 @@ class MediaStore {
     @observable importantNews = []
     @observable dubiwangNews = []
 
+
+    
     // @action getBanners(params = {slide_id :1 }) {
     //     return GET(Host + '/yapi/slide/index/', params).then(res => {
     //         if (res.code === 1) {
@@ -53,7 +55,7 @@ class MediaStore {
     }
     @action toggleCollection(item) {
         try {
-            item = item.resource.author
+            item = item.author
             const collection = this.collection
             const idx = collection.findIndex(o => o.id === item.id)
             if (idx === -1) {
@@ -90,6 +92,7 @@ class MediaStore {
     }
 
     @action toggleArticleCollection(item) {
+        console.log('item-->', toJS(item))
         try {
             
             const collection = this.articleCollection
@@ -111,6 +114,8 @@ class MediaStore {
             }
             AsyncStorage.setItem('articleCollection', JSON.stringify(collection)).then(() => {
                 this.getStorageArticleCollection()
+
+                AsyncStorage.setItem('articleCollection', JSON.stringify([]))
             })
         } catch (error) {
             Alert.alert('添加失败')

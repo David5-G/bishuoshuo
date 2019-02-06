@@ -3,7 +3,7 @@ import {Text, Platform } from 'react-native'
 import TabBarIcon from '../component/TabBarIcon'
 import Colors from '../constants/Colors'
 import Home from '../views/home'
-// import News from '../views/news'
+import News from '../views/news'
 import Cycle from '../views/cycle'
 import Quota from '../views/quota'
 import Mine from '../views/mine'
@@ -23,6 +23,9 @@ import Feedback from '../views/feedback'
 import Userinfo from '../views/userinfo'
 import About from '../views/about'
 import Teach from '../views/teach'
+
+import Watch from '../views/collection/watch'
+import Collect from '../views/collection/collect'
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -113,6 +116,9 @@ export default createStackNavigator(
 		About,
 		Chart,
 		Teach,
+
+		Watch,
+		Collect,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,

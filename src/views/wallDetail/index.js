@@ -21,7 +21,7 @@ export default class WallDetail extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: this.props.navigation.state.params.resource.id,
+            id: this.props.navigation.state.params.id,
             loading: false,
             detail: {},
             comments: {},
@@ -41,7 +41,7 @@ export default class WallDetail extends React.Component {
                 <NavigationBar
                     title={detail.title}
                     style={{}}
-                    leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20 }} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
+                    leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20,}} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
                 // rightButton={<Text onPress={()=> navigation.navigate('Login')} style={{color:Colors.headerText,fontSize:16,}}>登录</Text>}
                 />
                 {
@@ -108,7 +108,7 @@ export default class WallDetail extends React.Component {
     }
 
     async _getComments() {
-        const {id } = this.state
+        const {id} = this.state
         // /apiv1/comment/articles/3478742/comments?id=3478742&time_desc=true&first_page=true&cursor=&limit=30
         if (!id) return
         const res = await GET(WallHost + '/apiv1/comment/articles/' + id + '/comments', {

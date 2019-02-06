@@ -218,10 +218,10 @@ export default {
 
 	// Segment
 	segmentBackgroundColor: platform === "ios" ? "#F8F8F8" : "#3F51B5",
-	segmentActiveBackgroundColor: platform === "ios" ? "#1478f0" : "#fff",
-	segmentTextColor: platform === "ios" ? "#1478f0" : "#fff",
-	segmentActiveTextColor: platform === "ios" ? "#fff" : "#3F51B5",
-	segmentBorderColor: platform === "ios" ? "#1478f0" : "#fff",
+	segmentActiveBackgroundColor: platform === "ios" ? "#fff" : "#fff",
+	segmentTextColor: platform === "ios" ? "#fff" : "#fff",
+	segmentActiveTextColor: platform === "ios" ? "#1478f0" : "#3F51B5",
+	segmentBorderColor: platform === "ios" ? "#fff" : "#fff",
 	segmentBorderColorMain: platform === "ios" ? "#a7a6ab" : "#3F51B5",
 
 	// Spinner

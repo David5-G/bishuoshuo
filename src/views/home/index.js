@@ -74,7 +74,7 @@ class Home extends React.Component {
         const idx = MediaStore.collection.findIndex(el => el.id === author.id)
         const active = idx === -1 ? 0 : 1
         return (
-            <TouchableOpacity onPress={() => navigation.navigate('WallDetail', item)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
+            <TouchableOpacity onPress={() => navigation.navigate('WallDetail', item.resource)} style={[styles.card, { marginTop: key % 5 === 0 ? 7 : 0 }]}>
                 <View style={{ flex: 1.8 }}>
                     <View style={{ flex: 1, justifyContent: 'space-between'}}>
                         <Text numberOfLines={2} style={{ lineHeight: 30, fontSize: 18 }}>{item.resource.title}</Text>
