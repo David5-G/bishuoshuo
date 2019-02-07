@@ -39,14 +39,14 @@ const Tab = createBottomTabNavigator(
 			navigationOptions: {
 				tabBarLabel: '首页',
 				// tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={Platform.OS === 'ios'? `ios-information-circle${focused ? '' : '-outline'}`: 'md-information-circle'} />),
-				tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={'md-aperture'} />),
+				tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={'ios-switch'} />),
 			}
 		},
 
 		Cycle: {
 			screen: Cycle,
 			navigationOptions: {
-				tabBarLabel: '圈子',
+				tabBarLabel: '财经',
 				tabBarIcon: ({ focused }) => (<TabBarIcon focused={focused} name={'ios-today'} />),
 			}
 		},
