@@ -72,14 +72,14 @@ export default class MineList extends React.Component {
 					</View>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => {}}>
+				{/* <TouchableOpacity onPress={() => {}}>
 					<View style={[styles.item]}>
 						<View style={{flexDirection: 'row'}}>
 							<Text style={styles.text}>分享好友</Text>
 						</View>
 						<Icon style={styles.iconR} name={'ios-arrow-forward'} color={Colors.bodyTextGray} size={18}  />
 					</View>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 
 				<TouchableOpacity style={styles.space} onPress={() => navigation.navigate('About')}>
 					<View style={[styles.item,{borderBottomWidth: 0}]}>

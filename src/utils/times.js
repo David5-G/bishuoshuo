@@ -57,7 +57,7 @@ function hourMins (time) {
 		.getMinutes()
 		.toString()
 		.padStart(2, "0");
-	return hour + ":" + minute + ":00";
+	return hour + ":" + minute ;
 }
 
 function dayhourMins (time) {
@@ -81,8 +81,30 @@ function dayhourMins (time) {
 	return month + "-" + date + ' ' + hour + ":" + minute + ":00";
 }
 
+function day (time) {
+    if (!time) return "···"
+    time = time * 1000
+	time = new Date(time);
+	const year = (time.getFullYear());
+	const month = (time.getMonth() + 1).toString().padStart(2, "0");
+	const date = time
+		.getDate()
+		.toString()
+		.padStart(2, "0");
+	const hour = time
+		.getHours()
+		.toString()
+		.padStart(2, "0");
+	const minute = time
+		.getMinutes()
+		.toString()
+		.padStart(2, "0");
+	return month + "-" + date;
+}
+
 export {
     timeago,
     hourMins,
     dayhourMins,
+    day,
 }

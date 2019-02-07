@@ -114,8 +114,6 @@ class MediaStore {
             }
             AsyncStorage.setItem('articleCollection', JSON.stringify(collection)).then(() => {
                 this.getStorageArticleCollection()
-
-                AsyncStorage.setItem('articleCollection', JSON.stringify([]))
             })
         } catch (error) {
             Alert.alert('添加失败')

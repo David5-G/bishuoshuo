@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, WebView, FlatList, ScrollView, StyleSheet } from 'react-native';
-import { Container, Header, Content, Card, CardItem, List, SwipeRow, ListItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { View, WebView, FlatList, ScrollView,Image, StyleSheet } from 'react-native';
+import { Container, Header, Content,Text, Card, CardItem, List, SwipeRow, ListItem, Thumbnail, Button, Icon, Left, Body, Right } from 'native-base';
 import NavigationBar from '../common/NavigationBar'
 // import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
 import { toJS } from 'mobx'
 import { observer, inject } from 'mobx-react/native';
-
+import { width} from '../../constants/Scale'
 @inject('MediaStore', 'UserStore')
 @observer
 export default class Watch extends React.Component {
@@ -24,6 +24,7 @@ export default class Watch extends React.Component {
 	}
 	_renderItemView(listItem) {
 		const { item } = listItem
+		console.log('item-->', toJS(item))
 		return (
 			<SwipeRow
 				leftOpenValue={60}
@@ -34,9 +35,16 @@ export default class Watch extends React.Component {
 					</Button>
 				}
 				body={
-					<View style={{flexDirection: 'row',justifyContent: 'space-between',paddingLeft: 10,paddingRight: 10}}>
-						{/* <Thumbnail square source={{ uri: item.image }} /> */}
-						<Text style={{marginLeft: 20,}}>{item.display_name}</Text>
+					<View style={{flexDirection: 'row',paddingLeft: 10,paddingRight: 10,width}}>
+						<Left>
+							<Thumbnail source={{ uri: item.image }} />
+							<Text style={{marginLeft: 20}}>{item.display_name}</Text>
+						</Left>
+						<Right>
+							<Button style={{alignSelf:'center',}} light small>
+								<Text>已关注</Text>
+							</Button>
+						</Right>
 					</View>
 				}
 				right={
@@ -47,9 +55,7 @@ export default class Watch extends React.Component {
 			/>)
 	}
 	_renderHeader() {
-		return (<Text>
-
-		</Text>)
+		return  null
 	}
 	_renderFooter() {
 		const { comments } = this.props
@@ -66,18 +72,28 @@ export default class Watch extends React.Component {
 		return (
 			<View style={styles.container}>
 				<NavigationBar
-					title={'关注'}
+					title={'我的关注'}
 					style={{}}
 					leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20, color: Colors.headerText }} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 				/>
-				<FlatList
-					style={{margin: 0,padding: 0,}}
-					data={collection}
-					renderItem={this._renderItemView.bind(this)}
-					keyExtractor={this._keyExtractor} //唯一的key
-					ListHeaderComponent={this._renderHeader.bind(this)}
-					ListFooterComponent={this._renderFooter.bind(this)}
-				/>
+				{
+					collection.length?
+					<FlatList
+						style={{marginTop: 0}}
+						data={collection}
+						renderItem={this._renderItemView.bind(this)}
+						keyExtractor={this._keyExtractor} //唯一的key
+						ListHeaderComponent={this._renderHeader.bind(this)}
+						ListFooterComponent={this._renderFooter.bind(this)}
+					/> :
+					<View style={{flex: 1,alignItems:'center',justifyContent:'center',}}>
+						<View style={{}}>
+							<Image source={require('../../pics/blank.png')} />
+							<Text style={{fontSize: 13,color:Colors.bodyTextGray,lineHeight: 30}}>在这个星球找不到</Text>
+						</View>
+					</View>
+				}
+				
 			</View>
 		);
 	}
@@ -85,5 +101,6 @@ export default class Watch extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1
 	},
 });

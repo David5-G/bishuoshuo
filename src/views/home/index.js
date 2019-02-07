@@ -115,7 +115,7 @@ class Home extends React.Component {
         const { channel } = this.state
         return (
             <View style={styles.container}>
-
+                <StatusBar barStyle={'dark-content'} />
                 {/* <View style={{backgroundColor: '#fff',paddingBottom: 10}}>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <TouchableOpacity onPress={this._toggleTab.bind(this,'global')} style={styles.nav} ><Text style={[channel==='global'?styles.active:styles.navItem]}>要闻</Text></TouchableOpacity>

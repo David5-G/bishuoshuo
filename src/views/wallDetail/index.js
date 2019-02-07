@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Alert, Text, Button, Linking, WebView, ScrollView, StyleSheet } from 'react-native'
+import { View, Dimensions, Alert,Animated, Text, Button, Linking, WebView, ScrollView, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import NavigationBar from '../common/NavigationBar'
 import Colors from '../../constants/Colors'
@@ -26,6 +26,7 @@ export default class WallDetail extends React.Component {
             detail: {},
             comments: {},
             openLink: false,
+            draging: false,
         }
     }
     componentDidMount() {
@@ -33,7 +34,7 @@ export default class WallDetail extends React.Component {
         this._getComments()
     }
     render() {
-        const { detail, loading, openLink, comments, related_articles } = this.state
+        const { detail, loading, openLink, comments,draging, related_articles } = this.state
         const { navigation } = this.props
         let content = detail.content ? detail.content.replace(/<!--image#0-->/, '<img src="' + detail.image_uri + '" />') : ''
         return (
@@ -46,7 +47,10 @@ export default class WallDetail extends React.Component {
                 />
                 {
                     detail.content ?
-                        <ScrollView style={{}}>
+                        <ScrollView
+                            onScrollBeginDrag={() => this.setState({draging: true})}
+                            onScrollEndDrag={() => this.setState({draging: false})}
+                            style={{}}>
                             {/* title */}
                             <View style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}>
                                 <Text style={{ fontSize: 23, fontWeight: '600', lineHeight: 35,textAlign:'justify'}}>{detail.title}</Text>
@@ -92,7 +96,7 @@ export default class WallDetail extends React.Component {
                         </ScrollView>
                         : <Loading show={loading} text={'请稍候···'} />
                 }
-                <Bar comments={comments} navigation={navigation} />
+                {!draging && <Bar comments={comments} navigation={navigation} />}
             </View>
         );
     }
