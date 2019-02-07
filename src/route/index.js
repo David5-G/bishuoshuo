@@ -11,7 +11,7 @@ import Mine from '../views/mine'
 import Chart from '../views/chart'
 // import Play from '../views/play'
 // import PlayVideo from '../views/play/play.js'
-
+import Player from '../views/teach/player.js'
 
 
 import Login from '../views/login'
@@ -117,7 +117,9 @@ export default createStackNavigator(
 		About,
 		Chart,
 		Teach,
+		Player,
 
+		
 		Watch,
 		Collect,
 		// PlayVideo: PlayVideo,

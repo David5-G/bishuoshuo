@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, Dimensions, WebView, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Text, Button, Dimensions, WebView,TouchableOpacity, ScrollView, Image, StyleSheet } from 'react-native';
 import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
@@ -45,6 +45,12 @@ export default class Teach extends React.Component {
                             <Image resizeMode={'cover'} source={require('../../pics/t4.png')} />
                         </View>
                     </View>
+
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate('Player')
+                    }}>
+                        <Text>player</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         );
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         borderRadius: 4,
         shadowColor: '#000',
-		shadowOpacity: 0.15,
-		shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowOffset: { width: 0, height: 2 },
     }
 });
