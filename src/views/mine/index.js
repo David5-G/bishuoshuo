@@ -8,6 +8,7 @@ import Colors from '../../constants/Colors'
 import NavigationBar from '../common/NavigationBar'
 import MineList from './subPage/mineList.js'
 import Icon from 'react-native-vector-icons/Ionicons'
+import LinearGradient from 'react-native-linear-gradient';
 const width = Dimensions.get('window').width
 
 @inject('MainStore','MediaStore', 'UserStore')
@@ -90,6 +91,11 @@ export default class Mine extends React.Component {
 						<Text style={styles.tipVal}>{isLogin?userInfo.score:0}</Text>
 					</View>
 				</View>
+				<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+  <Text style={styles.buttonText}>
+    Sign in with Facebook
+  </Text>
+</LinearGradient>
 				<MineList navigation={navigation} />
 			</ScrollView>
 		);
