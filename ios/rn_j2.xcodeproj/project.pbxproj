@@ -15,6 +15,7 @@
 		00E356F31AD99517003FC87E /* rn_j2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rn_j2Tests.m */; };
 		03476AB1DBE4487FB07463E3 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E43A34076441494590BFBEE2 /* Octicons.ttf */; };
 		057E6799A46448FDA19C76D8 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7AFB45C984463B94EF1F52 /* Roboto.ttf */; };
+		0B049BE3220D0C9C00591A8E /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B049BC9220D0C8B00591A8E /* libRCTVideo.a */; };
 		0BB1483C220194A50009721C /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB1480A220194A50009721C /* UMCommon.framework */; };
 		0BB1483D220194A50009721C /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB1480B220194A50009721C /* UMAnalytics.framework */; };
 		0BB1483E220194A50009721C /* RNUMConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1480E220194A50009721C /* RNUMConfigure.m */; };
@@ -123,6 +124,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = rn_j2;
+		};
+		0B049BC8220D0C8B00591A8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B049BAE220D0C8B00591A8E /* RCTVideo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTVideo;
+		};
+		0B049BCA220D0C8B00591A8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B049BAE220D0C8B00591A8E /* RCTVideo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 641E28441F0EEC8500443AF6;
+			remoteInfo = "RCTVideo-tvOS";
 		};
 		0B579DAA21F02B9300D98F0E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -417,6 +432,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* rn_j2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rn_j2Tests.m; sourceTree = "<group>"; };
 		02CF95316F254D4FA88AF255 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		0B049BAE220D0C8B00591A8E /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		0BB1480A220194A50009721C /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
 		0BB1480B220194A50009721C /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
 		0BB1480D220194A50009721C /* UMAnalyticsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMAnalyticsModule.h; sourceTree = "<group>"; };
@@ -504,6 +520,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B049BE3220D0C9C00591A8E /* libRCTVideo.a in Frameworks */,
 				0BB1484A2201A2C80009721C /* libSplashScreen.a in Frameworks */,
 				0BB148432201972B0009721C /* CoreGraphics.framework in Frameworks */,
 				0BB14841220197210009721C /* libsqlite3.0.tbd in Frameworks */,
@@ -623,6 +640,15 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B049BAF220D0C8B00591A8E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B049BC9220D0C8B00591A8E /* libRCTVideo.a */,
+				0B049BCB220D0C8B00591A8E /* libRCTVideo.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		0B579D8021F02B9200D98F0E /* Recovered References */ = {
@@ -823,6 +849,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0B049BAE220D0C8B00591A8E /* RCTVideo.xcodeproj */,
 				0BB148442201A20E0009721C /* SplashScreen.xcodeproj */,
 				0BB50ABD220157F10025D6DF /* RCTJCoreModule.xcodeproj */,
 				0BB50A8E220157C20025D6DF /* RCTJPushModule.xcodeproj */,
@@ -1091,6 +1118,10 @@
 					ProjectRef = 00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */;
 				},
 				{
+					ProductGroup = 0B049BAF220D0C8B00591A8E /* Products */;
+					ProjectRef = 0B049BAE220D0C8B00591A8E /* RCTVideo.xcodeproj */;
+				},
+				{
 					ProductGroup = 139FDEE71B06529A00C62182 /* Products */;
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
@@ -1151,6 +1182,20 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0B049BC9220D0C8B00591A8E /* libRCTVideo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVideo.a;
+			remoteRef = 0B049BC8220D0C8B00591A8E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0B049BCB220D0C8B00591A8E /* libRCTVideo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVideo.a;
+			remoteRef = 0B049BCA220D0C8B00591A8E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0B579DAB21F02B9300D98F0E /* libCodePush.a */ = {

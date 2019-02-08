@@ -3,6 +3,7 @@ package com.rn_j2;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactVideoPackage(),
             new SplashScreenReactPackage(),
             new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
             new VectorIconsPackage()
