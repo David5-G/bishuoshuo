@@ -28,11 +28,7 @@ export default class Player extends React.Component {
                     style={{}}
                     leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20 }} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
                 />
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Player')
-                }}>
-                    <Text>player</Text>
-                </TouchableOpacity>
+                
             </View>
         );
     }
