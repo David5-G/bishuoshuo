@@ -11,10 +11,8 @@ export default class Trade extends React.Component {
 		this.state = {}
     }
     componentDidMount() {
-        console.log('trade--> componentDidMount')
     }
     componentWillUnmount() {
-        console.log('trade--> componentWillUnmount')
     }
 	render() {
 		return (

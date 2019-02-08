@@ -100,7 +100,6 @@ class QuotaStore {
     @observable commodityList = []
     @action getQuotaList (params={}) { // 取所有行情
 
-        console.log('params-->',params)
         // type: commodity
         // fields: prod_name,last_px,px_change,px_change_rate,price_precision,update_time
         // sort_type: pcp_incr

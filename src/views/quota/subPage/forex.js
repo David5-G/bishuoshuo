@@ -21,7 +21,6 @@ export default class List extends React.Component {
         super(props)
         this.state = {
             loading: false,
-            defaultShow: 0,
             list: [],
         }
     }
@@ -66,13 +65,10 @@ export default class List extends React.Component {
         this && this.setState({ loading: false, list })
     }
     _renderItemView = (info) => {
-        const { defaultShow } = this.state
         const { navigation } = this.props
         const item = info.item.data
-        const sectionIdx = info.section.index
         if (!item) return null //错误处理
         if (info.index >= 5) return null //最多只显示6个
-        if (!item || defaultShow !== sectionIdx) return null //只显示展开的
 
         return (<TouchableOpacity onPress={() => navigation.navigate('Chart', item[0])} style={styles.item}>
             <View style={{ flex: 2 }}>
@@ -96,16 +92,16 @@ export default class List extends React.Component {
 
     _renderSectionHeader = (info) => {
         const { name, index } = info.section
-        const { defaultShow } = this.state
-        return (<View style={styles.sectionHeader}>
-                    <TouchableHighlight onPress={() => this.setState({defaultShow: defaultShow===index?'':index})}>
-                        <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                            <Icon size={18} color={'#777'} name={defaultShow===index?'downcircle':'upcircle'} style={{marginTop: 2,}}/>
-                            <Text style={{lineHeight: 45,height: 45,fontSize: 18,marginLeft: 5,}}>{name}</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <Text style={{lineHeight: 45,height: 45,fontSize: 16,color: '#666'}}>></Text>
-                </View>)
+        return (
+            <View>
+                <View style={styles.sectionHeader}>
+                    <View style={{flexDirection: 'row',alignItems: 'center'}}>
+                        <Text style={{lineHeight: 45,height: 45,fontSize: 18,marginLeft: 5,}}>{name}</Text>
+                    </View>
+                    <Text style={{lineHeight: 45,height: 45,fontSize: 16,color: '#666'}}>···</Text>
+                </View>
+            </View>
+        )
     }
     _keyExtractor(info) {
         return Math.random()
@@ -134,6 +130,8 @@ export default class List extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff',
+
     },
     item: {
         paddingLeft: 10,
@@ -142,19 +140,18 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         flexDirection: 'row',
         borderBottomWidth: 1,
-        borderColor: Colors.borderGray,
-        backgroundColor: '#fff',
+        borderColor: '#e6eaef',
     },
 
     sectionHeader: {
         flexDirection: 'row',
         alignItems: 'center',
         height: 45,
-        borderColor: '#ddd',
-        borderBottomWidth: 1,
         justifyContent: 'space-between',
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: '#f2f2f2'
+        borderBottomWidth: 1,
+        borderColor: '#eceff2',
+        backgroundColor: '#f1f3f6',
     }
 });

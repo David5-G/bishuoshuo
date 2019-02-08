@@ -22,8 +22,8 @@ export default {
     bodyTextActive: tintColor,
 
     borderGray: '#f4f4f4',
-    raise: '#e62e4d',
-    fall: '#1f995c',
+    raise: '#ff4a68',
+    fall: '#00a97f',
     collect: '#ff8647'
 
 };

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, Modal, NetInfo, View, Text, WebView, ScrollView, StyleSheet } from 'react-native'
+import { StatusBar, Modal, NetInfo, View, Image, Text, WebView, ScrollView, StyleSheet } from 'react-native'
 
 import Colors from '../../constants/Colors';
 import NavigationBar from '../common/NavigationBar'
@@ -108,6 +108,10 @@ export default class Home extends React.Component {
 							title={'关于行情'}
 							style={{}}
 							rightButton={<Icon color="#fff" name={'ios-arrow-down'} size={25} onPress={() => this.setState({ modalVisible: false })} />}
+						/>
+						<Image
+							style={{}}
+							source={require('../../pics/img1.png')}
 						/>
 						<Content padder>
 							<Accordion

@@ -74,7 +74,6 @@ export default class Bar extends React.Component {
 
             const ariticleId = params.id
 
-            console.log(authorId,ariticleId)
             const authorIdx = MediaStore.collection.findIndex(o => o.id === authorId)
             const articleIdx = MediaStore.articleCollection.findIndex(o => o.id === ariticleId)
             const keepAuthor = authorIdx === -1 ? 0 : 1
@@ -122,8 +121,8 @@ export default class Bar extends React.Component {
                         </TouchableOpacity>
                     </View>
 
-                    <Modal animationType="slide" visible={modalVisible} >
-                        <View style={{paddingBottom: 50}}>
+                    <Modal animationType="slide" visible={modalVisible}  style={{paddingBottom: 50}}>
+                        <View style={{flex: 1,paddingBottom: 50}}>
                             <NavigationBar
                                 title={'热门评论'}
                                 rightButton={<Icon name={'ios-arrow-down'} size={25} style={{ color: Colors.headerText }} onPress={() => this.setState({ modalVisible: false })} />}

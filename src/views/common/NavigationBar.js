@@ -2,7 +2,7 @@
  * NavigationBar
  * 
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {
     StyleSheet,
@@ -12,7 +12,8 @@ import {
     View
 } from 'react-native'
 import Colors from '../../constants/Colors'
-import { width,barHeight,notch, statusBarHeight } from '../../constants/Scale'
+import { width, barHeight, notch, statusBarHeight } from '../../constants/Scale'
+import LinearGradient from 'react-native-linear-gradient';
 
 const StatusBarShape = {
     // barStyle: PropTypes.oneOf(['light-content', 'default',]),
@@ -24,11 +25,11 @@ export default class NavigationBar extends Component {
     static propTypes = {
         // style: PropTypes.style,
         title: PropTypes.string,
-    //     titleView: PropTypes.element,
-    //     titleLayoutStyle:View.propTypes.style,
+        //     titleView: PropTypes.element,
+        //     titleLayoutStyle:View.propTypes.style,
         hide: PropTypes.bool,
-    //     statusBar: PropTypes.shape(StatusBarShape),
-        rightButton:  PropTypes.element,
+        //     statusBar: PropTypes.shape(StatusBarShape),
+        rightButton: PropTypes.element,
         leftButton: PropTypes.element,
 
     }
@@ -49,7 +50,7 @@ export default class NavigationBar extends Component {
     getButtonElement(data) {
         return (
             <View style={styles.navBarButton}>
-                {data? data : null}
+                {data ? data : null}
             </View>
         );
     }
@@ -57,23 +58,23 @@ export default class NavigationBar extends Component {
         let statusBar = !this.props.statusBar.hidden ?
             <View style={styles.statusBar}>
                 <StatusBar {...this.props.statusBar} />
-            </View>: null;
+            </View> : null;
 
         let titleView = this.props.titleView ? this.props.titleView : <Text ellipsizeMode="head" ellipsizeMode="tail" numberOfLines={1} style={[styles.title, this.props.style || null]}>{this.props.title}</Text>;
 
         let content = this.props.hide ? null :
             <View style={styles.navBar}>
                 {this.getButtonElement(this.props.leftButton)}
-                <View style={[styles.navBarTitleContainer,this.props.titleLayoutStyle]}>
+                <View style={[styles.navBarTitleContainer, this.props.titleLayoutStyle]}>
                     {titleView}
                 </View>
                 {this.getButtonElement(this.props.rightButton)}
             </View>;
         return (
-            <View style={[styles.container, this.props.style]}>
+            <LinearGradient style={[styles.container, this.props.style]} colors={['#4c669f', '#3b5998', '#192f6a']}>
                 {statusBar}
                 {content}
-            </View>
+            </LinearGradient>
         )
     }
 }

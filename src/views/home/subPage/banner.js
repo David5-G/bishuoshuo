@@ -4,9 +4,7 @@ import {View, Text, Image, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper'
 import {Dimensions} from 'react-native'
 import { observer, inject } from 'mobx-react/native'
-
-const height = Dimensions.get('window').height
-const width = Dimensions.get('window').width
+import { width,height} from '../../../constants/Scale'
 
 
 @inject('MediaStore')
@@ -65,6 +63,10 @@ export default class Banner extends React.Component {
 const styles = StyleSheet.create({
 	container: {
         height: 160,
+        width,
+        backgroundColor: '#fff',
+        paddingLeft: 5,
+        paddingRight: 5,
     },
     wrap: {
         height: 160,
@@ -73,13 +75,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 10,
         bottom: 10,
-        width: width - 20,
+        width: width - 40,
         fontSize: 18,
         lineHeight: 25,
         color: '#fff',
     },
     image: {
-        width,
+        width: width - 10,
         height: 160,
+        borderRadius: 5,
+        overflow: 'hidden',
     }
 });

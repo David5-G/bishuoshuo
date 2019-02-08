@@ -37,6 +37,13 @@ export default class WallDetail extends React.Component {
         const { detail, loading, openLink, comments,draging, related_articles } = this.state
         const { navigation } = this.props
         let content = detail.content ? detail.content.replace(/<!--image#0-->/, '<img src="' + detail.image_uri + '" />') : ''
+        content = content.trim()
+        content = content.replace('本文来自华尔街见闻','')
+        content = content.replace('开通华尔街见闻金','')
+        content = content.replace('成为铂金','')
+        content = content.replace('铂金','')
+        content = content.replace('会员','')
+        content = content.replace('黑卡','')
         return (
             <View style={styles.container}>
                 <NavigationBar
@@ -50,7 +57,7 @@ export default class WallDetail extends React.Component {
                         <ScrollView
                             onScrollBeginDrag={() => this.setState({draging: true})}
                             onScrollEndDrag={() => this.setState({draging: false})}
-                            style={{}}>
+                            style={{marginBottom: 60}}>
                             {/* title */}
                             <View style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}>
                                 <Text style={{ fontSize: 23, fontWeight: '600', lineHeight: 35,textAlign:'justify'}}>{detail.title}</Text>

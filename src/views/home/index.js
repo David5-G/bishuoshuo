@@ -115,7 +115,6 @@ class Home extends React.Component {
         const { channel } = this.state
         return (
             <View style={styles.container}>
-                <StatusBar barStyle={'dark-content'} />
                 {/* <View style={{backgroundColor: '#fff',paddingBottom: 10}}>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <TouchableOpacity onPress={this._toggleTab.bind(this,'global')} style={styles.nav} ><Text style={[channel==='global'?styles.active:styles.navItem]}>要闻</Text></TouchableOpacity>
@@ -135,14 +134,12 @@ class Home extends React.Component {
                 
                 <StatusBar barStyle={'dark-content'}/>
                 <View style={{paddingTop: statusBarHeight + 10,backgroundColor: '#fff'}}>
-
                     <View style={styles.header}>
                         <View style={{ flex: 3, flexDirection: 'row' }}>
                             <TouchableOpacity onPress={this._toggleTab.bind(this, 'global')} style={{ width: 60, justifyContent: 'flex-end', alignItems: 'center', }} ><Text style={[channel === 'global' ? styles.active : styles.navItem]}>要闻</Text></TouchableOpacity>
                             <TouchableOpacity onPress={this._toggleTab.bind(this, 'enterprise')} style={{ width: 60, justifyContent: 'flex-end', alignItems: 'center', }}><Text style={[channel === 'enterprise' ? styles.active : styles.navItem]}>公司</Text></TouchableOpacity>
                             <TouchableOpacity onPress={this._toggleTab.bind(this, 'wision')} style={{ width: 60, justifyContent: 'flex-end', alignItems: 'center', }}><Text style={[channel === 'wision' ? styles.active : styles.navItem]}>研究</Text></TouchableOpacity>
                         </View>
-
                         <TouchableOpacity
                             style={{ flex: 1, alignItems: 'flex-end' }}
                             onPress={() => navigation.navigate(UserStore.isLogin?'Userinfo':'Login')}

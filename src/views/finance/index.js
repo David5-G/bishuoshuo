@@ -14,7 +14,6 @@ import { WallQuotaListHost } from '../../config'
 import { dayhourMins, hourMins, day } from '../../utils/times'
 import NavigationBar from '../common/NavigationBar'
 
-
 import CoinNews from '../news/subPage/coin'
 import FlashNews from '../news/subPage/flashNews'
 import ImportantNews from '../news/subPage/importantNews'
@@ -114,6 +113,12 @@ class Finance extends React.Component {
                     style={{}}
                     // rightButton={<Icon style={{}} onPress={() => { }} name={'ios-timer'} size={20} color={Colors.headerText} />}
                 />
+                <View style={{backgroundColor: '#fff'}}>
+                    {tab===0&&<TouchableOpacity onPress={() => navigation.navigate('Player',0)}><Image style={{width,height: 150,}} source={require('../../pics/fu1.png')}/></TouchableOpacity>}
+                    {tab===1&&<TouchableOpacity onPress={() => navigation.navigate('Player',1)}><Image style={{width,height: 150,}} source={require('../../pics/fu2.png')}/></TouchableOpacity>}
+                    {tab===2&&<TouchableOpacity onPress={() => navigation.navigate('Player',2)}><Image style={{width,height: 150,}} source={require('../../pics/fu3.png')}/></TouchableOpacity>}
+                    {tab===3&&<TouchableOpacity onPress={() => navigation.navigate('Player',3)}><Image style={{width,height: 150,}} source={require('../../pics/fu4.png')}/></TouchableOpacity>}
+                </View>
                 <Form>
                     <Item picker>
                         <Left>
