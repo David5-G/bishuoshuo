@@ -26,7 +26,7 @@ export default class App extends Component<Props> {
 			updateText: '',
 			isDownload: false,
 			isUpdateFinished: false,
-			connect: false,
+			connect: true,
 		}
 	}
 	componentDidMount() {
@@ -39,6 +39,8 @@ export default class App extends Component<Props> {
 			if (isConnected) {
 				this.setState({connect: 1})
 				this._hotUpdata()
+			} else {
+				this.setState({connect: 0})
 			}
 		})
 	}
@@ -95,19 +97,18 @@ export default class App extends Component<Props> {
 		const {connect, updateText, isUpdateFinished } = this.state
         if (!connect) {
             return (
-                <View style={{flex: 1,alignItems:'center',justifyContent:'center'}}>
+                <View style={{flex: 1,alignItems:'center',justifyContent:'center',backgroundColor:'#2F4F4F'}}>
                     <View style={{alignItems: 'center'}}>
-                        <Text style={{fontSize: 18}}>网络不给力</Text>
+                        <Text style={{fontSize: 18,color: '#fff'}}>网络不给力</Text>
                         <TouchableOpacity
-                            style={{borderWidth: 1,marginTop:10,borderColor: '#999',borderRadius: 2,paddingLeft: 7,paddingRight: 7}}
+                            style={{borderWidth: 1,marginTop:10,borderColor: '#fff',borderRadius: 2,paddingLeft: 7,paddingRight: 7}}
                             onPress={() => {
                                 NetInfo.isConnected.fetch().done((isConnected) => {
-									console.log('isConnected-->',connect, isConnected)
 									isConnected && this.setState({connect: connect+1})
 								})
                             }}
                         >
-                            <Text style={{fontSize: 16,lineHeight: 25,color: '#999'}}>重试</Text>
+                            <Text style={{fontSize: 14,lineHeight: 25,color: '#fff'}}>重试</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -115,8 +116,8 @@ export default class App extends Component<Props> {
 		}
 		if (!isUpdateFinished) {
 			return (
-				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					<Text style={{ fontSize: 18 }}>{updateText}</Text>
+				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor:'#2F4F4F'}}>
+					<Text style={{ fontSize: 18,color: '#fff'}}>{updateText}</Text>
 				</View>
 			)
 		}
