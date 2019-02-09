@@ -53,7 +53,6 @@ export default class Collect extends React.Component {
 						/>
 					</View>
 				</View>
-
 			</TouchableOpacity>)
 	}
 	_renderHeader() {

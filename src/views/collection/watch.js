@@ -24,7 +24,7 @@ export default class Watch extends React.Component {
 	}
 	_renderItemView(listItem) {
 		const { item } = listItem
-		console.log('item-->', toJS(item))
+		const { MediaStore } = this.props
 		return (
 			<SwipeRow
 				leftOpenValue={60}
@@ -48,7 +48,9 @@ export default class Watch extends React.Component {
 					</View>
 				}
 				right={
-					<Button danger onPress={() => alert('Trash')}>
+					<Button danger onPress={() => {
+						MediaStore.toggleCollection({author: item})
+					}}>
 						<Text>删除</Text>
 					</Button>
 				}
