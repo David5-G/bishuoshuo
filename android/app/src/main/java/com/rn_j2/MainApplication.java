@@ -10,6 +10,7 @@ import com.BV.LinearGradient.LinearGradientPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.brentvatne.react.ReactVideoPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 import cn.jpush.reactnativejpush.JPushPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -55,7 +56,7 @@ public class MainApplication extends Application implements ReactApplication {
 	  return Arrays.<ReactPackage>asList(
 		  	new MainReactPackage(),
 			new DplusReactPackage(),	// umeng
-			new LinearGradientPackage(),
+			new LinearGradientPackage(), // linear gradient
 			new RNDeviceInfo(),
 			new ReactVideoPackage(),
 			new SplashScreenReactPackage(),

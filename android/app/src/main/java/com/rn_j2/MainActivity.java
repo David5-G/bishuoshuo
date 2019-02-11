@@ -1,15 +1,13 @@
 package com.rn_j2;
 
-import android.os.Bundle;
 
 
 import com.facebook.react.ReactActivity;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.codepush.react.CodePush;
-
-// umeng
-import com.umeng.analytics.MobclickAgent;
-
+import com.umeng.analytics.MobclickAgent;   // umeng
+import org.devio.rn.splashscreen.SplashScreen;  // splashscreen
+import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
 
@@ -17,7 +15,7 @@ public class MainActivity extends ReactActivity {
     /* umeng  start*/
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        // SplashScreen.show(this);
+        SplashScreen.show(this);
         super.onCreate(savedInstanceState);
         MobclickAgent.setSessionContinueMillis(1000);
         // MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_DUM_NORMAL);
