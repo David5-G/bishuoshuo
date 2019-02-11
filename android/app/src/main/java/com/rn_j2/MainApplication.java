@@ -3,6 +3,8 @@ package com.rn_j2;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.brentvatne.react.ReactVideoPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
@@ -37,6 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LinearGradientPackage(),
+            new RNDeviceInfo(),
             new ReactVideoPackage(),
             new SplashScreenReactPackage(),
             new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),

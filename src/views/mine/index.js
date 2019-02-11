@@ -24,7 +24,6 @@ export default class Mine extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			symbol: 'BSESN'
 		}
 	}
 	_logout() {

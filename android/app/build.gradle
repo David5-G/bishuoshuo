@@ -156,7 +156,16 @@ android {
     }
 }
 
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.webkit:android-jsc:r236355'
+    }
+}
+
 dependencies {
+    compile project(':react-native-linear-gradient')
+    compile project(':react-native-device-info')
 
     implementation project(':react-native-video')
     implementation project(':react-native-splash-screen')

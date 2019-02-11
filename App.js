@@ -13,12 +13,10 @@ import Root from './src/root.js'
 import { Provider } from 'mobx-react'
 import Store from './src/store/index.js'
 
-
 import JPushModule from 'jpush-react-native'
 import SplashScreen from 'react-native-splash-screen'
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component{
 
 	constructor(props) {
 		super(props)
@@ -43,6 +41,7 @@ export default class App extends Component<Props> {
 				this.setState({connect: 0})
 			}
 		})
+		
 	}
 	componentWillMount() {
 		NetInfo.removeEventListener('connectionChange')
@@ -60,7 +59,6 @@ export default class App extends Component<Props> {
 		codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE }, this.codePushStatusDidChange.bind(this));
 	}
 	codePushStatusDidChange(syncStatus) {
-		console.log('codePush.SyncStatus-->', syncStatus)
 		switch (syncStatus) {
 			case codePush.SyncStatus.CHECKING_FOR_UPDATE:
 				this.setState({ updateText: '检查更新' });
@@ -95,6 +93,7 @@ export default class App extends Component<Props> {
 	}
 	render() {
 		const {connect, updateText, isUpdateFinished } = this.state
+		
         if (!connect) {
             return (
                 <View style={{flex: 1,alignItems:'center',justifyContent:'center',backgroundColor:'#2F4F4F'}}>
@@ -127,6 +126,7 @@ export default class App extends Component<Props> {
 			</Provider>
 		);
 	}
+	
 }
 
 const styles = StyleSheet.create({

@@ -14,20 +14,20 @@ export default class About extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            applicationName: DeviceInfo.getApplicationName(),
-            brand: DeviceInfo.getBrand(),
-            bundleId: DeviceInfo.getBundleId(),
-            carrier: DeviceInfo.getCarrier(),
-            deviceCountry: DeviceInfo.getDeviceCountry(),
-            deviceLocale: DeviceInfo.getDeviceLocale(),
-            deviceName: DeviceInfo.getDeviceName(),
-            freeDiskStorage: DeviceInfo.getFreeDiskStorage(),
-            systemName: DeviceInfo.getSystemName(),
-            systemVersion: DeviceInfo.getSystemVersion(),
-            uniqueId: DeviceInfo.getUniqueID(),
-            isEmulator: DeviceInfo.isEmulator(),
-            hasNotch: DeviceInfo.hasNotch(),
-            manufacturer: DeviceInfo.getManufacturer(),
+            // applicationName: DeviceInfo.getApplicationName(),
+            // brand: DeviceInfo.getBrand(),
+            // bundleId: DeviceInfo.getBundleId(),
+            // carrier: DeviceInfo.getCarrier(),
+            // deviceCountry: DeviceInfo.getDeviceCountry(),
+            // deviceLocale: DeviceInfo.getDeviceLocale(),
+            // deviceName: DeviceInfo.getDeviceName(),
+            // freeDiskStorage: DeviceInfo.getFreeDiskStorage(),
+            // systemName: DeviceInfo.getSystemName(),
+            // systemVersion: DeviceInfo.getSystemVersion(),
+            // uniqueId: DeviceInfo.getUniqueID(),
+            // isEmulator: DeviceInfo.isEmulator(),
+            // hasNotch: DeviceInfo.hasNotch(),
+            // manufacturer: DeviceInfo.getManufacturer(),
         }
     }
     componentDidMount() {
@@ -44,7 +44,7 @@ export default class About extends React.Component {
                     style={{}}
                     leftButton={<Icon style={{ paddingLeft: 20, paddingRight: 20 }} onPress={() => navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
                 />
-                <Content>
+                {/* <Content>
                     <Separator bordered><Text>本机</Text></Separator>
                     <ListItem icon>
                         <Body><Text>品牌</Text></Body>
@@ -93,7 +93,7 @@ export default class About extends React.Component {
                         <Body><Text>应用Id</Text></Body>
                         <Right><Text>{this.state.bundleId}</Text></Right>
                     </ListItem>
-                </Content>
+                </Content> */}
             </Container>
         );
     }
