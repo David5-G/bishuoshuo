@@ -10,11 +10,12 @@ const NAV_BAR_HEIGHT_IOS = notch ? 60 : 40;
 const NAV_BAR_HEIGHT_ANDROID = 50;
 const barHeight = Platform.OS === 'ios' ? NAV_BAR_HEIGHT_IOS : NAV_BAR_HEIGHT_ANDROID
 const statusBarHeight = Platform.OS === 'ios' ? 20 : 0
-
+const isIos = Platform.OS === 'ios'
 export {
     width,
     height,
     notch,
     barHeight,
     statusBarHeight,
+    isIos,
 }

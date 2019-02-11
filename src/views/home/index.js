@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View,Alert, Image, Dimensions,AsyncStorage, TouchableOpacity,StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
+import { View,Alert, Image, Platform ,Dimensions,AsyncStorage, TouchableOpacity,StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
 import { Toast, Button} from 'native-base'
 import { observer, inject, } from 'mobx-react/native'
 import { toJS } from 'mobx'
@@ -11,7 +11,7 @@ import NavigationBar from '../common/NavigationBar'
 import Banners from './subPage/banner.js'
 import { timeago } from '../../utils/times'
 import { red } from 'ansi-colors';
-import { barHeight, statusBarHeight } from '../../constants/Scale'
+import { barHeight, statusBarHeight,isIos } from '../../constants/Scale'
 const width = Dimensions.get('window').width
 
 @inject('MediaStore', 'UserStore')
@@ -132,7 +132,7 @@ class Home extends React.Component {
                     </ScrollView>
                 </View> */}
                 
-                <StatusBar barStyle={'dark-content'}/>
+                <StatusBar barStyle={isIos?'dark-content':'light-content'}/>
                 <View style={{paddingTop: statusBarHeight + 10,backgroundColor: '#fff'}}>
                     <View style={styles.header}>
                         <View style={{ flex: 3, flexDirection: 'row' }}>
@@ -144,7 +144,7 @@ class Home extends React.Component {
                             style={{ flex: 1, alignItems: 'flex-end' }}
                             onPress={() => navigation.navigate(UserStore.isLogin?'Userinfo':'Login')}
                         >
-                            <Icon style={{ marginTop: 14 }} name={'ios-contact'} color={'#999'} size={40} />
+                            <Icon style={{ marginTop: isIos ? 14 : 4 }} name={'ios-contact'} color={'#999'} size={40} />
                         </TouchableOpacity>
                     </View>
                 </View>

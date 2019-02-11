@@ -172,7 +172,7 @@ export default class VideoPlayer extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.fullScreen}>
-                    <Video
+                    {/* <Video
                         source={{uri: this.uri}}
                         style={videoStyle}
                         rate={this.state.rate}
@@ -188,9 +188,9 @@ export default class VideoPlayer extends Component {
                         onEnd={() => {}}
                         repeat={false}
                         controls={this.state.controls}
-                    />
+                    /> */}
                 </View>
-                <View style={styles.controls}>
+                {/* <View style={styles.controls}>
                     <View style={styles.generalControls}>
                         <View style={styles.skinControl}>
                             {this.renderSkinControl('custom')}
@@ -216,11 +216,12 @@ export default class VideoPlayer extends Component {
                         {(Platform.OS === 'ios') ? <View style={styles.ignoreSilentSwitchControl}>
                             {this.renderIgnoreSilentSwitchControl('ignore')}{this.renderIgnoreSilentSwitchControl('obey')}</View> : null}
                     </View>
-                </View>
+                </View> */}
             </View>);
     }
     render() {
-        return this.state.controls ? this.renderNativeSkin() : this.renderCustomSkin(); 
+        return this.renderNativeSkin()
+        // return this.state.controls ? this.renderNativeSkin() : this.renderCustomSkin();
     }
 };
 

@@ -1,4 +1,4 @@
-package com.umeng.soexample.invokenative;
+package com.rn_j2.invokenative;
 
 import java.util.ArrayList;
 import java.util.HashMap;

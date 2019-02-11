@@ -44,6 +44,10 @@ export default class Banner extends React.Component {
                         autoplayTimeout={3}
                         containerStyle={{ width:width }}
                         removeClippedSubviews={false}
+                        showsButtons={false}
+                        dotStyle={{width: 10,height: 5,borderRadius: 0,bottom: -10}}
+                        activeDotStyle={{width: 10,height: 5,borderRadius: 0,bottom: -10}}
+                        dotColor={'rgba(255,255,255,0.5)'} //圆点的颜色
                     >
                         {banners.map((item,i) => {
                             return (

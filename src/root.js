@@ -4,7 +4,7 @@ import { Root } from "native-base";
 import Route from './route/index.js'
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from './views/common/Loading'
-
+import {isIos} from './constants/Scale.js'
 @inject('MainStore', 'UserStore', 'MediaStore')
 @observer
 export default class News extends React.Component {
@@ -40,7 +40,7 @@ export default class News extends React.Component {
         return (
             <Root style={styles.container}>
                 <LoadingView show={loading} />
-                {Platform.OS === 'ios' && <StatusBar hidden={false} barStyle="light-content" />}
+                <StatusBar hidden={false} barStyle="light-content" />
                 <Route />
             </Root>
         )

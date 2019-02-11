@@ -1,4 +1,4 @@
-package com.umeng.soexample.invokenative;
+package com.rn_j2.invokenative;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

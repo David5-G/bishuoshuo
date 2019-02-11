@@ -2,6 +2,9 @@ package com.rn_j2;
 
 import android.app.Application;
 
+
+
+
 import com.facebook.react.ReactApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -18,52 +21,67 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-// 引用code push 包
+// code push
 import com.microsoft.codepush.react.CodePush;
+
+// umeng
+import com.rn_j2.invokenative.RNUMConfigure;
+import com.rn_j2.invokenative.AnalyticsModule;
+import com.rn_j2.invokenative.DplusReactPackage;
+
+import com.umeng.commonsdk.UMConfigure;
+
+
+
+
+
 
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
-        @Override
-        protected String getJSBundleFile() {
-          return CodePush.getJSBundleFile();
-        }
-    
-    @Override
-    public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
-    }
+		@Override
+		protected String getJSBundleFile() {
+		  return CodePush.getJSBundleFile();
+		}
 
-    @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new LinearGradientPackage(),
-            new RNDeviceInfo(),
-            new ReactVideoPackage(),
-            new SplashScreenReactPackage(),
-            new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
-            new VectorIconsPackage(),
+	@Override
+	public boolean getUseDeveloperSupport() {
+	  return BuildConfig.DEBUG;
+	}
 
-            new CodePush("deployment-key-here", MainApplication.this, BuildConfig.DEBUG)
-      );
-    }
+	@Override
+	protected List<ReactPackage> getPackages() {
+	  return Arrays.<ReactPackage>asList(
+		  	new MainReactPackage(),
+			new DplusReactPackage(),	// umeng
+			new LinearGradientPackage(),
+			new RNDeviceInfo(),
+			new ReactVideoPackage(),
+			new SplashScreenReactPackage(),
+			new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
+			new VectorIconsPackage(),
+			new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG)
+	  );
+	}
 
-    @Override
-    protected String getJSMainModuleName() {
-      return "index";
-    }
-  };
+	@Override
+	protected String getJSMainModuleName() {
+		return "index";
+		}
+	};
 
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
-  }
+	@Override
+	public ReactNativeHost getReactNativeHost() {
+		return mReactNativeHost;
+	}
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-  }
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		SoLoader.init(this, /* native exopackage */ false);
+		RNUMConfigure.init(this,"5c613c4ab465f54ba7000092","Umeng", UMConfigure.DEVICE_TYPE_PHONE,"");
+
+		//initUpush();
+	}
 }

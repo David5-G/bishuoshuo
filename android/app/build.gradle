@@ -125,13 +125,13 @@ android {
     }
     buildTypes {
 
-//        debug {
-//            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
-//        }
-//
-//        releaseStaging {
-//            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
-//        }
+        debug {
+            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+        }
+
+        releaseStaging {
+            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+        }
 
         release {
             buildConfigField "String", "CODEPUSH_KEY", '"TSc12LV1GGpwnHEQC5f9coQLRrSg100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
@@ -178,6 +178,8 @@ dependencies {
     implementation project(':react-native-code-push')
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation files('libs/umeng-common-2.0.1.jar') //umeng
+    implementation files('libs/umeng-analytics-8.0.0.jar') //umeng
 
     implementation 'com.google.guava:guava:27.0.1-android'
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

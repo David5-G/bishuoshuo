@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
 import Bar from './subPage/bar'
 import Articles from './subPage/article'
-
+import { width} from '../../constants/Scale'
 import { GET } from '../../utils/request'
 import { WallQuotaListHost, WallQuotaHost } from '../../config'
 import { hourMins } from '../../utils/times.js'
@@ -42,6 +42,7 @@ export default class Chart extends React.Component {
     render() {
         const { navigation } = this.props
         const { symbol,quota } = this.state
+        const uri = 'http://localhost:2002?symbol=' + symbol + '&interval=1'
         return (
             <View style={styles.container}>
                 <NavigationBar
@@ -52,11 +53,11 @@ export default class Chart extends React.Component {
                 />
                 <ScrollView>
                     <Bar navigation={navigation} quota={quota} />
-                    <View style={{height: 350,}}>
+                    <View style={{height: 300,}}>
                         {symbol ? <WebView
-                            style={{flex: 1}}
+                            style={{width,height: 300}}
                             ref={(ww) => this._chart = ww}
-                            source={{ uri: 'http://localhost:2002?symbol=' + symbol + '&interval=1' }}
+                            source={{ uri }}
                             onLoadStart={() => this.setState({ loading: true })}
                             onLoad={() => {}}
                             onLoadEnd={() => this.setState({ loading: false })}

@@ -1,4 +1,4 @@
-package com.umeng.soexample.invokenative;
+package com.rn_j2.invokenative;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,8 +33,8 @@ public class DplusReactPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(
         ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new ShareModule(reactContext));
-        modules.add(new PushModule(reactContext));
+        // modules.add(new ShareModule(reactContext));
+        // modules.add(new PushModule(reactContext));
         modules.add(new AnalyticsModule(reactContext));
         return modules;
     }

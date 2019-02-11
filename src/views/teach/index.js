@@ -3,8 +3,7 @@ import { View, Text, Button, Dimensions, WebView, TouchableOpacity, ScrollView, 
 import NavigationBar from '../common/NavigationBar'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
-const deviceW = Dimensions.get('window').width
-
+import { width } from '../../constants/Scale'
 export default class Teach extends React.Component {
     static navigationOptions = {
         title: 'Teach',
