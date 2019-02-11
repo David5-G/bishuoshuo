@@ -9,11 +9,15 @@ import cn.jpush.reactnativejpush.JPushPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
+
+// 引用code push 包
+import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -21,7 +25,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
+          return CodePush.getJSBundleFile();
         }
     
     @Override
@@ -36,8 +40,9 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactVideoPackage(),
             new SplashScreenReactPackage(),
             new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
-            new VectorIconsPackage()
-          // new CodePush("deployment-key-here", MainApplication.this, BuildConfig.DEBUG)
+            new VectorIconsPackage(),
+
+            new CodePush("deployment-key-here", MainApplication.this, BuildConfig.DEBUG)
       );
     }
 
