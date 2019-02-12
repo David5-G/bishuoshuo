@@ -57,7 +57,7 @@ export default class WallDetail extends React.Component {
                         <ScrollView
                             onScrollBeginDrag={() => this.setState({draging: true})}
                             onScrollEndDrag={() => this.setState({draging: false})}
-                            style={{marginBottom: 60}}>
+                            style={{}}>
                             {/* title */}
                             <View style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}>
                                 <Text style={{ fontSize: 23, fontWeight: '600', lineHeight: 35,textAlign:'justify'}}>{detail.title}</Text>
@@ -103,7 +103,7 @@ export default class WallDetail extends React.Component {
                         </ScrollView>
                         : <Loading show={loading} text={'请稍候···'} />
                 }
-                {!draging && <Bar comments={comments} navigation={navigation} />}
+                <Bar comments={comments} navigation={navigation} />
             </View>
         );
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, Platform } from 'react-native'
+import { Text, Platform,Animated,Easing } from 'react-native'
 import TabBarIcon from '../component/TabBarIcon'
 import Colors from '../constants/Colors'
 import Home from '../views/home'
@@ -67,7 +67,7 @@ const Tab = createBottomTabNavigator(
 	},
 	{
 		initialRouteName: 'Home', //第一次加载时初始选项卡路由的routeName
-		order: ['Home','Quota','Cycle','Mine'], //定义选项卡顺序的routeNames数组
+		order: ['Home', 'Quota', 'Cycle', 'Mine'], //定义选项卡顺序的routeNames数组
 		backBehavior: 'initialRoute', //后退按钮是否会导致标签切换到初始路由？如果是，则设置为initialRoute，否则none。默认为initialRoute。
 		//tabBarComponent: null, //Options，覆盖用作标签栏的组件。
 		tabBarOptions: {
@@ -119,18 +119,41 @@ export default createStackNavigator(
 		Teach,
 		Player,
 
-		
+
 		Watch,
 		Collect,
 		// PlayVideo: PlayVideo,
 		// Play: Play,
 		// Account: Account,
-	},{
+	}, {
 		initialRouteName: 'Main', //默认页面，可不写
 		mode: 'card', // card modal 使屏幕从底部滑入，这是一种常见的iOS模式。只适用于iOS，对Android没有影响
 		headerMode: 'screen', // float - 在屏幕更改时渲染保留在顶部的单个标题和动画。这是iOS上的常见效果。
-							// screen - 每个屏幕都附有一个标题，标题与屏幕一起淡入和淡出。这是Android上的常见效果。
-							// none - 不会显示标题。
+		// screen - 每个屏幕都附有一个标题，标题与屏幕一起淡入和淡出。这是Android上的常见效果。
+		// none - 不会显示标题。
+		transitionConfig() {
+			return {
+				transitionSpec: {
+					duration: 200,
+					easing: Easing.out(Easing.poly(4)),
+					timing: Animated.timing,
+					useNativeDriver: true,
+				},
+				screenInterpolator: sceneProps => {
+					const { layout, position, scene } = sceneProps
+
+					const thisSceneIndex = scene.index
+					const width = layout.initWidth
+
+					const translateX = position.interpolate({
+						inputRange: [thisSceneIndex - 1, thisSceneIndex],
+						outputRange: [width, 0],
+					})
+
+					return { transform: [{ translateX }] }
+				},
+			}
+		},
 		navigationOptions: {
 			headerTitleStyle: {}, // - 标题组件的样式
 			headerBackTitleStyle: {},

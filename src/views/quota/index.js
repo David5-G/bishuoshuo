@@ -44,7 +44,6 @@ export default class Home extends React.Component {
 		// 查行情
 		// https://api-ddc.wallstreetcn.com/market/real?&prod_code=BTCUSD.Bitfinex&fields=prod_code,prod_name,prod_en_name,market_type,symbol,trade_status,price_precision,update_time,securities_type,px_change,px_change_rate,last_px,preclose_px,amplitude,turnover_volume,ex_type,ex_update_time,ex_last_px,ex_px_change,ex_px_change_rate
 
-
 	}
 	render() {
 		const { active, modalVisible } = this.state
@@ -119,7 +118,6 @@ export default class Home extends React.Component {
 								headerStyle={{ backgroundColor: "#b7daf8" }}
 								contentStyle={{ backgroundColor: "#ddecf8" }}
 							/>
-							
 						</Content>
 					</Container>
 				</Modal>

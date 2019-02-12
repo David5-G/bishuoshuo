@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, Image, StyleSheet } from 'react-native';
+import {View, Text, Image, StyleSheet,TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper'
 import {Dimensions} from 'react-native'
 import { observer, inject } from 'mobx-react/native'
@@ -33,7 +33,7 @@ export default class Banner extends React.Component {
     }
     componentWillUnmount() {}
 	render() {
-        const { MediaStore } = this.props
+        const { MediaStore, navigation } = this.props
         const banners = MediaStore.banners
 		return (
 			<View style={styles.container}>
@@ -51,10 +51,14 @@ export default class Banner extends React.Component {
                     >
                         {banners.map((item,i) => {
                             return (
-                                <View style={styles.wrap} key={i}>
+                                <TouchableOpacity
+                                    style={styles.wrap}
+                                    key={i}
+                                    onPress={() => navigation.navigate('WallDetail', item.resource)}
+                                >
                                     <Image style={styles.image} source={{uri: item.resource.image_uri}} />
                                     <Text style={styles.title}>{item.resource.title}</Text>
-                                </View>
+                                </TouchableOpacity>
                             )
                         })}
                     </Swiper> 

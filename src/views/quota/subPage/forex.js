@@ -96,7 +96,7 @@ export default class List extends React.Component {
             <View>
                 <View style={styles.sectionHeader}>
                     <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                        <Text style={{lineHeight: 45,height: 45,fontSize: 18,marginLeft: 5,}}>{name}</Text>
+                        <Text style={{lineHeight: 45,height: 45,fontSize: 18,}}>{name}</Text>
                     </View>
                     <Text style={{lineHeight: 45,height: 45,fontSize: 16,color: '#666'}}>···</Text>
                 </View>

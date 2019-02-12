@@ -150,6 +150,9 @@ class Home extends React.Component {
                 </View>
                 
                 <FlatList
+                    
+                    overScrollMode={'never'}
+                    overScroll={'never'}
                     data={MediaStore.wallNews}
                     renderItem={this._renderItemView.bind(this)}
                     keyExtractor={this._keyExtractor} //唯一的key

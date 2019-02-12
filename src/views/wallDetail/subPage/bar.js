@@ -122,7 +122,7 @@ export default class Bar extends React.Component {
                     </View>
 
                     <Modal animationType="slide" visible={modalVisible}  style={{paddingBottom: 50}}>
-                        <View style={{flex: 1,paddingBottom: 50}}>
+                        <View style={{flex: 1,}}>
                             <NavigationBar
                                 title={'热门评论'}
                                 rightButton={<Icon name={'ios-arrow-down'} size={25} style={{ color: Colors.headerText }} onPress={() => this.setState({ modalVisible: false })} />}
