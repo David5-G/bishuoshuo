@@ -113,7 +113,16 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
     }
     splits {
         abi {
@@ -125,19 +134,21 @@ android {
     }
     buildTypes {
 
-        debug {
-            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
-        }
-
-        releaseStaging {
-            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
-        }
+//        debug {
+//            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+//        }
+//
+//        releaseStaging {
+//            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+//        }
 
         release {
             buildConfigField "String", "CODEPUSH_KEY", '"TSc12LV1GGpwnHEQC5f9coQLRrSg100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
 
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            signingConfig signingConfigs.release
         }
 
     }
@@ -164,6 +175,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-video')
 
     implementation project(':react-native-video')
     implementation project(':react-native-splash-screen')

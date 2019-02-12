@@ -3,8 +3,6 @@ package com.rn_j2;
 
 
 import com.facebook.react.ReactActivity;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.microsoft.codepush.react.CodePush;
 import com.umeng.analytics.MobclickAgent;   // umeng
 import org.devio.rn.splashscreen.SplashScreen;  // splashscreen
 import android.os.Bundle;

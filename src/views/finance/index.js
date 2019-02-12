@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View, Alert, Image, RefreshControl, Dimensions, AsyncStorage, TouchableOpacity, StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
-import { Container, Header, Form, Tab, DatePicker, Picker, Left,Right,Item, Tabs, TabHeading, } from 'native-base'
+import { View, Alert, Image, RefreshControl,Picker, Dimensions, AsyncStorage, TouchableOpacity, StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
+import { Container, Header, Form, Tab, DatePicker, Left,Right,Item, Tabs, TabHeading, } from 'native-base'
 import { Toast, Button } from 'native-base'
 import { observer, inject, } from 'mobx-react/native'
 import { toJS } from 'mobx'
@@ -122,21 +122,15 @@ class Finance extends React.Component {
                 <Form>
                     <Item picker>
                         <Left>
-                            <Picker
-                                mode="dropdown"
-                                iosIcon={<Icon color={'#999'} name="ios-arrow-down" />}
-                                style={{ }}
-                                placeholder="选择类型"
-                                placeholderStyle={{ color: "#000" }}
-                                placeholderIconColor="#007aff"
-                                selectedValue={(s) => {}}
-                                onValueChange={(v) => this.setState({ tab: v })}
-                            >
+                        <Picker
+                            selectedValue={this.state.language}
+                            style={{ height: 50, width: 120, }}
+                            onValueChange={(v) => this.setState({ tab: v })}>
                                 <Picker.Item label="财经日历" value={0} />
                                 <Picker.Item label="币圈" value={1} />
                                 <Picker.Item label="闪讯" value={2} />
                                 <Picker.Item label="重要新闻" value={3} />
-                            </Picker>
+                        </Picker>
                         </Left>
                         <Right style={{marginRight: 15}}>
                             {tab===0&&<Text style={{fontSize: 16,color:'#999'}}>财经日历</Text>}
@@ -165,7 +159,6 @@ class Finance extends React.Component {
                             title="刷新中···"
                             titleColor="#999999"
                             colors={['#ff0000', '#00ff00', '#0000ff']}
-                            progressBackgroundColor="red"
                         />
                     }
                 />

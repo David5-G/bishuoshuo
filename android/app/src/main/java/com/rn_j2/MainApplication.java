@@ -6,6 +6,7 @@ import android.app.Application;
 
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.brentvatne.react.ReactVideoPackage;
@@ -55,6 +56,7 @@ public class MainApplication extends Application implements ReactApplication {
 	protected List<ReactPackage> getPackages() {
 	  return Arrays.<ReactPackage>asList(
 		  	new MainReactPackage(),
+            new ReactVideoPackage(),
 			new DplusReactPackage(),	// umeng
 			new LinearGradientPackage(), // linear gradient
 			new RNDeviceInfo(),
@@ -62,7 +64,8 @@ public class MainApplication extends Application implements ReactApplication {
 			new SplashScreenReactPackage(),
 			new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
 			new VectorIconsPackage(),
-			new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG)
+//			  new CodePush("TSc12LV1GGpwnHEQC5f9coQLRrSg100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
+				new CodePush("ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
 	  );
 	}
 
