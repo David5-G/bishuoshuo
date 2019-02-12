@@ -156,7 +156,7 @@ class Home extends React.Component {
                     ListHeaderComponent={channel === 'global' ? <Banners navigation={navigation} /> : null}
                     ListFooterComponent={this._renderFooter.bind(this)}
                     onEndReached={this._loadMore.bind(this)}
-                    onEndReachedThreshold={0}
+                    onEndReachedThreshold={1}
                 />
             </View>
         );
