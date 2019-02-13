@@ -57,6 +57,8 @@ class Finance extends React.Component {
         this.setState({ loading: false })
 
     }
+
+    
     _renderItemView({ item }) {
         return (
             <View

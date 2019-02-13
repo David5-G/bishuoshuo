@@ -1,10 +1,13 @@
 import React from 'react';
-import { View,Text, Platform,StatusBar,AsyncStorage, StyleSheet, AppState, } from 'react-native';
+import { View,Text, Platform,StatusBar,AsyncStorage,NativeModules, StyleSheet, AppState, } from 'react-native';
 import { Root } from "native-base";
 import Route from './route/index.js'
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from './views/common/Loading'
 import {isIos} from './constants/Scale.js'
+
+
+
 @inject('MainStore', 'UserStore', 'MediaStore')
 @observer
 export default class News extends React.Component {
@@ -31,6 +34,10 @@ export default class News extends React.Component {
     componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange);
         this._initStore()
+
+        NativeModules.ContextBridge.getStore(res => {
+            console.log('res-->', res)
+        })
     }
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);

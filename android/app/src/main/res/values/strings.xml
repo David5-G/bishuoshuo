@@ -1,4 +1,4 @@
 <resources>
     <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey"></string>
-    <string name="app_name">rn_j2</string>
+    <string name="app_name">盈创期货</string>
 </resources>

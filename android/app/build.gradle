@@ -99,15 +99,14 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.rn_j2"
+        applicationId "com.rn_j2_test"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.1"
         manifestPlaceholders = [
-                JPUSH_APPKEY: "475f91be84ab0dd75ec136f7",
-                APP_CHANNEL : "default"
-
+            JPUSH_APPKEY: "475f91be84ab0dd75ec136f7",
+            APP_CHANNEL : "developer-default"
         ]
 
         ndk {

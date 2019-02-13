@@ -9,7 +9,6 @@ import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.brentvatne.react.ReactVideoPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import cn.jpush.reactnativejpush.JPushPackage;
@@ -55,8 +54,9 @@ public class MainApplication extends Application implements ReactApplication {
 	@Override
 	protected List<ReactPackage> getPackages() {
 	  return Arrays.<ReactPackage>asList(
-		  	new MainReactPackage(),
-            new ReactVideoPackage(),
+		  new MainReactPackage(),
+			new ContextModuleReactPackage(), //与原生通讯
+      new ReactVideoPackage(),
 			new DplusReactPackage(),	// umeng
 			new LinearGradientPackage(), // linear gradient
 			new RNDeviceInfo(),
@@ -65,7 +65,7 @@ public class MainApplication extends Application implements ReactApplication {
 			new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
 			new VectorIconsPackage(),
 //			  new CodePush("TSc12LV1GGpwnHEQC5f9coQLRrSg100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
-				new CodePush("ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
+			new CodePush("ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
 	  );
 	}
 

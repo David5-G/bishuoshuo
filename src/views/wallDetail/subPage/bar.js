@@ -80,7 +80,6 @@ export default class Bar extends React.Component {
             const keepArticle = articleIdx === -1 ? 0 : 1
             const commentList = comments.items || []
             const { modalVisible } = this.state
-            
             return (
                 <View style={styles.bar}>
                     <View style={{ flexDirection: 'row', paddingTop: 10, paddingLeft: 20, paddingRight: 20, }}>
@@ -121,7 +120,12 @@ export default class Bar extends React.Component {
                         </TouchableOpacity>
                     </View>
 
-                    <Modal animationType="slide" visible={modalVisible}  style={{paddingBottom: 50}}>
+                    <Modal
+                        animationType="slide"
+                        visible={modalVisible}
+                        onRequestClose={()=>{}}
+                        style={{paddingBottom: 50}}
+                    >
                         <View style={{flex: 1,}}>
                             <NavigationBar
                                 title={'热门评论'}
