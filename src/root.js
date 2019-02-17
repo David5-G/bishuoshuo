@@ -35,9 +35,9 @@ export default class News extends React.Component {
         AppState.addEventListener('change', this._handleAppStateChange);
         this._initStore()
 
-        NativeModules.ContextBridge.getStore(res => {
-            console.log('res-->', res)
-        })
+        // NativeModules.ContextBridge.getStore(res => {
+        //     console.log('res-->', res)
+        // })
     }
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
