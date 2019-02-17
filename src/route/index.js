@@ -26,7 +26,9 @@ import About from '../views/about'
 import Teach from '../views/teach'
 
 import Watch from '../views/collection/watch'
+import Watchlist from '../views/collection/watchList'
 import Collect from '../views/collection/collect'
+
 // import Account from '../views/account'
 // leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
@@ -120,7 +122,8 @@ export default createStackNavigator(
 		Player,
 
 
-		Watch,
+        Watch,
+        Watchlist,
 		Collect,
 		// PlayVideo: PlayVideo,
 		// Play: Play,

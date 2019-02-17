@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View, Alert, Image, RefreshControl,Picker, Dimensions, AsyncStorage, TouchableOpacity, StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
-import { Container, Header, Form, Tab, DatePicker, Left,Right,Item, Tabs, TabHeading, } from 'native-base'
-import { Toast, Button } from 'native-base'
+import { View, Alert, Image,Picker as RnPicker, RefreshControl, Dimensions, AsyncStorage, TouchableOpacity, StatusBar, Text, ActivityIndicator, FlatList, WebView, ScrollView, StyleSheet } from 'react-native'
+import { Container, Header, Form, Tab, DatePicker,Picker, Left,Right,Item, Tabs, TabHeading, } from 'native-base'
 import { observer, inject, } from 'mobx-react/native'
 import { toJS } from 'mobx'
 
 import Colors from '../../constants/Colors'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { width } from '../../constants/Scale'
+import { width,isIos } from '../../constants/Scale'
 import { GET } from '../../utils/request'
 import { WallQuotaListHost } from '../../config'
 import { dayhourMins, hourMins, day } from '../../utils/times'
@@ -54,6 +53,8 @@ class Finance extends React.Component {
                 financeList: res.data.items,
             })
         }
+
+        console.log('finance res-->', res)
         this.setState({ loading: false })
 
     }
@@ -124,15 +125,26 @@ class Finance extends React.Component {
                 <Form>
                     <Item picker>
                         <Left>
-                        <Picker
-                            selectedValue={this.state.language}
-                            style={{ height: 50, width: 120, }}
-                            onValueChange={(v) => this.setState({ tab: v })}>
-                                <Picker.Item label="财经日历" value={0} />
-                                <Picker.Item label="币圈" value={1} />
-                                <Picker.Item label="闪讯" value={2} />
-                                <Picker.Item label="重要新闻" value={3} />
-                        </Picker>
+                        {isIos?
+                            <Picker
+                                selectedValue={this.state.tab}
+                                style={{ height: 50, width: 125, }}
+                                onValueChange={(v) => this.setState({ tab: v })}>
+                                    <Picker.Item label="财经日历" value={0} />
+                                    <Picker.Item label="币圈" value={1} />
+                                    <Picker.Item label="闪讯" value={2} />
+                                    <Picker.Item label="重要新闻" value={3} />
+                            </Picker>:
+                            <RnPicker
+                                selectedValue={this.state.tab}
+                                style={{ height: 50, width: 125, }}
+                                onValueChange={(v) => this.setState({ tab: v })}>
+                                    <RnPicker.Item label="财经日历" value={0} />
+                                    <RnPicker.Item label="币圈" value={1} />
+                                    <RnPicker.Item label="闪讯" value={2} />
+                                    <RnPicker.Item label="重要新闻" value={3} />
+                            </RnPicker>
+                        }
                         </Left>
                         <Right style={{marginRight: 15}}>
                             {tab===0&&<Text style={{fontSize: 16,color:'#999'}}>财经日历</Text>}

@@ -135,7 +135,7 @@ class Home extends React.Component {
                 <StatusBar barStyle={isIos?'dark-content':'light-content'}/>
                 <View style={{paddingTop: statusBarHeight + 10,backgroundColor: '#fff'}}>
                     <View style={styles.header}>
-                        <View style={{ flex: 3, flexDirection: 'row' }}>
+                        <View style={{ flex: 3, flexDirection: 'row'}}>
                             <TouchableOpacity onPress={this._toggleTab.bind(this, 'global')} style={{ width: 60, justifyContent: 'flex-end', alignItems: 'center', }} ><Text style={[channel === 'global' ? styles.active : styles.navItem]}>要闻</Text></TouchableOpacity>
                             <TouchableOpacity onPress={this._toggleTab.bind(this, 'enterprise')} style={{ width: 60, justifyContent: 'flex-end', alignItems: 'center', }}><Text style={[channel === 'enterprise' ? styles.active : styles.navItem]}>公司</Text></TouchableOpacity>
                             <TouchableOpacity onPress={this._toggleTab.bind(this, 'wision')} style={{ width: 60, justifyContent: 'flex-end', alignItems: 'center', }}><Text style={[channel === 'wision' ? styles.active : styles.navItem]}>研究</Text></TouchableOpacity>
@@ -206,6 +206,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         paddingBottom: 10,
+        borderBottomWidth: 1,
+        borderColor: Colors.borderGray,
 
     },
 });

@@ -2,11 +2,11 @@ import React from 'react';
 import { View, WebView, FlatList, ScrollView,Image, StyleSheet } from 'react-native';
 import { Container, Header, Content,Text, Card, CardItem, List, SwipeRow, ListItem, Thumbnail, Button, Icon, Left, Body, Right } from 'native-base';
 import NavigationBar from '../common/NavigationBar'
-// import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../constants/Colors'
 import { toJS } from 'mobx'
 import { observer, inject } from 'mobx-react/native';
-import { width} from '../../constants/Scale'
+import { width } from '../../constants/Scale'
+
 @inject('MediaStore', 'UserStore')
 @observer
 export default class Watch extends React.Component {
@@ -24,13 +24,13 @@ export default class Watch extends React.Component {
 	}
 	_renderItemView(listItem) {
 		const { item } = listItem
-		const { MediaStore } = this.props
+		const { MediaStore,navigation } = this.props
 		return (
 			<SwipeRow
 				leftOpenValue={60}
 				rightOpenValue={-60}
 				left={
-					<Button success onPress={() => alert('Add')}>
+					<Button success onPress={() => navigation.navigate('Watchlist', item.id)}>
 						<Text>查看</Text>
 					</Button>
 				}
@@ -41,9 +41,7 @@ export default class Watch extends React.Component {
 							<Text style={{marginLeft: 20}}>{item.display_name}</Text>
 						</Left>
 						<Right>
-							<Button style={{alignSelf:'center',}} light small>
-								<Text>已关注</Text>
-							</Button>
+							<Text style={{color: '#999'}}>已关注</Text>
 						</Right>
 					</View>
 				}

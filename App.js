@@ -28,7 +28,6 @@ export default class App extends Component{
 		}
 	}
 	componentDidMount() {
-		SplashScreen.hide();
 		JPushModule.getRegistrationID((registrationId) => {
 			console.log('registrationId-->', registrationId)
 		});
@@ -74,7 +73,10 @@ export default class App extends Component{
 				break;
 			case codePush.SyncStatus.UP_TO_DATE:
 				this.setState({ updateText: '应用已是最新版本' }, () => {
-					setTimeout(() => this.setState({ isUpdateFinished: true }), 100);
+					setTimeout(() => {
+                        this.setState({ isUpdateFinished: true })
+                        SplashScreen.hide();
+                    }, 100);
 				});
 				break;
 			case codePush.SyncStatus.UPDATE_IGNORED:
