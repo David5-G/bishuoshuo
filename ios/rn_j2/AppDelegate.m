@@ -70,14 +70,14 @@
 {
   //  umeng start
   [UMConfigure setLogEnabled:YES];
-  [RNUMConfigure initWithAppkey:@"5c514be9b465f518720008cb" channel:@"App Store"];
+  [RNUMConfigure initWithAppkey:@"5c6a216fb465f539f7000020" channel:@"App Store"];
   [MobClick setScenarioType:E_UM_NORMAL];
   //  umeng end
   
   
   
   
-  [JPUSHService setupWithOption:launchOptions appKey:@"475f91be84ab0dd75ec136f7"
+  [JPUSHService setupWithOption:launchOptions appKey:@"93ceef59806806c7238b30cb"
                         channel:nil apsForProduction:nil];
 
   NSURL *jsCodeLocation;

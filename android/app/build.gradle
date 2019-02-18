@@ -99,13 +99,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.rn_j2_test"
+        applicationId "com.rn_j2.yyqhttz"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.1"
         manifestPlaceholders = [
-            JPUSH_APPKEY: "475f91be84ab0dd75ec136f7",
+            JPUSH_APPKEY: "93ceef59806806c7238b30cb", // 极光
             APP_CHANNEL : "developer-default"
         ]
 
@@ -134,15 +134,15 @@ android {
     buildTypes {
 
 //        debug {
-//            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+//            buildConfigField "String", "CODEPUSH_KEY", '"yDc9U0TyC_aIzPGPP0DUTjpNrLG5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
 //        }
 //
 //        releaseStaging {
-//            buildConfigField "String", "CODEPUSH_KEY", '"ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+//            buildConfigField "String", "CODEPUSH_KEY", '"yDc9U0TyC_aIzPGPP0DUTjpNrLG5100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
 //        }
 
         release {
-            buildConfigField "String", "CODEPUSH_KEY", '"TSc12LV1GGpwnHEQC5f9coQLRrSg100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
+            buildConfigField "String", "CODEPUSH_KEY", '"h4NhukveG7XQhe9baoHGIZvfiQNw100ffbc1-99f4-43dc-9fa8-4426a0c779ce"'
 
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Text, Platform,StatusBar,AsyncStorage,NativeModules, StyleSheet, AppState, } from 'react-native';
+import { View,Text, Platform,StatusBar, WebView, AsyncStorage,NativeModules, StyleSheet, AppState, } from 'react-native';
 import { Root } from "native-base";
 import Route from './route/index.js'
 import { observer, inject } from 'mobx-react/native';
@@ -35,15 +35,28 @@ export default class News extends React.Component {
         AppState.addEventListener('change', this._handleAppStateChange);
         this._initStore()
 
-        // NativeModules.ContextBridge.getStore(res => {
-        //     console.log('res-->', res)
-        // })
+        if (isIos) {
+            
+        } else {
+            NativeModules.ContextBridge.getStore(res => {
+                console.log('android-->', res)
+            })
+        }
+        
     }
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
     render() {
         const { loading , appState} = this.state
+        // return (
+        //     <View style={{flex: 1}}>
+        //         <WebView
+        //             style={{flex: 1}}
+        //             source={{uri: 'https://www.baidu.com/'}}
+        //         />
+        //     </View>
+        // )
         return (
             <Root style={styles.container}>
                 <LoadingView show={loading} />
@@ -54,10 +67,9 @@ export default class News extends React.Component {
     }
     _handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-            console.log('appState--> 打开了app') //首次打开app不走这里
             this._initStore()
         } else {
-            console.log('appState--> 关闭了app')
+            
         }
         this.setState({ appState: nextAppState })
     }

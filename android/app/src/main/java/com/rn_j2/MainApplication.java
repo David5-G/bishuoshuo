@@ -64,8 +64,8 @@ public class MainApplication extends Application implements ReactApplication {
 			new SplashScreenReactPackage(),
 			new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
 			new VectorIconsPackage(),
-//			  new CodePush("TSc12LV1GGpwnHEQC5f9coQLRrSg100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
-			new CodePush("ZDzCjcx041zyeHRdbddRYjhSrx5100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
+//			  new CodePush("yDc9U0TyC_aIzPGPP0DUTjpNrLG5100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
+			new CodePush("h4NhukveG7XQhe9baoHGIZvfiQNw100ffbc1-99f4-43dc-9fa8-4426a0c779ce", MainApplication.this, BuildConfig.DEBUG)
 	  );
 	}
 
@@ -84,7 +84,7 @@ public class MainApplication extends Application implements ReactApplication {
 	public void onCreate() {
 		super.onCreate();
 		SoLoader.init(this, /* native exopackage */ false);
-		RNUMConfigure.init(this,"5c613c4ab465f54ba7000092","Umeng", UMConfigure.DEVICE_TYPE_PHONE,"");
+		RNUMConfigure.init(this,"5c6a1f84b465f5023600010b","Umeng", UMConfigure.DEVICE_TYPE_PHONE,"");
 
 		//initUpush();
 	}
