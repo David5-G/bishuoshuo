@@ -6,15 +6,12 @@ import { observer, inject } from 'mobx-react/native';
 import LoadingView from './views/common/Loading'
 import {isIos} from './constants/Scale.js'
 
-
-
 @inject('MainStore', 'UserStore', 'MediaStore')
 @observer
 export default class News extends React.Component {
     static navigationOptions = {
         title: 'news',
         token: 'default token',
-        
     }
     constructor(props) {
         super(props)
@@ -27,6 +24,7 @@ export default class News extends React.Component {
             appState: AppState.currentState,
             loading: false,
         }
+
         this._handleAppStateChange = this._handleAppStateChange.bind(this)
         this._initStore = this._initStore.bind(this)
     }
@@ -42,21 +40,12 @@ export default class News extends React.Component {
                 console.log('android-->', res)
             })
         }
-        
     }
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
     render() {
         const { loading , appState} = this.state
-        // return (
-        //     <View style={{flex: 1}}>
-        //         <WebView
-        //             style={{flex: 1}}
-        //             source={{uri: 'https://www.baidu.com/'}}
-        //         />
-        //     </View>
-        // )
         return (
             <Root style={styles.container}>
                 <LoadingView show={loading} />

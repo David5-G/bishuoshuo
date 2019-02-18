@@ -40,7 +40,7 @@ export default class App extends Component {
 		}
 	}
 	componentDidMount() {
-        
+        SplashScreen.hide()
 		JPushModule.getRegistrationID(registrationId => {
 			console.log('registrationId-->', registrationId)
 		})
@@ -77,42 +77,48 @@ export default class App extends Component {
 	codePushStatusDidChange(syncStatus) {
 		switch (syncStatus) {
 			case codePush.SyncStatus.CHECKING_FOR_UPDATE:
-				this.setState({updateText: '检查更新'})
+				// this.setState({updateText: '检查更新'})
+				this.setState({updateText: '检查网格'})
 				break
 			case codePush.SyncStatus.DOWNLOADING_PACKAGE:
-				this.setState({isDownload: true, updateText: '下载更新包...'})
+				// this.setState({isDownload: true, updateText: '下载更新包...'})
+				this.setState({isDownload: true, updateText: '请稍候...'})
 				break
 			case codePush.SyncStatus.AWAITING_USER_ACTION:
 				this.setState({updateText: '等待用户动作'})
 				break
 			case codePush.SyncStatus.INSTALLING_UPDATE:
-				this.setState({updateText: '正在安装更新'})
+				// this.setState({updateText: '正在安装更新'})
+				this.setState({updateText: '请稍候'})
 				break
-			case codePush.SyncStatus.UP_TO_DATE:
-				this.setState({updateText: '应用已是最新版本'}, () => {
+            case codePush.SyncStatus.UP_TO_DATE:
+                // this.setState({updateText: '应用已是最新版本'})
+				this.setState({updateText: '请稍候'}, () => {
 					setTimeout(() => {
                         this.setState({isUpdateFinished: true})
-                        SplashScreen.hide()
+                        // SplashScreen.hide()
 					}, 100)
 				})
 				break
 			case codePush.SyncStatus.UPDATE_IGNORED:
-				this.setState({updateText: '您已取消更新'})
+				// this.setState({updateText: '您已取消更新'})
+				this.setState({updateText: '请稍候'})
 				break
 			case codePush.SyncStatus.UPDATE_INSTALLED:
 				this.setState(
 					{updateText: '更新已安裝,将会在下次启动应用时启用'},
 					() => {
                         this.setState({isUpdateFinished: true})
-                        SplashScreen.hide()
+                        // SplashScreen.hide()
                     }
 				)
 				break
-			case codePush.SyncStatus.UNKNOWN_ERROR:
-				this.setState({updateText: '更新失败'}, () =>
+            case codePush.SyncStatus.UNKNOWN_ERROR:
+                // this.setState({updateText: '更新失败'})
+				this.setState({updateText: '请稍候'}, () => {
                     this.setState({isUpdateFinished: true})
-                    SplashScreen.hide()
-				)
+                    // SplashScreen.hide()
+                })
 				break
 			default:
 		}
@@ -191,7 +197,7 @@ export default class App extends Component {
                         {updateText}
 					</Text>
                     <View style={{width,justifyContent: 'center',alignItems: 'center'}}>
-                        {updateText==='下载更新包...'&&(
+                        {updateText==='请稍候...'&&(
                             isIos ? 
                             <ProgressViewIOS
                                 style={{
@@ -204,7 +210,12 @@ export default class App extends Component {
                                 progressColor={'#89C0FF'}
                                 progress={hotUpdatePrecent}
                             /> : 
-                            <ProgressBarAndroid styleAttr="Horizontal" indeterminate={false} progress={hotUpdatePrecent} />
+                            <ProgressBarAndroid
+                                style={{width: width - 100}}
+                                styleAttr="Horizontal"
+                                indeterminate={false}
+                                progress={Number(hotUpdatePrecent)}
+                            />
                         )}
                     </View>
 				</View>
