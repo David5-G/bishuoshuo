@@ -1,5 +1,4 @@
 import React from 'react'
-import { Text, Platform,Animated,Easing } from 'react-native'
 import TabBarIcon from '../component/TabBarIcon'
 import Colors from '../constants/Colors'
 import Home from '../views/home'
@@ -29,8 +28,6 @@ import Watch from '../views/collection/watch'
 import Watchlist from '../views/collection/watchList'
 import Collect from '../views/collection/collect'
 
-// import Account from '../views/account'
-// leftButton={<Eicon.Ionicons style={{paddingLeft:20,paddingRight:20}} onPress={()=> navigation.goBack()} name={'ios-arrow-back'} size={28} color={Colors.headerText} />}
 
 import { StackNavigator, TabNavigator, TabBarBottom, createTabNavigator, createSwitchNavigator, createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 
@@ -136,25 +133,24 @@ export default createStackNavigator(
 		// none - 不会显示标题。
 		transitionConfig() {
 			return {
-				transitionSpec: {
-					duration: 200,
-					easing: Easing.out(Easing.poly(4)),
-					timing: Animated.timing,
-					useNativeDriver: true,
-				},
-				screenInterpolator: sceneProps => {
-					const { layout, position, scene } = sceneProps
+				// transitionSpec: {
+				// 	duration: 200,
+				// 	easing: Easing.out(Easing.poly(4)),
+				// 	timing: Animated.timing,
+				// 	useNativeDriver: true,
+				// },
+				// screenInterpolator: sceneProps => {
+				// 	const { layout, position, scene } = sceneProps
 
-					const thisSceneIndex = scene.index
-					const width = layout.initWidth
+				// 	const thisSceneIndex = scene.index
+				// 	const width = layout.initWidth
 
-					const translateX = position.interpolate({
-						inputRange: [thisSceneIndex - 1, thisSceneIndex],
-						outputRange: [width, 0],
-					})
-
-					return { transform: [{ translateX }] }
-				},
+				// 	const translateX = position.interpolate({
+				// 		inputRange: [thisSceneIndex - 1, thisSceneIndex],
+				// 		outputRange: [width, 0],
+				// 	})
+				// 	return { transform: [{ translateX }] }
+				// },
 			}
 		},
 		navigationOptions: {

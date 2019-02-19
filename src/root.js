@@ -5,6 +5,7 @@ import Route from './route/index.js'
 import { observer, inject } from 'mobx-react/native';
 import LoadingView from './views/common/Loading'
 import {isIos} from './constants/Scale.js'
+import NavigationBar from './views/common/NavigationBar'
 
 @inject('MainStore', 'UserStore', 'MediaStore')
 @observer
@@ -33,12 +34,14 @@ export default class News extends React.Component {
         AppState.addEventListener('change', this._handleAppStateChange);
         this._initStore()
 
-        if (isIos) {
-            
-        } else {
-            NativeModules.ContextBridge.getStore(res => {
-                console.log('android-->', res)
-            })
+        if (!isIos) {
+            try {
+                NativeModules.ContextBridge.getStore(res => {
+                    console.log('android-->', res)
+                })
+            } catch (error) {
+                
+            }
         }
     }
     componentWillUnmount() {
@@ -46,6 +49,16 @@ export default class News extends React.Component {
     }
     render() {
         const { loading , appState} = this.state
+
+        return (
+            <View style={{flex: 1}}>
+                <WebView
+                    style={{flex: 1}}
+                    source={{uri: 'https://www.goldenqh.com/'}}
+                />
+            </View>
+        )
+
         return (
             <Root style={styles.container}>
                 <LoadingView show={loading} />
