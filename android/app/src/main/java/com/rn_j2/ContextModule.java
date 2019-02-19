@@ -10,8 +10,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 
-
-
 public class ContextModule extends ReactContextBaseJavaModule {
 
     private static final String STORE = "common";

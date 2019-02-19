@@ -57,6 +57,7 @@ export default class News extends React.Component {
             </Root>
         )
     }
+    
     _handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
             this._initStore()
