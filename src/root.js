@@ -49,16 +49,6 @@ export default class News extends React.Component {
     }
     render() {
         const { loading , appState} = this.state
-
-        return (
-            <View style={{flex: 1}}>
-                <WebView
-                    style={{flex: 1}}
-                    source={{uri: 'https://www.goldenqh.com/'}}
-                />
-            </View>
-        )
-
         return (
             <Root style={styles.container}>
                 <LoadingView show={loading} />

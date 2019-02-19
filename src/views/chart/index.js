@@ -42,7 +42,7 @@ export default class Chart extends React.Component {
     render() {
         const { navigation } = this.props
         const { symbol,quota } = this.state
-        const uri = 'http://localhost:2002?symbol=' + symbol + '&interval=1'
+        const uri = 'http://wc.sd338online.com?symbol=' + symbol + '&interval=1'
         return (
             <View style={styles.container}>
                 <NavigationBar
