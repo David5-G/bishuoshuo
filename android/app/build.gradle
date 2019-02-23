@@ -102,7 +102,7 @@ android {
         applicationId "com.rn_j2.yyqhttz"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 10001
         versionName "1.0.1"
         manifestPlaceholders = [
             JPUSH_APPKEY: "93ceef59806806c7238b30cb", // 极光
@@ -175,7 +175,6 @@ configurations.all {
 
 dependencies {
     compile project(':react-native-video')
-
     implementation project(':react-native-video')
     implementation project(':react-native-splash-screen')
     implementation project(':jpush-react-native')
@@ -189,6 +188,14 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation files('libs/umeng-common-2.0.1.jar') //umeng
     implementation files('libs/umeng-analytics-8.0.0.jar') //umeng
+    implementation files('libs/umeng-share-core-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-share-email-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-share-QQ-simplify-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-share-sina-simplify-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-share-sms-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-share-wechat-simplify-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-shareboard-widget-6.9.3.jar') //umeng share
+    implementation files('libs/umeng-sharetool-6.9.3.jar') //umeng share
 
     implementation 'com.google.guava:guava:27.0.1-android'
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
