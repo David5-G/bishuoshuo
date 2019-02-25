@@ -6,7 +6,8 @@ import {
 	WebView,
 	ScrollView,
 	TouchableOpacity,
-	StyleSheet
+    StyleSheet,
+    Share,
 } from 'react-native'
 import {
 	Container,
@@ -40,7 +41,28 @@ export default class MineList extends React.Component {
 		this.state = {}
 	}
 	componentDidMount() {}
-	componentWillUnmount() {}
+    componentWillUnmount() {}
+    async onShare() {
+        try {
+          const result = await Share.share({
+            message:
+              'React Native | A framework for building native apps using React',
+          })
+    
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              // shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+    
 	render() {
 		const { userInfo, isLogin } = this.props.UserStore
 		const { navigation } = this.props
@@ -140,6 +162,22 @@ export default class MineList extends React.Component {
 					<View style={[styles.item]}>
 						<View style={{ flexDirection: 'row' }}>
 							<Text style={styles.text}>分享好友</Text>
+						</View>
+						<Icon
+							style={styles.iconR}
+							name={'ios-arrow-forward'}
+							color={Colors.bodyTextGray}
+							size={18}
+						/>
+					</View>
+				</TouchableOpacity>
+
+                <TouchableOpacity
+					onPress={this.onShare}
+				>
+					<View style={[styles.item]}>
+						<View style={{ flexDirection: 'row' }}>
+							<Text style={styles.text}>share</Text>
 						</View>
 						<Icon
 							style={styles.iconR}

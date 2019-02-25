@@ -72,6 +72,7 @@
   [UMConfigure setLogEnabled:YES];
   [RNUMConfigure initWithAppkey:@"5c6a216fb465f539f7000020" channel:@"App Store"];
   [MobClick setScenarioType:E_UM_NORMAL];
+  
   //  umeng end
   
   

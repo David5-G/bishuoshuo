@@ -12,7 +12,7 @@ import com.facebook.react.bridge.ReactMethod;
 
 public class ContextModule extends ReactContextBaseJavaModule {
 
-    private static final String STORE = "360";
+    private static final String STORE = "sdbdyyqhttz";
 
     public ContextModule(ReactApplicationContext reactContext){
         super(reactContext);

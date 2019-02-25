@@ -102,11 +102,12 @@ android {
         applicationId "com.rn_j2.yyqhttz"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10001
+
         versionName "1.0.1"
         manifestPlaceholders = [
             JPUSH_APPKEY: "93ceef59806806c7238b30cb", // 极光
-            APP_CHANNEL : "developer-default"
+            APP_CHANNEL : "developer-default",
+            versionCode: 10000
         ]
 
         ndk {
