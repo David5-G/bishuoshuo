@@ -21,11 +21,14 @@ export default class Login extends React.Component {
 		this.state = {
 			text: '',
 			password: '',
-			verification_code: '',
 			loading: false,
 		}
 	}
-	componentDidMount() {
+	async componentDidMount() {
+        const { UserStore } = this.props
+        let rcures = await UserStore.userGetCurrent()
+
+        console.log('res-->', rcures)
 		console.log('login--> componentDidMount')
 	}
 	componentWillUnmount() {
@@ -33,7 +36,7 @@ export default class Login extends React.Component {
 	}
 	render() {
 		const { MainStore, UserStore, navigation } = this.props
-		const { text, password, verification_code, loading } = this.state
+		const { text, password, loading } = this.state
 
 		return (
 			<Container style={styles.container}>
@@ -53,22 +56,6 @@ export default class Login extends React.Component {
 							placeholder='请输入手机号' />
 						<NeIcon name={text.length === 11 ? 'checkmark-circle' : 'information-circle'} />
 					</Item>
-					<Item success={text.length === 11}>
-						<Input
-							maxLength={6}
-							onChangeText={(verification_code) => this.setState({ verification_code })}
-							placeholder='请输入验证码' />
-						<NeIcon name={verification_code.length === 6 ? 'checkmark-circle' : 'information-circle'} />
-						<NeText onPress={this._getCode.bind(this)}>点击获取</NeText>
-						{/* <NeButton
-							transparent
-							success={text.length === 11}
-							dark={text.length !== 11}
-							style={{ marginTop: 2 }}
-							onPress={() => {}}>
-							<NeText>获取验证码</NeText>
-						</NeButton> */}
-					</Item>
 					<Item success={password.length >= 6}>
 						<Input
 							secureTextEntry
@@ -77,57 +64,29 @@ export default class Login extends React.Component {
 						<NeIcon name={password.length >= 6 ? 'checkmark-circle' : 'information-circle'} />
 					</Item>
 					<View style={{ marginTop: 50 }}>
-						<NeButton onPress={this._getRegist.bind(this)} block info={text && password && verification_code ? false : true}>
+						<NeButton onPress={this._getRegist.bind(this)} block info={text && password ? false : true}>
 							<NeText>注 册</NeText>
 						</NeButton>
 					</View>
 				</Content>
-				<View style={styles.footer}>
-                    <NeText>如遇问题请</NeText>
-                    <TouchableOpacity onPress={()=> navigation.navigate('Service')}>
-                        <NeText style={styles.service}>联系客服</NeText>
-                    </TouchableOpacity>
-                </View>
 			</Container>
 		);
 	}
-	async _getCode() {
-		const { MainStore, UserStore } = this.props
-		const { text, password, verification_code, loading } = this.state
-		if (loading) return
-		if (text.length !== 11) {
-			// Alert.alert('获取验证码','请输入正确的手机号码',[{ text: '确定', onPress: () => console.log('OK Pressed') },],{ cancelable: false })
-			Alert.alert('获取验证码', '请输入正确的手机号码')
-			return
-		}
-		this.setState({ loading: true })
-		const res = await UserStore.userVerificationCode({ username: text })
-		this.setState({ loading: false })
-		Alert.alert('获取验证码', res.msg ? res.msg : '错误')
-	}
 	async _getRegist() {
-		const { MainStore, UserStore } = this.props
-		const { text, password, verification_code, loading } = this.state
-
+		const { UserStore } = this.props
+		const { text, password, loading } = this.state
 		if (loading) return
-		if (text.length !== 11) {
-			Alert.alert('注册', '请输入正确的手机号码')
-		} else if (verification_code.length !== 6) {
-			Alert.alert('注册', '请输入正确的验证码')
-		} else if (password.length < 6) {
+		if (text.length <6 ) {
+			Alert.alert('注册', '长度大于6位的账户名')
+        }
+        else if (password.length < 6) {
 			Alert.alert('注册', '请输入长度大于6位的密码')
 		} else {
-			this.setState({ loading: true })
-			const res = await UserStore.userRegister({ username: text, password, verification_code })
-			this.setState({ loading: false })
-			Alert.alert('注册', res.msg ? res.msg : '错误', [{
-				text: '确定', onPress: () => {
-					if (res.code === 1) {
-						this.props.navigation.navigate('Login')
-					}
-				}
-			}])
-
+            // this.setState({ loading: true })
+            // userRegister
+			const res = await UserStore.userRegister({ username: text, password })
+            // this.setState({ loading: false })
+            console.log('res-->', res)
 		}
 	}
 

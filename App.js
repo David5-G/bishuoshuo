@@ -17,8 +17,7 @@ import {
 	View,
 	NativeModules,
 	ProgressBarAndroid,
-    ProgressViewIOS,
-    ImageBackground
+	ProgressViewIOS
 } from 'react-native'
 import codePush from 'react-native-code-push'
 import Root from './src/root.js'
@@ -40,15 +39,15 @@ class App extends Component {
 		}
 	}
 	componentDidMount() {
-        SplashScreen.hide()
+		SplashScreen.hide()
 		JPushModule.getRegistrationID(registrationId => {
 			console.log('registrationId-->', registrationId)
 		})
 		this._checkConnect() //绑定一个网络监测事件
 		NetInfo.isConnected.fetch().done(isConnected => {
 			if (isConnected) {
-                this.setState({ connect: 1 })
-                this._hotUpdata()
+				this.setState({ connect: 1 })
+				// this._hotUpdata()
 			} else {
 				this.setState({ connect: 0 })
 			}
@@ -76,7 +75,7 @@ class App extends Component {
 	codePushStatusDidChange(syncStatus) {
 		switch (syncStatus) {
 			case codePush.SyncStatus.CHECKING_FOR_UPDATE:
-				this.setState({ updateText: '请稍候' }) //检查更新
+				this.setState({ updateText: '检查更新' }) //检查更新
 				break
 			case codePush.SyncStatus.DOWNLOADING_PACKAGE:
 				this.setState({ updateText: '请求中...' }) //下载更新包
@@ -85,11 +84,11 @@ class App extends Component {
 				this.setState({ updateText: '等待用户动作' }) //等待用户动作
 				break
 			case codePush.SyncStatus.INSTALLING_UPDATE:
-				this.setState({ updateText: '请稍候' }) //正在安装更新
+				this.setState({ updateText: '正在安装更新' }) //正在安装更新
 				break
-            case codePush.SyncStatus.UP_TO_DATE:
-                //已是最新版本
-				this.setState({ updateText: '请稍候' }, () => {
+			case codePush.SyncStatus.UP_TO_DATE:
+				//已是最新版本
+				this.setState({ updateText: '已是最新版本' }, () => {
 					setTimeout(() => {
 						this.setState({ isUpdateFinished: true })
 					}, 100)
@@ -133,13 +132,14 @@ class App extends Component {
 
 		if (!connect) {
 			return (
-				<ImageBackground
+				<View
 					style={{
 						flex: 1,
 						alignItems: 'center',
 						justifyContent: 'center',
-                    }}
-                    source={require('./src/pics/screen.png')}
+						backgroundColor: '#C92326'
+					}}
+					source={require('./src/pics/screen.png')}
 				>
 					<View style={{ alignItems: 'center' }}>
 						<Text style={{ fontSize: 18, color: '#fff' }}>
@@ -176,18 +176,19 @@ class App extends Component {
 							</Text>
 						</TouchableOpacity>
 					</View>
-				</ImageBackground>
+				</View>
 			)
 		}
 		if (!isUpdateFinished) {
 			return (
-				<ImageBackground
+				<View
 					style={{
 						flex: 1,
 						justifyContent: 'center',
 						alignItems: 'center',
-                    }}
-                    source={require('./src/pics/screen.png')}
+						backgroundColor: '#C92326'
+					}}
+					source={require('./src/pics/screen.png')}
 				>
 					<Text style={{ fontSize: 18, color: '#fff' }}>
 						{updateText}
@@ -221,7 +222,7 @@ class App extends Component {
 								/>
 							))}
 					</View>
-				</ImageBackground>
+				</View>
 			)
 		}
 		return (
@@ -246,11 +247,11 @@ const styles = StyleSheet.create({
 	}
 })
 
-
 const codePushOptions = {
-    checkFrequency: codePush.CheckFrequency.ON_APP_RESUME || codePush.CheckFrequency.ON_APP_START,
-    mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
-};
+	checkFrequency:
+		codePush.CheckFrequency.ON_APP_RESUME ||
+		codePush.CheckFrequency.ON_APP_START,
+	mandatoryInstallMode: codePush.InstallMode.IMMEDIATE
+}
 
 export default codePush(codePushOptions)(App)
-// export default App

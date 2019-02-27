@@ -62,19 +62,20 @@ export default class NavigationBar extends Component {
 
         let titleView = this.props.titleView ? this.props.titleView : <Text ellipsizeMode="head" ellipsizeMode="tail" numberOfLines={1} style={[styles.title, this.props.style || null]}>{this.props.title}</Text>;
 
-        let content = this.props.hide ? null :
+        let content = (
             <View style={styles.navBar}>
                 {this.getButtonElement(this.props.leftButton)}
                 <View style={[styles.navBarTitleContainer, this.props.titleLayoutStyle]}>
                     {titleView}
                 </View>
                 {this.getButtonElement(this.props.rightButton)}
-            </View>;
+            </View>
+        )
         return (
-            <LinearGradient style={[styles.container, this.props.style]} colors={['#4c669f', '#3b5998', '#192f6a']}>
+            <View style={[styles.container, this.props.style]}>
                 {statusBar}
                 {content}
-            </LinearGradient>
+            </View>
         )
     }
 }
@@ -83,23 +84,18 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.tintColor,
         width,
-        paddingRight: 20,
     },
     navBar: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         height: barHeight,
+        paddingLeft: 15,paddingRight: 15,
     },
     navBarTitleContainer: {
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        width: width - 80,
-        left: 40,
-        top: 0,
-        right: 40,
-        bottom: 0,
+        justifyContent:'center',
     },
     title: {
         fontSize: 20,

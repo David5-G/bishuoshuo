@@ -7,7 +7,7 @@ import LoadingView from './views/common/Loading'
 import {isIos} from './constants/Scale.js'
 import NavigationBar from './views/common/NavigationBar'
 
-@inject('MainStore', 'UserStore', 'MediaStore')
+@inject('MainStore', 'UserStore',)
 @observer
 export default class News extends React.Component {
     static navigationOptions = {
@@ -18,9 +18,8 @@ export default class News extends React.Component {
         super(props)
         UserStore = this.props.UserStore
         MainStore = this.props.MainStore
-        MediaStore = this.props.MediaStore
         navigation = this.props.navigation
-        // const { MainStore, UserStore, navigation } = this.props
+        
         this.state = {
             appState: AppState.currentState,
             loading: false,
@@ -33,7 +32,6 @@ export default class News extends React.Component {
     componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange);
         this._initStore()
-
         if (!isIos) {
             try {
                 NativeModules.ContextBridge.getStore(res => {
@@ -52,7 +50,8 @@ export default class News extends React.Component {
         return (
             <Root style={styles.container}>
                 <LoadingView show={loading} />
-                <StatusBar hidden={false} barStyle="light-content" />
+                <StatusBar hidden={false} barStyle="dark-content" />
+                {/* <StatusBar hidden={false} barStyle="light-content" /> */}
                 <Route />
             </Root>
         )
@@ -67,16 +66,7 @@ export default class News extends React.Component {
         this.setState({ appState: nextAppState })
     }
     async _initStore() {
-        const {loading } = this.state
-        if (loading) return
-        this.setState({ loading: true })
-        const text = await AsyncStorage.getItem('username') || ''
-        const password = await AsyncStorage.getItem('password') || ''
-        if (text && password) {
-            await UserStore.userLogin({ username: text, password, device_type: 'iphone' })
-        }
-        const banners = await MediaStore.getBanners()
-        this.setState({ loading: false })
+
     }
 }
 

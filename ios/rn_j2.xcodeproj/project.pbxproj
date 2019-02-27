@@ -1959,7 +1959,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.yyqhttz;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.bishuoshuo;
 				PRODUCT_NAME = rn_j2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2090,7 +2090,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.yyqhttz;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.bishuoshuo;
 				PRODUCT_NAME = rn_j2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2130,7 +2130,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.yyqhttz;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.bishuoshuo;
 				PRODUCT_NAME = rn_j2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
