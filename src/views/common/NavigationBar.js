@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.tintColor,
         width,
+        
     },
     navBar: {
         flexDirection: 'row',

@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Drawer } from 'native-base'
+import { toJS } from 'mobx'
+import Swiper from 'react-native-swiper'
+
 import {
 	View,
 	Alert,
@@ -25,7 +28,7 @@ import NavigationBar from '../common/NavigationBar'
 import { timeago } from '../../utils/times'
 import { barHeight, statusBarHeight, isIos, width } from '../../constants/Scale'
 import Block from './sub/block.js'
-
+import Coming from './sub/coming.js'
 @inject('UserStore','MainStore')
 @observer
 class Home extends React.Component {
@@ -46,28 +49,31 @@ class Home extends React.Component {
 		super(props)
         this.state = {
             loading: false,
+            start: 0,
+            count: 6,
+            active: 1,
         }
         this.initDate = this.initDate.bind(this)
 	}
 	componentDidMount() {
         this.initDate()
     }
-    initDate() {
-        const { loading } = this.state
+    async initDate() {
+        const { loading,start,count } = this.state
         const { MainStore } = this.props
+        const { city,apikey } = MainStore
         if (loading) return
         this.setState({loading: true})
-        MainStore.getHomePage().then(res => {
-            this.setState({loading: false})
-        }).catch(() => {
-            this.setState({loading: false})
-        })
+        await MainStore.getHotPlay({city,start,count})
+        await MainStore.getMouth({city: MainStore.city,apikey})
+        this.setState({loading: false})
 
-        console.log('home res-->', res)
     }
 	render() {
         const { navigation,MainStore } = this.props
-        const { subjects } = MainStore
+        const { subjects,weekJects } = MainStore
+        const { active, loading } = this.state
+        console.log(toJS(weekJects))
 		return (
 			<View style={styles.container}>
 				<NavigationBar
@@ -87,19 +93,25 @@ class Home extends React.Component {
 						/>
 					}
 				/>
-                <ScrollView>
-                    <View><Text>test</Text></View>
-                    {/* <View><Text>{subjects.title}</Text></View> */}
-                    {/* <ScrollView>
-                        {
-                            subjects.subjects.map((item, i) => {
-                                return (<View key={i}>
-                                    <Image source={{uri: item.images[0]}} width={100} height={142} />
-                                </View>)
-                            })
-                        }
-                    </ScrollView> */}
-                </ScrollView>
+                <View style={styles.nav}>
+                    <TouchableOpacity onPress={() => this.setState({active: 1})} style={[styles.navItem,active===1&&styles.active]}>
+                        <Text style={[styles.ft,active===1&&styles.active]}>影院热映</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.setState({active: 2})} style={[styles.navItem,active===2&&styles.active,{marginLeft: 10,}]}>
+                        <Text style={[styles.ft,active===2&&styles.active]}>即将上映</Text>
+                    </TouchableOpacity>
+                </View>
+                {
+                    active === 1 &&
+                    <ScrollView>
+                        <Block subjects={subjects} navigation={navigation} />
+                        <Block subjects={weekJects} navigation={navigation} />
+                    </ScrollView>
+                }
+                {
+                    active === 2 && <Coming />
+                    
+                }
 			</View>
 		)
 	}
@@ -109,6 +121,17 @@ export default Home
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: Colors.bodyBackground
-	}
+        backgroundColor: Colors.bodyBackground,
+        backgroundColor:'#fff',
+    },
+    nav: {
+        marginLeft: 15,flexDirection:'row',borderBottomWidth: 1,borderColor: Colors.borderGray
+    },
+    navItem: {},
+    ft: {fontSize: 19,lineHeight: 47,color: Colors.bodyTextGray},
+    active: {
+        borderColor: '#111',
+        borderBottomWidth: 2,
+        color: '#111',
+    }
 })

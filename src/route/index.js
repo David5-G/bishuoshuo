@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Login from '../views/login'
 import Regist from '../views/regist'
 import Findback from '../views/findback'
-import Drawer from '../views/Drawer'
+import Drawer from '../views/drawer'
+import MovieDetail from '../views/movieDetail'
 import {
 	StackNavigator,
 	DrawerNavigator,
@@ -50,7 +51,7 @@ export default createStackNavigator(
 				}
 			}
 		},
-
+        MovieDetail,
 		Login,
 		Regist,
 		Findback

@@ -47,9 +47,9 @@ const FETCH = (url, options, noHeaders = false) => {
 	const { headers, ...others } = options
 	let combineHeaders = { ...headers }
 	if (!noHeaders) {
-		// combineHeaders = { 'X-Request-Id': GUID(), ...headers }
+		combineHeaders = { 'X-Request-Id': GUID(), ...headers }
 	}
-
+    
 	return fetch(url, {
 		credentials: 'include',
 		...others,
