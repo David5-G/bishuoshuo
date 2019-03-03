@@ -3,67 +3,95 @@ import { observable, computed, useStrict,decorate, action } from 'mobx'
 import { POST, GET } from '../utils/request.js'
 import { Host } from '../config'
 
+const config = {
+    movieHost: 'https://movie.douban.com',
+    bookHost: 'https://read.douban.com',
+    gameHost: 'https://www.douban.com',
+    teamHost: 'https://m.douban.com',
+}
 class MainStore {
     id = Math.random()
-    @observable subjects = {
-        title: '',
-        subjects: [],
-    }
-    @observable weekJects = {
-        title: '',
-        subjects: [],
-    }
-    @observable city = '北京'
-    @observable apikey = '0b2bdeda43b5688921839c8ecb20399b'
 
-    @action changeCity (city) {
-        this.city = city
-    }
+    @observable hotMovies = []
+    @observable hotTvs = []
+
+    
     @action getTitle(title) {
         setTimeout(() => {
             this.title = title ? title : '请传参数' + Math.random()
         },1000)
     }
 
-    @action getHotPlay (params = {}) {
-
-        // https://m.douban.com/rexxar/api/v2/subject_collection/movie_showing/items?os=ios&callback=jsonp1&start=0&count=8&loc_id=108288&_=0
-        return GET('https://api.douban.com/v2/movie/in_theaters',params).then(res => {
+    @action getMovieList (params = {}) {
+        // https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&page_limit=50&page_start=0
+        return GET(config.movieHost + '/j/search_subjects',params).then(res => {
+            console.log('hotTvsTab-->', res)
             if (!res.subjects) return
-            this.subjects = res || {}
+            if(params.type === 'movie') {
+                this.hotMovies = res.subjects
+            } else {
+
+                this.hotTvs = res.subjects
+            }
             return res
         }).catch(err => {
             return err
         })
     }
 
-    @action getMouth (params = {}) {
-        // https://m.douban.com/rexxar/api/v2/subject_collection/movie_showing/items?os=ios&callback=jsonp1&start=0&count=8&loc_id=108288&_=0
-        return GET('https://api.douban.com/v2/movie/weekly',params).then(res => {
-            console.log('getMouth----->', res)
-            if (!res.subjects) return
-            res.subjects.forEach((el,i) => res.subjects[i] = res.subjects[i].subject);
-            this.weekJects = {
-                title: '币说本周口碑榜',
-                subjects: res.subjects
-            }
+    // 图书
+    @observable books = []
+    @action getBooks (params = {}) {
+        return GET(config.bookHost + '/j/index//charts',params).then(res => {
+            console.log('book-->', res)
+            res.list && (this.books = res.list)
             return res
-        }).catch(err => err)
+        }).catch(err => {
+            return err
+        })
     }
 
-    @action getTop (params = {}) {
-        return GET('https://api.douban.com/v2/movie/top250',params).then(res => {
-
-            console.log('top')
-            // if (!res.subjects) return
-            // res.subjects.forEach((el,i) => res.subjects[i] = res.subjects[i].subject);
-            // this.weekJects = {
-            //     title: '币说本周口碑榜',
-            //     subjects: res.subjects
-            // }
+    // 游戏
+    @observable games = []
+    @action getGames (params = {}) {
+        // https://www.douban.com/j/ilmen/game/search?genres=1&platforms=94%2C17%2C96&q=&sort=rating
+        return GET(config.gameHost + '/j/ilmen/game/search',params).then(res => {
+            res.games && (this.games = res.games)
             return res
-        }).catch(err => err)
+        }).catch(err => {
+            return err
+        })
     }
+
+    // 大家说，小组
+    @observable teamsBanner = []
+    @observable teams = []
+    @action getTeamsBanner (params = {
+        ck: 'Kl55',
+        for_mobile: 1,
+    }) {
+        // https://www.douban.com/j/ilmen/game/search?genres=1&platforms=94%2C17%2C96&q=&sort=rating
+        return GET(config.teamHost + '/rexxar/api/v2/group/mixed_rec_groups',params).then(res => {
+            res.mixed_rec_groups && (this.teamsBanner = res.mixed_rec_groups)
+            return res
+        }).catch(err => {
+            return err
+        })
+    }
+
+    @action getTeams (params = {
+        ck: 'Kl55',
+        for_mobile: 1,
+    }) {
+        // https://www.douban.com/j/ilmen/game/search?genres=1&platforms=94%2C17%2C96&q=&sort=rating
+        return GET(config.teamHost + '/rexxar/api/v2/group/rec_groups_for_newbies',params).then(res => {
+            res.rec_groups && (this.teams = res.rec_groups[0].classified_groups)
+            return res
+        }).catch(err => {
+            return err
+        })
+    }
+
 }
 
 export default new MainStore()

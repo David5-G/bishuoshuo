@@ -8,7 +8,15 @@ import Login from '../views/login'
 import Regist from '../views/regist'
 import Findback from '../views/findback'
 import Drawer from '../views/drawer'
-import MovieDetail from '../views/movieDetail'
+import Book from '../views/book'
+import Game from '../views/game'
+import Team from '../views/team'
+import Program from '../views/program'
+
+/* detail */
+import HomeDetail from '../views/homeDetail'
+import About from '../views/about'
+
 import {
 	StackNavigator,
 	DrawerNavigator,
@@ -23,8 +31,12 @@ import {
 
 const SimpleAppNavigator = createDrawerNavigator(
 	{
-		Home: Home
-	},
+        Home,
+        Book,
+        Game,
+        Team,
+        Program,
+	}, 
 	{
 		initialRouteName: 'Home',
 		contentComponent: Drawer,
@@ -50,11 +62,13 @@ export default createStackNavigator(
 					backgroundColor: 'rgba(0,0,0,0.2)'
 				}
 			}
-		},
-        MovieDetail,
+        },
 		Login,
 		Regist,
-		Findback
+        Findback,
+        About,
+
+        HomeDetail,
 	},
 	{
 		initialRouteName: 'Main', //默认页面，可不写
