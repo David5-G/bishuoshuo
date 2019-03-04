@@ -1,6 +1,5 @@
 import React from 'react';
 import { View,Text, Platform,StatusBar, WebView, AsyncStorage,NativeModules, StyleSheet, AppState, } from 'react-native';
-import { Root } from "native-base";
 import { Provider } from '@ant-design/react-native';
 
 import Route from './route/index.js'

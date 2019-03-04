@@ -11,6 +11,7 @@ export default StyleSheet.create({
 	tl: { textAlign: 'left' },
 	tr: { textAlign: 'right' },
 	tc: { textAlign: 'center' },
+	tj: { textAlign: 'justify' },
 
 	pr: { position: 'relative' },
 	pa: { position: 'absolute' },
@@ -19,6 +20,9 @@ export default StyleSheet.create({
     bga: {backgroundColor: Colors.tintColor},
     bgg: {backgroundColor: Colors.borderGray},
     cw: {color: '#fff'},
+    cg: {color: Colors.bodyTextGray},
+
+    
 	sw: {
 		shadowOffset: {
 			width: 2,
