@@ -51,7 +51,7 @@ export default class DrawerNav extends React.Component {
 							<Text style={styles.tip}>一起玩手机</Text>
 						</TouchableOpacity>
 
-						<TouchableOpacity style={styles.line}>
+						<TouchableOpacity style={styles.line} onPress={() => navigation.navigate('Music')}>
 							<Aicon style={styles.icon} name={'sound'} />
 							<Text style={styles.text}>音乐</Text>
 							<Text style={styles.tip}>新歌，潮歌</Text>

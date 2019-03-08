@@ -136,7 +136,7 @@ export default class About extends React.Component {
 						<View style={[reset.bgw, reset.mt5, reset.pb20]}>
 							<WingBlank>
 								<WhiteSpace />
-								<Text style={[reset.fs25, reset.lh30, reset.bgw, reset.mt10]}>剧情简介</Text>
+								<Text style={[reset.fs20, reset.lh30, reset.bgw, reset.mt10]}>剧情简介</Text>
 								<Icon name='down' />
 								<Text numberOfLines={lines} style={{ lineHeight: 25, fontSize: 16, marginTop: 5 }}>
 									{des}

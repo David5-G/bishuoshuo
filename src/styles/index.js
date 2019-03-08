@@ -22,7 +22,6 @@ export default StyleSheet.create({
     cw: {color: '#fff'},
     cg: {color: Colors.bodyTextGray},
 
-    
 	sw: {
 		shadowOffset: {
 			width: 2,

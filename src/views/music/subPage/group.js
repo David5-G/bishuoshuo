@@ -7,7 +7,7 @@ import Colors from '../../../constants/Colors'
 import { Badge } from '@ant-design/react-native'
 import { barHeight, statusBarHeight, isIos, width } from '../../../constants/Scale'
 import { toJS } from 'mobx'
-
+import {GET } from '../../../utils/request'
 @inject('MainStore')
 @observer
 export default class Block extends React.Component {
@@ -17,79 +17,47 @@ export default class Block extends React.Component {
 	}
 	static proptypes = {
 		navigation: PropTypes.object.isRequired,
-		MainStore: PropTypes.object.isRequired
+        MainStore: PropTypes.object.isRequired,
+        tag: PropTypes.string.isRequired
 	}
 	constructor(props) {
 		super(props)
 		this.state = {
-			done: false,
-			loading: false,
-
-			type: 'movie',
-			movieTag: '热门',
-			page_limit: 50,
-			page_start: 0,
-			categrayMovie: ['热门', '最新', '豆瓣高分', '冷门佳片', '华语', '欧美', '韩国', '日本']
+            loading: false,
+            musics: [],
 		}
 	}
 	componentDidMount() {
 		this._loadMore()
 	}
 	async _loadMore() {
-		const { type, movieTag, page_limit, page_start, done, loading } = this.state
-		if (loading || done) return
-		this.setState({ loading: true })
-		const res = await MainStore.getMovieList({
-			page_start,
-			page_limit,
-			type,
-			tag: movieTag
-		})
-		if (res && res.subjects && res.subjects.length) {
-			this.setState({ page_start: page_start + page_limit })
-		} else {
-			this.setState({ done: true })
-		}
-		this.setState({ loading: false })
+		const { loading } = this.state
+		if (loading) return
+        this.setState({ loading: true })
+        const {tag} = this.props
+
+        const res  = await GET('https://api.douban.com/v2/music/search?q='+ tag +'&count=15')
+        this.setState({ loading: false,musics: res.musics })
+        
 	}
 
 	render() {
 		const { navigation } = this.props
-		const { categrayMovie, movieTag, loading } = this.state
+		const { loading,musics } = this.state
 
 		return (
 			<View style={{}}>
-				<Text style={{ fontSize: 18, marginLeft: 15, lineHeight: 40 }}>最近热门电影</Text>
-				<View style={{ flexDirection: 'row', marginLeft: 15 }}>
-					{categrayMovie.map((item, i) => {
-						return (
-							<TouchableOpacity
-								key={i}
-								onPress={() => {
-									if (loading) return
-									this.setState({ movieTag: item }, () => {
-										this._loadMore()
-									})
-								}}
-							>
-								<Text key={i} style={[styles.navItem, item === movieTag && styles.navItemActive]}>
-									{item}
-								</Text>
-							</TouchableOpacity>
-						)
-					})}
-				</View>
+				
 				<ScrollView contentContainerStyle={{ marginLeft: 15 }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
-					{MainStore.hotMovies.map((item, i) => {
+					{musics.map((item, i) => {
 						return (
-							<TouchableOpacity key={i} style={styles.item} onPress={() => navigation.navigate('MovieDetail',item.id)}>
+							<TouchableOpacity key={i} style={styles.item} onPress={{}}>
 								<View>
-									<Badge text={item.is_new ? 'new' : ''}>
-										<Image style={styles.img} source={{ uri: item.cover }} />
+									<Badge text={item.rating.average}>
+										<Image style={styles.img} source={{ uri: item.image }} />
 									</Badge>
 									<View style={{ width: (width - 40) / 3 }}>
-										<Text style={styles.title}>{item.title}</Text>
-										<Text style={styles.rate}>{item.rate}</Text>
+										<Text numberOfLines={2} style={styles.title}>{item.title}</Text>
 									</View>
 								</View>
 							</TouchableOpacity>
@@ -107,7 +75,7 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		width: 120,
-		marginRight: 12,
+		marginRight: 20,
 		paddingTop: 10,
 		paddingBottom: 10
 	},

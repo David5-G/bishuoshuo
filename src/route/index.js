@@ -12,9 +12,13 @@ import Book from '../views/book'
 import Game from '../views/game'
 import Team from '../views/team'
 import Program from '../views/program'
+import Music from '../views/music'
 
 /* detail */
-import HomeDetail from '../views/homeDetail'
+import MovieDetail from '../views/home/detail.js'
+import BookDetail from '../views/book/detail.js'
+import GameDetail from '../views/game/detail.js'
+import TeamDetail from '../views/team/detail.js'
 import About from '../views/about'
 
 import {
@@ -36,6 +40,7 @@ const SimpleAppNavigator = createDrawerNavigator(
         Game,
         Team,
         Program,
+        Music,
 	}, 
 	{
 		initialRouteName: 'Home',
@@ -67,8 +72,11 @@ export default createStackNavigator(
 		Regist,
         Findback,
         About,
-
-        HomeDetail,
+        
+        MovieDetail,
+        BookDetail,
+        GameDetail,
+        TeamDetail,
 	},
 	{
 		initialRouteName: 'Main', //默认页面，可不写
