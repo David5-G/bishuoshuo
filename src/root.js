@@ -51,8 +51,6 @@ export default class News extends React.Component {
         return (
             <Provider style={styles.container}>
                 <LoadingView show={loading} />
-                <StatusBar hidden={false} barStyle="dark-content" />
-                {/* <StatusBar hidden={false} barStyle="light-content" /> */}
                 <Route />
             </Provider>
         )

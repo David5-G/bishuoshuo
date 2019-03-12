@@ -2,6 +2,7 @@ import React from 'react'
 import TabBarIcon from '../views/common/TabBarIcon'
 import Colors from '../constants/Colors'
 import Home from '../views/home'
+import HomeList from '../views/home/list'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import Login from '../views/login'
@@ -13,12 +14,17 @@ import Game from '../views/game'
 import Team from '../views/team'
 import Program from '../views/program'
 import Music from '../views/music'
+import MusicList from '../views/music/list.js'
 
 /* detail */
 import MovieDetail from '../views/home/detail.js'
 import BookDetail from '../views/book/detail.js'
 import GameDetail from '../views/game/detail.js'
 import TeamDetail from '../views/team/detail.js'
+import MusicDetail from '../views/music/detail.js'
+
+import Search from '../views/search'
+
 import About from '../views/about'
 
 import {
@@ -41,6 +47,7 @@ const SimpleAppNavigator = createDrawerNavigator(
         Team,
         Program,
         Music,
+        
 	}, 
 	{
 		initialRouteName: 'Home',
@@ -73,10 +80,15 @@ export default createStackNavigator(
         Findback,
         About,
         
+        
         MovieDetail,
         BookDetail,
         GameDetail,
         TeamDetail,
+        HomeList,
+        MusicList,
+        MusicDetail,
+        Search,
 	},
 	{
 		initialRouteName: 'Main', //默认页面，可不写

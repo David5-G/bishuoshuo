@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observer, inject } from 'mobx-react/native'
-import { View, Text, Button, WebView, ScrollView, TouchableOpacity, FlatList, Image, StyleSheet, ActivityIndicator } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { View, Text, ScrollView, TouchableOpacity, FlatList, Image, StyleSheet } from 'react-native'
 import Colors from '../../../constants/Colors'
-import { Badge } from '@ant-design/react-native'
+import { Badge,Flex } from '@ant-design/react-native'
 import { barHeight, statusBarHeight, isIos, width } from '../../../constants/Scale'
 import { toJS } from 'mobx'
+import Score from '../../common/score.js'
+import reset from '../../../styles'
 import {GET } from '../../../utils/request'
+
+
+
 @inject('MainStore')
 @observer
 export default class Block extends React.Component {
@@ -35,29 +39,29 @@ export default class Block extends React.Component {
 		if (loading) return
         this.setState({ loading: true })
         const {tag} = this.props
-
         const res  = await GET('https://api.douban.com/v2/music/search?q='+ tag +'&count=15')
         this.setState({ loading: false,musics: res.musics })
-        
 	}
-
 	render() {
 		const { navigation } = this.props
 		const { loading,musics } = this.state
-
 		return (
 			<View style={{}}>
-				
-				<ScrollView contentContainerStyle={{ marginLeft: 15 }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+                {loading && <Image source={require('../../../pics/load.gif')} style={{width: 30,height: 30,marginLeft: width/2 -15}} />}
+				<ScrollView contentContainerStyle={{ marginRight: 15 }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
 					{musics.map((item, i) => {
 						return (
-							<TouchableOpacity key={i} style={styles.item} onPress={{}}>
+							<TouchableOpacity key={i} style={styles.item} onPress={() => navigation.navigate('MusicDetail', item.id)}>
 								<View>
-									<Badge text={item.rating.average}>
-										<Image style={styles.img} source={{ uri: item.image }} />
-									</Badge>
+                                    <Badge text={item.rating.average}>
+									    <Image style={styles.img} source={{ uri: item.image }} />
+                                    </Badge>
 									<View style={{ width: (width - 40) / 3 }}>
 										<Text numberOfLines={2} style={styles.title}>{item.title}</Text>
+                                        {/* <Flex>
+                                            <Score score={item.rating.average} />
+                                            <Text style={[reset.fs14,reset.cg,reset.ml5]}>{item.rating.average}</Text>
+                                        </Flex> */}
 									</View>
 								</View>
 							</TouchableOpacity>

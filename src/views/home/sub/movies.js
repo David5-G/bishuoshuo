@@ -4,9 +4,13 @@ import { observer, inject } from 'mobx-react/native'
 import { View, Text, Button, WebView, ScrollView, TouchableOpacity, FlatList, Image, StyleSheet, ActivityIndicator } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../../constants/Colors'
-import { Badge } from '@ant-design/react-native'
+import { Badge,Flex } from '@ant-design/react-native'
 import { barHeight, statusBarHeight, isIos, width } from '../../../constants/Scale'
 import { toJS } from 'mobx'
+import Score from '../../common/score.js'
+
+import Loading from '../../common/Loading.js'
+
 
 @inject('MainStore')
 @observer
@@ -56,11 +60,10 @@ export default class Block extends React.Component {
 	render() {
 		const { navigation } = this.props
 		const { categrayMovie, movieTag, loading } = this.state
-
+        
 		return (
-			<View style={{}}>
-				<Text style={{ fontSize: 18, marginLeft: 15, lineHeight: 40 }}>最近热门电影</Text>
-				<View style={{ flexDirection: 'row', marginLeft: 15 }}>
+			<View style={{ paddingTop: 10 }}>
+				<View style={{ flexDirection: 'row',}}>
 					{categrayMovie.map((item, i) => {
 						return (
 							<TouchableOpacity
@@ -79,7 +82,8 @@ export default class Block extends React.Component {
 						)
 					})}
 				</View>
-				<ScrollView contentContainerStyle={{ marginLeft: 15 }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+                <Loading show={loading}/>
+				<ScrollView contentContainerStyle={{ }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
 					{MainStore.hotMovies.map((item, i) => {
 						return (
 							<TouchableOpacity key={i} style={styles.item} onPress={() => navigation.navigate('MovieDetail',item.id)}>
@@ -89,7 +93,10 @@ export default class Block extends React.Component {
 									</Badge>
 									<View style={{ width: (width - 40) / 3 }}>
 										<Text style={styles.title}>{item.title}</Text>
-										<Text style={styles.rate}>{item.rate}</Text>
+                                        <Flex>
+                                            <Score score={+item.rate} />
+										    <Text style={styles.rate}>{item.rate}</Text>
+                                        </Flex>
 									</View>
 								</View>
 							</TouchableOpacity>
@@ -107,7 +114,7 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		width: 120,
-		marginRight: 12,
+		marginRight: 20,
 		paddingTop: 10,
 		paddingBottom: 10
 	},
@@ -130,7 +137,8 @@ const styles = StyleSheet.create({
 	},
 	rate: {
 		fontSize: 13,
-		lineHeight: 20,
+        lineHeight: 20,
+        marginLeft: 5,
 		color: '#e09015'
 	},
 	navItem: { marginRight: 5, fontSize: 15, color: Colors.bodyTextGray, lineHeight: 25 },

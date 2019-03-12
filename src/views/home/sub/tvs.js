@@ -5,10 +5,12 @@ import { View, Text, Button, WebView, ScrollView, TouchableOpacity, FlatList, Im
 import Icon from 'react-native-vector-icons/Ionicons'
 import Colors from '../../../constants/Colors'
 
-import { Badge } from '@ant-design/react-native'
-
+import { Badge,Flex } from '@ant-design/react-native'
+import Score from '../../common/score.js'
 import { barHeight, statusBarHeight, isIos, width } from '../../../constants/Scale'
 import { toJS } from 'mobx'
+import Loading from '../../common/Loading.js'
+
 
 @inject('MainStore')
 @observer
@@ -61,9 +63,8 @@ export default class Block extends React.Component {
 		const { categrayTv, tvTag, loading } = this.state
 
 		return (
-			<View style={{ borderTopWidth: 1, borderTopColor: Colors.borderGray, paddingTop: 10 }}>
-				<Text style={{ fontSize: 18, marginLeft: 15, lineHeight: 40 }}>最近热门电视剧</Text>
-				<View style={{ flexDirection: 'row', marginLeft: 15 }}>
+			<View style={{ paddingTop: 10 }}>
+				<View style={{ flexDirection: 'row',  }}>
 					{categrayTv.map((item, i) => {
 						return (
 							<TouchableOpacity
@@ -82,20 +83,24 @@ export default class Block extends React.Component {
 						)
 					})}
 				</View>
-				<ScrollView contentContainerStyle={{ marginLeft: 15 }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+                <Loading show={loading} />
+				<ScrollView contentContainerStyle={{  }} horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
 					{MainStore.hotTvs.map((item, i) => {
 						return (
-							<View key={i} style={styles.item}>
+							<TouchableOpacity key={i} style={styles.item} onPress={() => navigation.navigate('MovieDetail',item.id)}>
 								<View>
                                     <Badge text={item.is_new?'new':''}>
 									    <Image style={styles.img} source={{ uri: item.cover }} />
                                     </Badge>
 									<View style={{ width: (width - 40) / 3 }}>
 										<Text style={styles.title}>{item.title}</Text>
-										<Text style={styles.rate}>{item.rate}</Text>
+                                        <Flex>
+                                            <Score score={+item.rate} />
+										    <Text style={styles.rate}>{item.rate}</Text>
+                                        </Flex>
 									</View>
 								</View>
-							</View>
+							</TouchableOpacity>
 						)
 					})}
 				</ScrollView>
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		width: 120,
-		marginRight: 12,
+		marginRight: 20,
 		paddingTop: 10,
 		paddingBottom: 10
 	},
@@ -133,7 +138,8 @@ const styles = StyleSheet.create({
 	},
 	rate: {
 		fontSize: 13,
-		lineHeight: 20,
+        lineHeight: 20,
+        marginLeft: 5,
 		color: '#e09015'
 	},
 	navItem: { marginRight: 5, fontSize: 15, color: Colors.bodyTextGray, lineHeight: 25 },

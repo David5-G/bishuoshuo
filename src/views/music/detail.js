@@ -1,6 +1,9 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity,ActivityIndicator, ScrollView, Modal, FlatList } from 'react-native'
 import NavigationBar from '../common/NavigationBar'
+import Loading from '../common/Loading.js'
+
+
 import Colors from '../../constants/Colors'
 import { Flex, Icon, WingBlank, List, Badge, WhiteSpace, Tag, Button } from '@ant-design/react-native'
 import { width } from '../../constants/Scale'
@@ -8,7 +11,6 @@ import { GET, POST } from '../../utils/request'
 import reset from '../../styles'
 import { observer, inject } from 'mobx-react/native'
 import Score from '../common/score'
-import Loadging from '../common/Loading'
 const Item = List.Item
 const Brief = Item.Brief
 
@@ -54,7 +56,6 @@ export default class About extends React.Component {
 	}
 
 	async _getComments() {
-		console.log('_getComments-->')
 		const { navigation } = this.props
 		const { params } = navigation.state
 		const { commentLoading, start, count, done, comments } = this.state
@@ -75,9 +76,7 @@ export default class About extends React.Component {
 	}
 	render() {
 		const { navigation } = this.props
-		const { detailLoading, detail, lines, comments, modelShow} = this.state
-        console.log('detail-->', detail)
-		console.log('comments-->', comments)
+		const { detailLoading, detail, lines, comments, modelShow } = this.state
 		if (!detail || !comments) {
 			return (
 				<View>
@@ -88,7 +87,7 @@ export default class About extends React.Component {
 							</Flex>
 						}
 					/>
-					<Loadging show={detailLoading} />
+					
 				</View>
 			)
 		}
@@ -105,6 +104,7 @@ export default class About extends React.Component {
 						</Flex>
 					}
 				/>
+                <Loading show={detailLoading} />
 				<ScrollView>
 					<View style={[reset.bgw,reset.pb20]}>
 						<WingBlank>
@@ -121,8 +121,9 @@ export default class About extends React.Component {
 											<Tag key={i}>{item.name}</Tag>
 										))}
 									</Flex>
+                                    
                                     <Flex style={[reset.mt10]}>
-                                        <Score score={(detail.extra && detail.extra.rating_group && detail.extra.rating_group) ? detail.extra.rating_group.rating.value : 0} />
+                                        <Score score={(detail.extra && detail.extra.rating_group) ? detail.extra.rating_group.rating.value : 0} />
                                         <Text style={[reset.fs14,reset.ml5,reset.cg]}>{(detail.extra && detail.extra.rating_group) ? detail.extra.rating_group.rating.value : 0}</Text>
                                     </Flex>
 								</Flex.Item>
@@ -221,7 +222,6 @@ export default class About extends React.Component {
 
 	_renderItemView({ item }) {
         const { author, content, rating, useful_count, created_at } = item
-        console.log('_renderItemView-->',item)
 		return (
 			<View style={[reset.mb20]}>
 				<Flex justify='start' align='start'>
